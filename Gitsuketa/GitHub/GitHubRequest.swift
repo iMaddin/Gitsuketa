@@ -10,7 +10,7 @@ import Foundation
 
 public struct GitHubRequest {
 
-    public static func makeRequest(urlString: String, completionHandler: @escaping (_ json: [String: Any]?) -> Void) {
+    public static func makeRequest(urlString: String, completionHandler: @escaping (_ data: Any?) -> Void) {
         guard let url = URL(string: urlString) else {
             assertionFailure("Invalid URL string")
             completionHandler(nil)
@@ -33,14 +33,7 @@ public struct GitHubRequest {
                 return
             }
 
-            do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
-                    completionHandler(json)
-                }
-            } catch let error {
-                print(error.localizedDescription)
-                completionHandler(nil)
-            }
+            completionHandler(data)
         }
 
         task.resume()
