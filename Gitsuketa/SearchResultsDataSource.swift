@@ -25,7 +25,21 @@ extension SearchResultsDataSource: UITableViewDataSource {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
 
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = searchResults?.items[indexPath.row].title
+
+        let titleLabel = UITextField()
+        titleLabel.accessibilityIdentifier = "titleLabel"
+        titleLabel.text = searchResults?.items[indexPath.row].title
+
+        let contentStackView = UIStackView(arrangedSubviews: [titleLabel])
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.accessibilityIdentifier = "cell.contentStackView"
+        contentStackView.axis = .vertical
+
+        cell.contentView.addSubview(contentStackView)
+        contentStackView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
 
         return cell
     }
