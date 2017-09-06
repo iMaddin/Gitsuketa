@@ -38,6 +38,27 @@ class ViewController: UIViewController {
 
         let searchBar = searchController.searchBar
         searchBarContainerView.addSubview(searchBar)
+
+        let testSearch = "https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc"
+        GitHubRequest.makeRequest(urlString: testSearch) {
+            [weak resultsDataSource] data in
+            guard let data = data else {
+                assertionFailure("no data")
+                return
+            }
+
+            let decoder = JSONDecoder()
+            do {
+                let searchResult = try decoder.decode(GitHubSearchResult.self, from: data)
+                let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
+                resultsDataSource?.searchResults = formattedData
+
+            } catch {
+                print("error trying to convert data to JSON")
+                print(error)
+            }
+
+        }
     }
 
 }
