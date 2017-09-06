@@ -10,6 +10,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // Used to display default search results on app launch. Set to nil to show nothing at launch.
+    var defaultSearchKeyword: String? = "Benkio"
+
     let searchResultsViewController = SearchResultsViewController()
     let resultsDataSource = SearchResultsDataSource()
     var searchController: UISearchController?
@@ -20,7 +23,7 @@ class ViewController: UIViewController {
 
         view.accessibilityIdentifier = "ViewController view"
         searchResultsViewController.view.accessibilityIdentifier = "searchResultsViewController.view"
-
+        
         searchResultsViewController.tableView.dataSource = resultsDataSource
 
         let searchController = UISearchController(searchResultsController: searchResultsViewController)
@@ -38,6 +41,10 @@ class ViewController: UIViewController {
 
         let searchBar = searchController.searchBar
         searchBarContainerView.addSubview(searchBar)
+
+        // default search
+        searchController.isActive = defaultSearchKeyword != nil
+        searchBar.text = defaultSearchKeyword
     }
 
 }
