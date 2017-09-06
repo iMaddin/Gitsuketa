@@ -31,13 +31,7 @@ extension SearchResultsDataSource: UITableViewDataSource {
         tableView.register(SearchResultsTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
 
         let cell: SearchResultsTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SearchResultsTableViewCell
-
-        cell.titleLabel.text = searchResults?.items[indexPath.section].title
-        
-        if let description = searchResults?.items[indexPath.section].description {
-            cell.descriptionLabel.text = description
-        }
-
+        cell.viewModel = searchResults?.items[indexPath.section]
         return cell
     }
 

@@ -10,35 +10,94 @@ import UIKit
 
 class SearchResultsTableViewCell: UITableViewCell {
 
-    let titleLabel: UILabel
-    let descriptionLabel: UILabel
-    let languageLabel: UILabel
-    let updatedAtLabel: UILabel
-    let starsLabel: UILabel
-    let hasReadmeLabel: UILabel
+    var viewModel: SearchResultItem? {
+        didSet {
+            if let title = viewModel?.title,
+                let titleLabel = self.titleLabel {
+                titleLabel.text = title
+                contentStackView.addArrangedSubview(titleLabel)
+            }
+            
+            if let description = viewModel?.description,
+                let descriptionLabel = self.descriptionLabel {
+                descriptionLabel.text = description
+                contentStackView.addArrangedSubview(descriptionLabel)
+            }
+
+            if let formatedUpdatedAt = viewModel?.formatedUpdatedAt,
+                let formatedUpdatedAtLabel = self.formatedUpdatedAtLabel {
+                formatedUpdatedAtLabel.text = formatedUpdatedAt
+                contentStackView.addArrangedSubview(formatedUpdatedAtLabel)
+            }
+
+//            if let url = viewModel?.url,
+//                let urlLabel = self.urlLabel {
+//                urlLabel.text = url
+//                contentStackView.addArrangedSubview(urlLabel)
+//            }
+//
+            if let formattedLanguage = viewModel?.formattedLanguage,
+                let formattedLanguageLabel = self.formattedLanguageLabel {
+                formattedLanguageLabel.text = formattedLanguage
+                contentStackView.addArrangedSubview(formattedLanguageLabel)
+            }
+            
+            if let stars = viewModel?.stars,
+                let starsLabel = self.starsLabel,
+                stars != 0 {
+                starsLabel.text = "⭐️\(stars)"
+                contentStackView.addArrangedSubview(starsLabel)
+            }
+            
+            if let hasReadme = viewModel?.hasReadme,
+                let hasReadmeLabel = self.hasReadmeLabel,
+                hasReadme == true {
+                hasReadmeLabel.text = "readme"
+                contentStackView.addArrangedSubview(hasReadmeLabel)
+            }
+            
+        }
+    }
+
+    lazy var titleLabel: UILabel? = {
+        let titleLabel = UILabel()
+        return titleLabel
+    }()
+
+    lazy var descriptionLabel: UILabel? = {
+        let descriptionLabel = UILabel()
+        return descriptionLabel
+    }()
+
+    lazy var urlLabel: UILabel? = {
+        let urlLabel = UILabel()
+        return urlLabel
+    }()
+
+    lazy var formattedLanguageLabel: UILabel? = {
+        let formattedLanguageLabel = UILabel()
+        return formattedLanguageLabel
+    }()
+
+    lazy var formatedUpdatedAtLabel: UILabel? = {
+        let formatedUpdatedAtLabel = UILabel()
+        return formatedUpdatedAtLabel
+    }()
+
+    lazy var starsLabel: UILabel? = {
+        let starsLabel = UILabel()
+        return starsLabel
+    }()
+
+    lazy var hasReadmeLabel: UILabel? = {
+        let hasReadmeLabel = UILabel()
+        return hasReadmeLabel
+    }()
 
     var cellHorizontalSpacing: CGFloat = 15
+    let contentStackView = UIStackView()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        let titleLabel = UILabel()
-        self.titleLabel = titleLabel
-
-        let descriptionLabel = UILabel()
-        self.descriptionLabel = descriptionLabel
-
-        let languageLabel = UILabel()
-        self.languageLabel = languageLabel
-        
-        let updatedAtLabel = UILabel()
-        self.updatedAtLabel = updatedAtLabel
-        
-        let starsLabel = UILabel()
-        self.starsLabel = starsLabel
-        
-        let hasReadmeLabel = UILabel()
-        self.hasReadmeLabel = hasReadmeLabel
-        
-
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         let containerView = UIView()
@@ -54,7 +113,6 @@ class SearchResultsTableViewCell: UITableViewCell {
         containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
 
-        let contentStackView = UIStackView()
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.accessibilityIdentifier = "cell.contentStackView"
         contentStackView.axis = .vertical
@@ -64,14 +122,10 @@ class SearchResultsTableViewCell: UITableViewCell {
         contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
         contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: cellHorizontalSpacing).isActive = true
         contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -cellHorizontalSpacing).isActive = true
-
-        contentStackView.addArrangedSubview(titleLabel)
-        contentStackView.addArrangedSubview(descriptionLabel)
-
     }
 
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 
 }
