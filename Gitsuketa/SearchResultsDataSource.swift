@@ -39,18 +39,14 @@ extension SearchResultsDataSource: UITableViewDataSource {
         containerView.layer.cornerRadius = 4
         containerView.layer.borderWidth = 0.5
         containerView.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-        
+
         cell.addSubview(containerView)
         containerView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
         containerView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
         containerView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
 
-        let titleLabel = UITextField()
-        titleLabel.accessibilityIdentifier = "titleLabel"
-        titleLabel.text = searchResults?.items[indexPath.section].title
-
-        let contentStackView = UIStackView(arrangedSubviews: [titleLabel])
+        let contentStackView = UIStackView()
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.accessibilityIdentifier = "cell.contentStackView"
         contentStackView.axis = .vertical
@@ -60,6 +56,16 @@ extension SearchResultsDataSource: UITableViewDataSource {
         contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
         contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+
+        let titleLabel = UITextField()
+        titleLabel.text = searchResults?.items[indexPath.section].title
+        contentStackView.addArrangedSubview(titleLabel)
+
+        if let description = searchResults?.items[indexPath.section].description {
+            let descriptionLabel = UITextField()
+            descriptionLabel.text = description
+            contentStackView.addArrangedSubview(descriptionLabel)
+        }
 
         return cell
     }
