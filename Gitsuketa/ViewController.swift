@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         
         searchResultsViewController.tableView.dataSource = resultsDataSource
         searchResultsViewController.tableView.delegate = resultsDataSource
+        searchResultsViewController.tableView.separatorStyle = .none
 
         let searchController = UISearchController(searchResultsController: searchResultsViewController)
         self.searchController = searchController

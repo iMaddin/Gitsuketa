@@ -12,8 +12,9 @@ import UIKit
 class SearchResultsDataSource: NSObject  {
 
     var searchResults: SearchResultsFormatting?
-    var cellSpacing: CGFloat = 20
-    
+    var cellVerticalSpacing: CGFloat = 20
+    var cellHorizontalSpacing: CGFloat = 15
+
 }
 
 extension SearchResultsDataSource: UITableViewDataSource {
@@ -32,6 +33,19 @@ extension SearchResultsDataSource: UITableViewDataSource {
 
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
+        let containerView = UIView()
+        containerView.accessibilityIdentifier = "containerView"
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.layer.cornerRadius = 4
+        containerView.layer.borderWidth = 0.5
+        containerView.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
+        
+        cell.addSubview(containerView)
+        containerView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
+        containerView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
+
         let titleLabel = UITextField()
         titleLabel.accessibilityIdentifier = "titleLabel"
         titleLabel.text = searchResults?.items[indexPath.section].title
@@ -42,10 +56,10 @@ extension SearchResultsDataSource: UITableViewDataSource {
         contentStackView.axis = .vertical
 
         cell.contentView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
         return cell
     }
@@ -55,7 +69,7 @@ extension SearchResultsDataSource: UITableViewDataSource {
 extension SearchResultsDataSource: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return cellSpacing
+        return cellVerticalSpacing
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
