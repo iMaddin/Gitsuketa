@@ -54,8 +54,8 @@ extension SearchResultsDataSource: UITableViewDataSource {
         containerView.addSubview(contentStackView)
         contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: cellHorizontalSpacing).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -cellHorizontalSpacing).isActive = true
 
         let titleLabel = UILabel()
         titleLabel.text = searchResults?.items[indexPath.section].title
