@@ -17,7 +17,8 @@ protocol SearchResultItem {
 extension GitHubSearchResultItem: SearchResultItem {
 
     var title: String {
-        return self.full_name
+        return self.fullName
+    }
     }
 
 }

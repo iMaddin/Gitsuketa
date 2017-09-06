@@ -9,7 +9,24 @@
 import Foundation
 
 public struct GitHubSearchResultItem: Codable {
-    let full_name: String
+    let fullName: String
+    let descriptionText: String
+    let url: String
+    let language: String
+    let updatedAt: String
+    let stargazersCount: Int
+
+//    var readmeURL: URL?
+
+    enum CodingKeys: String, CodingKey {
+        case fullName = "full_name"
+        case descriptionText = "description"
+        case url = "html_url"
+        case language
+        case updatedAt = "updated_at"
+        case stargazersCount = "stargazers_count"
+    }
+
 }
 
 public struct GitHubSearchResult: Codable {
