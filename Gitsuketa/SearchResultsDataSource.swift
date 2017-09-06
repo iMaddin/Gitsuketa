@@ -40,7 +40,7 @@ extension SearchResultsDataSource: UITableViewDataSource {
         containerView.layer.borderWidth = 0.5
         containerView.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
 
-        cell.addSubview(containerView)
+        cell.contentView.addSubview(containerView)
         containerView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
         containerView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
         containerView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
@@ -51,7 +51,7 @@ extension SearchResultsDataSource: UITableViewDataSource {
         contentStackView.accessibilityIdentifier = "cell.contentStackView"
         contentStackView.axis = .vertical
 
-        cell.contentView.addSubview(contentStackView)
+        containerView.addSubview(contentStackView)
         contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
         contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
         contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
