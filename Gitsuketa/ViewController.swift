@@ -53,8 +53,10 @@ extension ViewController: UISearchResultsUpdating {
             return
         }
 
-        let testSearch = "https://api.github.com/search/repositories?q=tetris+language:assembly&sort=stars&order=desc"
-        GitHubRequest.makeRequest(urlString: testSearch) {
+        let query = GitHubSearchQuery(keyword: searchQuery)
+        let parameter = GitHubSearchParameter(query: query)
+
+        GitHubRequest.makeRequest(search: parameter) {
             [weak resultsDataSource] searchResult in
 
             guard let searchResult = searchResult else {
@@ -64,7 +66,7 @@ extension ViewController: UISearchResultsUpdating {
 
             let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
             resultsDataSource?.searchResults = formattedData
-            
+
             DispatchQueue.main.async {
                 guard let tableViewController = searchController.searchResultsController as? UITableViewController else {
                     assertionFailure()
