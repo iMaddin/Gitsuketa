@@ -11,7 +11,7 @@ import UIKit
 protocol SearchResultItem {
 
     var title: String { get }
-
+    var description: String? { get }
 }
 
 extension GitHubSearchResultItem: SearchResultItem {
@@ -19,6 +19,10 @@ extension GitHubSearchResultItem: SearchResultItem {
     var title: String {
         return self.fullName
     }
+
+    var description: String? {
+        return "A very nice description. 🤷‍♀️"
+//        return self.descriptionText
     }
 
 }

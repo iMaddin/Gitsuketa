@@ -10,9 +10,9 @@ import Foundation
 
 public struct GitHubSearchResultItem: Codable {
     let fullName: String
-    let descriptionText: String
+    let descriptionText: String?
     let url: String
-    let language: String
+    let language: String?
     let updatedAt: String
     let stargazersCount: Int
 
