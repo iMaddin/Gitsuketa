@@ -10,7 +10,7 @@ import Foundation
 
 public struct GitHubRequest {
 
-    public static func makeRequest(urlString: String, completionHandler: @escaping (_ data: Any?) -> Void) {
+    public static func makeRequest(urlString: String, completionHandler: @escaping (_ data: Data?) -> Void) {
         guard let url = URL(string: urlString) else {
             assertionFailure("Invalid URL string")
             completionHandler(nil)
