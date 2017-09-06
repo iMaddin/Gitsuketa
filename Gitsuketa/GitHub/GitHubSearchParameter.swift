@@ -53,7 +53,7 @@ public struct GitHubSearchQuery {
 //    let topic: [String?]
 
     public init(keyword: String) {
-        self.keyword = keyword
+        self.keyword = keyword.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
 
 }

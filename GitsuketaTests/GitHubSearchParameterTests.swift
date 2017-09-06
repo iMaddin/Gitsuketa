@@ -46,4 +46,13 @@ extension GitHubSearchParameterTests {
         XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
     }
 
+    func testQueryWithWhiteSpace() {
+        let searchKeyword = "Rocket League"
+        let searchQuery = GitHubSearchQuery(keyword: searchKeyword)
+        let searchParameter = GitHubSearchParameter(query: searchQuery)
+
+        let expectation = "https://api.github.com/search/repositories?q=Rocket+League&sort=match&order=desc"
+        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+    }
+
 }
