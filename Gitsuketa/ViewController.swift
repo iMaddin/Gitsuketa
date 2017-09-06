@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         searchResultsViewController.view.accessibilityIdentifier = "searchResultsViewController.view"
         
         searchResultsViewController.tableView.dataSource = resultsDataSource
+        searchResultsViewController.tableView.delegate = resultsDataSource
 
         let searchController = UISearchController(searchResultsController: searchResultsViewController)
         self.searchController = searchController

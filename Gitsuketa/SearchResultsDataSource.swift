@@ -8,16 +8,22 @@
 
 import UIKit
 
+// Spacing between cells in UITableView: https://stackoverflow.com/a/33931591/1016508
 class SearchResultsDataSource: NSObject  {
 
     var searchResults: SearchResultsFormatting?
-
+    var cellSpacing: CGFloat = 20
+    
 }
 
 extension SearchResultsDataSource: UITableViewDataSource {
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return searchResults?.items.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -28,7 +34,7 @@ extension SearchResultsDataSource: UITableViewDataSource {
 
         let titleLabel = UITextField()
         titleLabel.accessibilityIdentifier = "titleLabel"
-        titleLabel.text = searchResults?.items[indexPath.row].title
+        titleLabel.text = searchResults?.items[indexPath.section].title
 
         let contentStackView = UIStackView(arrangedSubviews: [titleLabel])
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -42,6 +48,25 @@ extension SearchResultsDataSource: UITableViewDataSource {
         contentStackView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
 
         return cell
+    }
+
+}
+
+extension SearchResultsDataSource: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacing
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // note that indexPath.section is used rather than indexPath.row
+        print("You tapped cell number \(indexPath.section).")
     }
 
 }
