@@ -29,6 +29,8 @@ class ViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: searchResultsViewController)
         self.searchController = searchController
         searchController.searchResultsUpdater = self
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
 
         let searchBarContainerView = UIView() // add container view to fix strange resizing behaviour of searchbar
         searchBarContainerView.accessibilityIdentifier = "searchBarContainerView"
