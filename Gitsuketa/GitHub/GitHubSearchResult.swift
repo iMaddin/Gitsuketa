@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct GitHubSearchResultItem: Codable {
+public struct GitHubSearchResultItem: Codable {
     let full_name: String
 }
 
-struct GitHubSearchResult: Codable {
+public struct GitHubSearchResult: Codable {
     let total_count: Int
     let incomplete_results: Bool
     let items: [GitHubSearchResultItem]

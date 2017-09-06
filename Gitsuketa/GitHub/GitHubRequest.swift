@@ -10,7 +10,7 @@ import Foundation
 
 public struct GitHubRequest {
 
-    public static func makeRequest(urlString: String, completionHandler: @escaping (_ data: Data?) -> Void) {
+    public static func makeRequest(urlString: String, completionHandler: @escaping (_ gitHubSearchResult: GitHubSearchResult?) -> Void) {
         guard let url = URL(string: urlString) else {
             assertionFailure("Invalid URL string")
             completionHandler(nil)
@@ -33,7 +33,14 @@ public struct GitHubRequest {
                 return
             }
 
-            completionHandler(data)
+            let decoder = JSONDecoder()
+            do {
+                let searchResult = try decoder.decode(GitHubSearchResult.self, from: data)
+                completionHandler(searchResult)
+            } catch {
+                print("error trying to convert data to JSON")
+                print(error)
+            }
         }
 
         task.resume()
