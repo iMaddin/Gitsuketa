@@ -13,7 +13,6 @@ class SearchResultsDataSource: NSObject  {
 
     var searchResults: SearchResultsFormatting?
     var cellVerticalSpacing: CGFloat = 20
-    var cellHorizontalSpacing: CGFloat = 15
 
 }
 
@@ -29,42 +28,14 @@ extension SearchResultsDataSource: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "searchResultCell"
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        tableView.register(SearchResultsTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
 
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell: SearchResultsTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! SearchResultsTableViewCell
 
-        let containerView = UIView()
-        containerView.accessibilityIdentifier = "containerView"
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.layer.cornerRadius = 4
-        containerView.layer.borderWidth = 0.5
-        containerView.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-
-        cell.contentView.addSubview(containerView)
-        containerView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
-        containerView.topAnchor.constraint(equalTo: cell.contentView.topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor).isActive = true
-
-        let contentStackView = UIStackView()
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.accessibilityIdentifier = "cell.contentStackView"
-        contentStackView.axis = .vertical
-
-        containerView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: cellHorizontalSpacing).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -cellHorizontalSpacing).isActive = true
-
-        let titleLabel = UILabel()
-        titleLabel.text = searchResults?.items[indexPath.section].title
-        contentStackView.addArrangedSubview(titleLabel)
-
+        cell.titleLabel.text = searchResults?.items[indexPath.section].title
+        
         if let description = searchResults?.items[indexPath.section].description {
-            let descriptionLabel = UILabel()
-            descriptionLabel.text = description
-            contentStackView.addArrangedSubview(descriptionLabel)
+            cell.descriptionLabel.text = description
         }
 
         return cell
