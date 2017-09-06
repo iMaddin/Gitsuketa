@@ -57,12 +57,12 @@ extension SearchResultsDataSource: UITableViewDataSource {
         contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
 
-        let titleLabel = UITextField()
+        let titleLabel = UILabel()
         titleLabel.text = searchResults?.items[indexPath.section].title
         contentStackView.addArrangedSubview(titleLabel)
 
         if let description = searchResults?.items[indexPath.section].description {
-            let descriptionLabel = UITextField()
+            let descriptionLabel = UILabel()
             descriptionLabel.text = description
             contentStackView.addArrangedSubview(descriptionLabel)
         }
