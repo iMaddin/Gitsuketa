@@ -11,6 +11,7 @@ import UIKit
 extension UIView {
 
     func constraints(equalToEdgeOf anotherView: UIView, constants: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)) {
+        anotherView.translatesAutoresizingMaskIntoConstraints = false
         self.topAnchor.constraint(equalTo: anotherView.topAnchor, constant: -constants.top).isActive = true
         self.bottomAnchor.constraint(equalTo: anotherView.bottomAnchor, constant: constants.bottom).isActive = true
         self.leadingAnchor.constraint(equalTo: anotherView.leadingAnchor, constant: -constants.left).isActive = true
