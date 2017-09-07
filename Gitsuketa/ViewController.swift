@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     var defaultSearchKeyword: String? = "Benkio"
 
     let searchResultsViewController = SearchResultsViewController()
-    let searchFilterViewController = SearchFilterViewController()
+    let searchFilterViewController = SearchFilterViewController(style: .grouped)
 
     var tableView: UITableView {
         return searchResultsViewController.tableView
