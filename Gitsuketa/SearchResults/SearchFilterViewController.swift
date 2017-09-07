@@ -25,6 +25,8 @@ class SearchFilterViewController: UITableViewController {
              searchInDescription,
              searchInReadme],
             [languagesTextField],
+            [orgOrUserSegmentedControl,
+             orgOrUserTextField]
 
         ]
     }
@@ -118,6 +120,20 @@ class SearchFilterViewController: UITableViewController {
     var languagesPicker: UIPickerView = {
         let languagesPicker = UIPickerView()
         return languagesPicker
+    }()
+
+    // MARK: - Organization or User repositories
+
+    var orgOrUserSegmentedControl: UISegmentedControl = {
+        let orgOrUserSegmentedControl = UISegmentedControl(items: ["organization", "user"])
+        orgOrUserSegmentedControl.accessibilityIdentifier = "orgOrUser SegmentedControl"
+        return orgOrUserSegmentedControl
+    }()
+    
+    var orgOrUserTextField: UITextField = {
+        let orgOrUserTextField = UITextField()
+        orgOrUserTextField.placeholder = NSLocalizedString("Organization / User name", comment: "") // TODO: change placeholder depeing on what is selected in orgOrUserSegmentedControl
+        return orgOrUserTextField
     }()
 
     override func viewDidLoad() {
