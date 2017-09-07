@@ -22,7 +22,11 @@ class SearchFilterViewController: UITableViewController {
             [forkSegmentedControl],
             [numberOfForksSegmentedControl,
              numberOfForksTextfield
-            ]
+            ],
+            [searchInRepositoryName,
+             searchInDescription,
+             searchInReadme
+            ],
         ]
     }
 
@@ -75,6 +79,35 @@ class SearchFilterViewController: UITableViewController {
         return numberOfForksTextfield
     }()
 
+    // MARK: - Search in repository name, description, README
+
+    var searchInRepositoryName: UIButton = {
+        let searchInRepositoryName = UIButton()
+        searchInRepositoryName.setTitleColor(UIColor.black, for: .normal)
+        searchInRepositoryName.setTitle(NSLocalizedString("⭕️ Repository Name", comment: ""), for: .normal)
+        searchInRepositoryName.contentHorizontalAlignment = .leading
+        searchInRepositoryName.addTarget(self, action: #selector(SearchFilterViewController.toggleButton(sender:)), for: .touchUpInside)
+        return searchInRepositoryName
+    }()
+
+    var searchInDescription: UIButton = {
+        let searchInDescription = UIButton()
+        searchInDescription.setTitleColor(UIColor.black, for: .normal)
+        searchInDescription.setTitle(NSLocalizedString("⭕️ Description", comment: ""), for: .normal)
+        searchInDescription.contentHorizontalAlignment = .leading
+        searchInDescription.addTarget(self, action: #selector(SearchFilterViewController.toggleButton(sender:)), for: .touchUpInside)
+        return searchInDescription
+    }()
+
+    var searchInReadme: UIButton = {
+        let searchInReadme = UIButton()
+        searchInReadme.setTitleColor(UIColor.black, for: .normal)
+        searchInReadme.setTitle(NSLocalizedString("⭕️ Readme", comment: ""), for: .normal)
+        searchInReadme.contentHorizontalAlignment = .leading
+        searchInReadme.addTarget(self, action: #selector(SearchFilterViewController.toggleButton(sender:)), for: .touchUpInside)
+        return searchInReadme
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -120,6 +153,19 @@ extension SearchFilterViewController {
         cell.contentView.constraints(equalToEdgeOf: cellContent, constants: cellContentInset)
 
         return cell
+    }
+
+}
+
+// MARK: - Search In button action
+extension SearchFilterViewController {
+
+    @objc func toggleButton(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if let oldTitle = sender.title(for: .normal) {
+            let newTitle = (sender.isSelected ? "🔴" : "⭕️") + oldTitle.dropFirst()
+            sender.setTitle(newTitle, for: .normal)
+        }
     }
 
 }
