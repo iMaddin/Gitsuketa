@@ -30,7 +30,8 @@ class SearchFilterViewController: UITableViewController {
             [sizeSegmentedControl,
              sizeTextfield],
             [numberOfStarsSegmentedControl,
-             numberOfStarsTextfield]
+             numberOfStarsTextfield],
+            [topicsTextfield]
         ]
     }
 
@@ -165,6 +166,14 @@ class SearchFilterViewController: UITableViewController {
         let numberOfStarsTextfield = UITextField()
         numberOfStarsTextfield.placeholder = NSLocalizedString("Number of stars", comment: "")
         return numberOfStarsTextfield
+    }()
+
+    // MARK: - Topics
+
+    var topicsTextfield: UITextField = {
+        let topicsTextfield = UITextField()
+        topicsTextfield.placeholder = NSLocalizedString("Topics, e.g. ruby, rails", comment: "")
+        return topicsTextfield
     }()
 
     override func viewDidLoad() {
