@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     var defaultSearchKeyword: String? = "Benkio"
 
     let searchResultsViewController = SearchResultsViewController()
+    let searchFilterViewController = SearchFilterViewController()
 
     var tableView: UITableView {
         return searchResultsViewController.tableView
@@ -126,7 +127,8 @@ extension ViewController: UISearchResultsUpdating {
 extension ViewController {
 
     @objc func showFilter() {
-
+        let filterNavigationcontroller = UINavigationController(rootViewController: searchFilterViewController)
+        present(filterNavigationcontroller, animated: true)
     }
 
 }
