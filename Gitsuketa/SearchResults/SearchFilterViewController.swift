@@ -91,6 +91,9 @@ extension SearchFilterViewController {
             case 1:
                 cell.contentView.addSubview(dateRangeSegmentedControl)
                 cell.contentView.constraints(equalToEdgeOf: dateRangeSegmentedControl, constants: cellContentInset)
+            case 2:
+                cell.contentView.addSubview(createdOrPushedTextfield)
+                cell.contentView.constraints(equalToEdgeOf: createdOrPushedTextfield, constants: cellContentInset)
             default:
                 break
             }
