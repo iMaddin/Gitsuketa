@@ -10,6 +10,8 @@ import UIKit
 
 class SearchFilterViewController: UITableViewController {
 
+    var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
+    
     let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
     static let rangeItems = ["=",">", ">=", "<", "<=", "..", "..*", "*.."]
 
@@ -195,7 +197,10 @@ class SearchFilterViewController: UITableViewController {
 extension SearchFilterViewController {
 
     @objc func dismissFilter() {
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            [unowned self] in
+            self.dismissAction?(self)
+        }
     }
 
     @objc func clearFilter() {
