@@ -13,7 +13,7 @@ class SearchResultsDataSource: NSObject  {
 
     var searchResults: SearchResultsFormatting?
     var cellVerticalSpacing: CGFloat = 20
-
+    var didSelectRowAction: ((String?) -> Void)?
 }
 
 extension SearchResultsDataSource: UITableViewDataSource {
@@ -51,7 +51,7 @@ extension SearchResultsDataSource: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // note that indexPath.section is used rather than indexPath.row
-        print("You tapped cell number \(indexPath.section).")
+        didSelectRowAction?(searchResults?.items[indexPath.section].url)
     }
 
 }

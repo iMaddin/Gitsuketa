@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ViewController: UIViewController {
 
@@ -32,6 +33,16 @@ class ViewController: UIViewController {
         searchResultsViewController.tableView.dataSource = resultsDataSource
         searchResultsViewController.tableView.delegate = resultsDataSource
         searchResultsViewController.tableView.separatorStyle = .none
+
+        resultsDataSource.didSelectRowAction = {
+            url in
+            guard let url = url, let urlObject = URL(string: url) else {
+                assertionFailure()
+                return
+            }
+            let safari = SFSafariViewController(url: urlObject)
+            self.present(safari, animated: true, completion: nil)
+        }
 
         if let defaultSearchKeyword = self.defaultSearchKeyword {
             startSearch(defaultSearchKeyword)
