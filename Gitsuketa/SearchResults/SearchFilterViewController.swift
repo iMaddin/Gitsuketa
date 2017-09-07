@@ -23,20 +23,28 @@ class SearchFilterViewController: UITableViewController {
              createdOrPushedSegmentedControl,
              dateRangeSegmentedControl,
              createdOrPushedTextfield],
-            [forkSegmentedControl],
-            [numberOfForksSegmentedControl,
+            [viewForSection(title: sectionTitles[1]),
+             forkSegmentedControl],
+            [viewForSection(title: sectionTitles[2]),
+             numberOfForksSegmentedControl,
              numberOfForksTextfield],
-            [searchInRepositoryName,
+            [viewForSection(title: sectionTitles[3]),
+             searchInRepositoryName,
              searchInDescription,
              searchInReadme],
-            [languagesTextField],
-            [orgOrUserSegmentedControl,
+            [viewForSection(title: sectionTitles[4]),
+             languagesTextField],
+            [viewForSection(title: sectionTitles[5]),
+             orgOrUserSegmentedControl,
              orgOrUserTextField],
-            [sizeSegmentedControl,
+            [viewForSection(title: sectionTitles[6]),
+             sizeSegmentedControl,
              sizeTextfield],
-            [numberOfStarsSegmentedControl,
+            [viewForSection(title: sectionTitles[7]),
+             numberOfStarsSegmentedControl,
              numberOfStarsTextfield],
-            [topicsTextfield]
+            [viewForSection(title: sectionTitles[8]),
+             topicsTextfield]
         ]
     }
 
@@ -198,26 +206,13 @@ class SearchFilterViewController: UITableViewController {
 
         // Do any additional setup after loading the view.
 
-        cellContents = [
-            [viewForSection(title: sectionTitles[0]),
-             createdOrPushedSegmentedControl,
-             dateRangeSegmentedControl,
-             createdOrPushedTextfield],
-            [forkSegmentedControl],
-            [numberOfForksSegmentedControl,
-             numberOfForksTextfield],
-            [searchInRepositoryName,
-             searchInDescription,
-             searchInReadme],
-            [languagesTextField],
-            [orgOrUserSegmentedControl,
-             orgOrUserTextField],
-            [sizeSegmentedControl,
-             sizeTextfield],
-            [numberOfStarsSegmentedControl,
-             numberOfStarsTextfield],
-            [topicsTextfield]
-        ]
+        var initialCellContents: [[UIView]] = []
+
+        for i in 0..<expandedCellContents.count {
+            initialCellContents.append([viewForSection(title: sectionTitles[i])])
+        }
+
+        cellContents = initialCellContents
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
