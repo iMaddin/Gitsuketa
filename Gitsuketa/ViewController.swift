@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         searchResultsViewController.tableView.dataSource = resultsDataSource
         searchResultsViewController.tableView.delegate = resultsDataSource
         searchResultsViewController.tableView.separatorStyle = .none
-        
+
         if let defaultSearchKeyword = self.defaultSearchKeyword {
             startSearch(defaultSearchKeyword)
         }
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         self.searchController = searchController
         searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false // TODO: should be true but UISearchBar behaves strangely with Auto Layout
         searchController.obscuresBackgroundDuringPresentation = false
 
         let searchBarContainerView = UIView() // add container view to fix strange resizing behaviour of searchbar
