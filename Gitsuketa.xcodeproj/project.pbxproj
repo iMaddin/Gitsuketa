@@ -100,6 +100,17 @@
 			path = GitHub;
 			sourceTree = "<group>";
 		};
+		1B60F83B1F61616100854B28 /* SearchResults */ = {
+			isa = PBXGroup;
+			children = (
+				1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */,
+				1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */,
+				1BAABCDB1F5F0BBA005A0536 /* SearchResultsDataSource.swift */,
+				1B2389381F5F0D450048C1D1 /* SearchResultsFormatter.swift */,
+			);
+			path = SearchResults;
+			sourceTree = "<group>";
+		};
 		1BAABC961F5EBD50005A0536 = {
 			isa = PBXGroup;
 			children = (
@@ -125,10 +136,7 @@
 			children = (
 				1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */,
 				1BAABCA41F5EBD50005A0536 /* ViewController.swift */,
-				1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */,
-				1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */,
-				1BAABCDB1F5F0BBA005A0536 /* SearchResultsDataSource.swift */,
-				1B2389381F5F0D450048C1D1 /* SearchResultsFormatter.swift */,
+				1B60F83B1F61616100854B28 /* SearchResults */,
 				1B23893E1F5F18250048C1D1 /* GitHub */,
 				1BAABCA91F5EBD50005A0536 /* Assets.xcassets */,
 				1BAABCAB1F5EBD50005A0536 /* LaunchScreen.storyboard */,
