@@ -27,6 +27,9 @@ class SearchFilterViewController: UITableViewController {
              searchInDescription,
              searchInReadme
             ],
+             searchInReadme],
+            [languagesTextField],
+
         ]
     }
 
@@ -108,6 +111,19 @@ class SearchFilterViewController: UITableViewController {
         return searchInReadme
     }()
 
+    // MARK: - Languages
+
+    var languagesTextField: UITextField = {
+        let languagesTextField = UITextField()
+        languagesTextField.placeholder = NSLocalizedString("Language", comment: "")
+        return languagesTextField
+    }()
+
+    var languagesPicker: UIPickerView = {
+        let languagesPicker = UIPickerView()
+        return languagesPicker
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -116,6 +132,10 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
         createdOrPushedTextfield.inputView = createdOrPushedDatePicker
+
+        languagesTextField.inputView = languagesPicker
+        languagesPicker.dataSource = self
+        languagesPicker.delegate = self
     }
 
 }
@@ -166,6 +186,30 @@ extension SearchFilterViewController {
             let newTitle = (sender.isSelected ? "🔴" : "⭕️") + oldTitle.dropFirst()
             sender.setTitle(newTitle, for: .normal)
         }
+    }
+
+}
+
+extension SearchFilterViewController: UIPickerViewDataSource {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 1
+    }
+
+}
+
+extension SearchFilterViewController: UIPickerViewDelegate {
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "Any"
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
     }
 
 }
