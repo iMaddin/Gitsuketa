@@ -15,9 +15,12 @@ class SearchFilterViewController: UITableViewController {
     let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
     static let rangeItems = ["=",">", ">=", "<", "<=", "..", "..*", "*.."]
 
-    var cellContents: [[UIView]] {
+    var cellContents: [[UIView]] = []
+
+    var expandedCellContents: [[UIView]] {
         return [
-            [createdOrPushedSegmentedControl,
+            [viewForSection(title: sectionTitles[0]),
+             createdOrPushedSegmentedControl,
              dateRangeSegmentedControl,
              createdOrPushedTextfield],
             [forkSegmentedControl],
@@ -36,6 +39,18 @@ class SearchFilterViewController: UITableViewController {
             [topicsTextfield]
         ]
     }
+
+    let sectionTitles = [
+        NSLocalizedString("Date", comment: ""),
+        NSLocalizedString("Fork", comment: ""),
+        NSLocalizedString("Number of Forks", comment: ""),
+        NSLocalizedString("Search in", comment: ""),
+        NSLocalizedString("Language", comment: ""),
+        NSLocalizedString("Organization / User", comment: ""),
+        NSLocalizedString("Size", comment: ""),
+        NSLocalizedString("Stars", comment: ""),
+        NSLocalizedString("Topics", comment: ""),
+        ]
 
     // MARK: - Created At / Pushed At
 
@@ -182,6 +197,28 @@ class SearchFilterViewController: UITableViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+
+        cellContents = [
+            [viewForSection(title: sectionTitles[0]),
+             createdOrPushedSegmentedControl,
+             dateRangeSegmentedControl,
+             createdOrPushedTextfield],
+            [forkSegmentedControl],
+            [numberOfForksSegmentedControl,
+             numberOfForksTextfield],
+            [searchInRepositoryName,
+             searchInDescription,
+             searchInReadme],
+            [languagesTextField],
+            [orgOrUserSegmentedControl,
+             orgOrUserTextField],
+            [sizeSegmentedControl,
+             sizeTextfield],
+            [numberOfStarsSegmentedControl,
+             numberOfStarsTextfield],
+            [topicsTextfield]
+        ]
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
@@ -232,6 +269,39 @@ extension SearchFilterViewController {
 
 }
 
+extension SearchFilterViewController {
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            var indexPaths: [IndexPath] = []
+            let max: Int
+
+            if sectionIsExpanded(section: indexPath.section) {
+                cellContents[indexPath.section] = [cellContents[indexPath.section][0]]
+
+                max = tableView.numberOfRows(inSection: indexPath.section)
+                for i in 1..<max {
+                    indexPaths.append(IndexPath(row: i, section: indexPath.section))
+                }
+
+                tableView.deleteRows(at: indexPaths, with: .top)
+            } else {
+                cellContents[indexPath.section] = expandedCellContents[indexPath.section]
+
+                max = expandedCellContents[indexPath.section].count
+                for i in 1..<max {
+                    indexPaths.append(IndexPath(row: i, section: indexPath.section))
+                }
+
+                tableView.insertRows(at: indexPaths, with: .top)
+            }
+
+
+        }
+    }
+
+}
+
 // MARK: - Search In button action
 extension SearchFilterViewController {
 
@@ -268,3 +338,24 @@ extension SearchFilterViewController: UIPickerViewDelegate {
     }
 
 }
+
+extension SearchFilterViewController {
+
+    func viewForSection(title: String) -> UIView {
+        let titleLabel = UILabel()
+        titleLabel.text = title
+
+        let isSelectedIndicator = UILabel()
+        isSelectedIndicator.text = "▲"
+        isSelectedIndicator.textAlignment = .right
+
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, isSelectedIndicator])
+        return stackView
+    }
+
+    func sectionIsExpanded(section: Int) -> Bool {
+        return cellContents[section].count != 1
+    }
+
+}
+
