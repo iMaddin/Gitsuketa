@@ -23,6 +23,7 @@
 		1BAABCD61F5ECB2D005A0536 /* GitHubRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCD51F5ECB2D005A0536 /* GitHubRequestTests.swift */; };
 		1BAABCD81F5EFBC7005A0536 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */; };
 		1BAABCDC1F5F0BBA005A0536 /* SearchResultsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCDB1F5F0BBA005A0536 /* SearchResultsDataSource.swift */; };
+		1BBCC77C1F619EF4006C0782 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		1BAABCD51F5ECB2D005A0536 /* GitHubRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestTests.swift; sourceTree = "<group>"; };
 		1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		1BAABCDB1F5F0BBA005A0536 /* SearchResultsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsDataSource.swift; sourceTree = "<group>"; };
+		1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIView+Layout.swift"; path = "SearchResults/UIView+Layout.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				1BAABCA41F5EBD50005A0536 /* ViewController.swift */,
 				1B60F83B1F61616100854B28 /* SearchResults */,
 				1B23893E1F5F18250048C1D1 /* GitHub */,
+				1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */,
 				1BAABCA91F5EBD50005A0536 /* Assets.xcassets */,
 				1BAABCAB1F5EBD50005A0536 /* LaunchScreen.storyboard */,
 				1BAABCAE1F5EBD50005A0536 /* Info.plist */,
@@ -307,6 +310,7 @@
 				1B2389421F5F18440048C1D1 /* GitHubSearchParameter.swift in Sources */,
 				1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */,
 				1BAABCDC1F5F0BBA005A0536 /* SearchResultsDataSource.swift in Sources */,
+				1BBCC77C1F619EF4006C0782 /* UIView+Layout.swift in Sources */,
 				1BAABCD81F5EFBC7005A0536 /* SearchResultsViewController.swift in Sources */,
 				1B23893D1F5F18120048C1D1 /* GitHubSearchResult.swift in Sources */,
 				1B2389401F5F183F0048C1D1 /* GitHubRequest.swift in Sources */,
