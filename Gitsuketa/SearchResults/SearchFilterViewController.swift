@@ -10,13 +10,6 @@ import UIKit
 
 class SearchFilterViewController: UITableViewController {
 
-    var createdOrPushedStackView: UIStackView = {
-        let createdOrPushedStackView = UIStackView()
-        createdOrPushedStackView.translatesAutoresizingMaskIntoConstraints = false
-        createdOrPushedStackView.distribution = .fillEqually
-        return createdOrPushedStackView
-    }()
-
     let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
 
     var createdOrPushedSegmentedControl: UISegmentedControl = {
@@ -105,10 +98,7 @@ extension SearchFilterViewController {
             break
         }
 
-
         return cell
     }
-
-}
 
 }
