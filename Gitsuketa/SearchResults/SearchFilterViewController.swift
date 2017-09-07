@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchFilterViewController: UIViewController {
+class SearchFilterViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,5 +29,24 @@ extension SearchFilterViewController {
     @objc func clearFilter() {
 
     }
-    
+
+}
+
+// MARK: - UITableViewDataSource
+extension SearchFilterViewController {
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier = "filterCell"
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+
+        return cell
+    }
+
+}
+
 }
