@@ -26,8 +26,11 @@ class SearchFilterViewController: UITableViewController {
              searchInReadme],
             [languagesTextField],
             [orgOrUserSegmentedControl,
-             orgOrUserTextField]
-
+             orgOrUserTextField],
+            [sizeSegmentedControl,
+             sizeTextfield],
+            [numberOfStarsSegmentedControl,
+             numberOfStarsTextfield]
         ]
     }
 
@@ -134,6 +137,34 @@ class SearchFilterViewController: UITableViewController {
         let orgOrUserTextField = UITextField()
         orgOrUserTextField.placeholder = NSLocalizedString("Organization / User name", comment: "") // TODO: change placeholder depeing on what is selected in orgOrUserSegmentedControl
         return orgOrUserTextField
+    }()
+
+    // MARK: - Size in KB
+
+    var sizeSegmentedControl: UISegmentedControl = {
+        let sizeSegmentedControl = UISegmentedControl(items: rangeItems)
+        sizeSegmentedControl.accessibilityIdentifier = "size range SegmentedControl"
+        return sizeSegmentedControl
+    }()
+
+    var sizeTextfield: UITextField = {
+        let sizeTextfield = UITextField()
+        sizeTextfield.placeholder = NSLocalizedString("Size in KB", comment: "")
+        return sizeTextfield
+    }()
+
+    // MARK: - Number of stars
+
+    var numberOfStarsSegmentedControl: UISegmentedControl = {
+        let numberOfStarsSegmentedControl = UISegmentedControl(items: rangeItems)
+        numberOfStarsSegmentedControl.accessibilityIdentifier = "numberOfStars range SegmentedControl"
+        return numberOfStarsSegmentedControl
+    }()
+
+    var numberOfStarsTextfield: UITextField = {
+        let numberOfStarsTextfield = UITextField()
+        numberOfStarsTextfield.placeholder = NSLocalizedString("Number of stars", comment: "")
+        return numberOfStarsTextfield
     }()
 
     override func viewDidLoad() {
