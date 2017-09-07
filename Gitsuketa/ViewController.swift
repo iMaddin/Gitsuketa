@@ -14,6 +14,11 @@ class ViewController: UIViewController {
     var defaultSearchKeyword: String? = "Benkio"
 
     let searchResultsViewController = SearchResultsViewController()
+
+    var tableView: UITableView {
+        return searchResultsViewController.tableView
+    }
+
     let resultsDataSource = SearchResultsDataSource()
     var searchController: UISearchController?
 
@@ -28,7 +33,7 @@ class ViewController: UIViewController {
         searchResultsViewController.tableView.delegate = resultsDataSource
         searchResultsViewController.tableView.separatorStyle = .none
 
-        let searchController = UISearchController(searchResultsController: searchResultsViewController)
+        let searchController = UISearchController(searchResultsController: nil)
         self.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.hidesNavigationBarDuringPresentation = false
@@ -38,10 +43,6 @@ class ViewController: UIViewController {
         searchBarContainerView.accessibilityIdentifier = "searchBarContainerView"
         searchBarContainerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBarContainerView)
-        searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        searchBarContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        searchBarContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        searchBarContainerView.heightAnchor.constraint(equalToConstant: 147).isActive = true
 
         let searchBar = searchController.searchBar
         searchBarContainerView.addSubview(searchBar)
@@ -49,6 +50,25 @@ class ViewController: UIViewController {
         // default search
         searchController.isActive = defaultSearchKeyword != nil
         searchBar.text = defaultSearchKeyword
+
+        addChildViewController(searchResultsViewController)
+        guard let searchResultsView = searchResultsViewController.view else {
+            assertionFailure()
+            return
+        }
+        view.addSubview(searchResultsView)
+        searchResultsView.translatesAutoresizingMaskIntoConstraints = false
+
+        searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        searchBarContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        searchBarContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        searchBarContainerView.heightAnchor.constraint(equalToConstant: searchBar.intrinsicContentSize.height).isActive = true
+
+        searchBarContainerView.bottomAnchor.constraint(equalTo: searchResultsView.topAnchor).isActive = true
+
+        searchResultsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        searchResultsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        searchResultsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
 
 }
@@ -68,7 +88,7 @@ extension ViewController: UISearchResultsUpdating {
         let parameter = GitHubSearchParameter(query: query)
 
         GitHubRequest.makeRequest(search: parameter) {
-            [weak resultsDataSource] searchResult in
+            [weak resultsDataSource, weak tableView] searchResult in
 
             guard let searchResult = searchResult else {
                 assertionFailure("No search results")
@@ -79,11 +99,7 @@ extension ViewController: UISearchResultsUpdating {
             resultsDataSource?.searchResults = formattedData
 
             DispatchQueue.main.async {
-                guard let tableViewController = searchController.searchResultsController as? UITableViewController else {
-                    assertionFailure()
-                    return
-                }
-                tableViewController.tableView.reloadData()
+                tableView?.reloadData()
             }
         }
     }
