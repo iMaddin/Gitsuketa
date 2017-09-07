@@ -17,16 +17,12 @@ class SearchFilterViewController: UITableViewController {
         return [
             [createdOrPushedSegmentedControl,
              dateRangeSegmentedControl,
-             createdOrPushedTextfield
-            ],
+             createdOrPushedTextfield],
             [forkSegmentedControl],
             [numberOfForksSegmentedControl,
-             numberOfForksTextfield
-            ],
+             numberOfForksTextfield],
             [searchInRepositoryName,
              searchInDescription,
-             searchInReadme
-            ],
              searchInReadme],
             [languagesTextField],
 
