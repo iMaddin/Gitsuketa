@@ -11,6 +11,22 @@ import UIKit
 class SearchFilterViewController: UITableViewController {
 
     let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+    static let rangeItems = ["=",">", ">=", "<", "<=", "..", "..*", "*.."]
+
+    var cellContents: [[UIView]] {
+        return [
+            [createdOrPushedSegmentedControl,
+             dateRangeSegmentedControl,
+             createdOrPushedTextfield
+            ],
+            [forkSegmentedControl],
+            [numberOfForksSegmentedControl,
+             numberOfForksTextfield
+            ]
+        ]
+    }
+
+    // MARK: - Created At / Pushed At
 
     var createdOrPushedSegmentedControl: UISegmentedControl = {
         let createdOrPushedSegmentedControl = UISegmentedControl(items: ["created", "pushed"])
@@ -19,7 +35,7 @@ class SearchFilterViewController: UITableViewController {
     }()
 
     var dateRangeSegmentedControl: UISegmentedControl = {
-        let dateRangeSegmentedControl = UISegmentedControl(items: [">", ">=", "<", "<=", "..", "..*", "*.."])
+        let dateRangeSegmentedControl = UISegmentedControl(items: rangeItems)
         dateRangeSegmentedControl.accessibilityIdentifier = "createdOrPushed dateRange SegmentedControl"
         return dateRangeSegmentedControl
     }()
@@ -35,6 +51,28 @@ class SearchFilterViewController: UITableViewController {
         createdOrPushedDatePicker.datePickerMode = .date
         createdOrPushedDatePicker.accessibilityIdentifier = "createdOrPushed DatePicker"
         return createdOrPushedDatePicker
+    }()
+
+    // MARK: - Forked
+
+    var forkSegmentedControl: UISegmentedControl = {
+        let forkSegmentedControl = UISegmentedControl(items: ["true", "only"])
+        forkSegmentedControl.accessibilityIdentifier = "fork SegmentedControl"
+        return forkSegmentedControl
+    }()
+
+    // MARK: - Number of forks
+
+    var numberOfForksSegmentedControl: UISegmentedControl = {
+        let numberOfForksSegmentedControl = UISegmentedControl(items: rangeItems)
+        numberOfForksSegmentedControl.accessibilityIdentifier = "numberOfForks dateRange SegmentedControl"
+        return numberOfForksSegmentedControl
+    }()
+
+    var numberOfForksTextfield: UITextField = {
+        let numberOfForksTextfield = UITextField()
+        numberOfForksTextfield.placeholder = NSLocalizedString("Number of forks", comment: "")
+        return numberOfForksTextfield
     }()
 
     override func viewDidLoad() {
@@ -65,16 +103,11 @@ extension SearchFilterViewController {
 extension SearchFilterViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+        return cellContents.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch(section) {
-        case 0:
-            return 10
-        default:
-            return 0
-        }
+        return cellContents[section].count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,24 +115,9 @@ extension SearchFilterViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        switch indexPath.section {
-        case 0:
-            switch(indexPath.row) {
-            case 0:
-                cell.contentView.addSubview(createdOrPushedSegmentedControl)
-                cell.contentView.constraints(equalToEdgeOf: createdOrPushedSegmentedControl, constants: cellContentInset)
-            case 1:
-                cell.contentView.addSubview(dateRangeSegmentedControl)
-                cell.contentView.constraints(equalToEdgeOf: dateRangeSegmentedControl, constants: cellContentInset)
-            case 2:
-                cell.contentView.addSubview(createdOrPushedTextfield)
-                cell.contentView.constraints(equalToEdgeOf: createdOrPushedTextfield, constants: cellContentInset)
-            default:
-                break
-            }
-        default:
-            break
-        }
+        let cellContent = cellContents[indexPath.section][indexPath.row]
+        cell.contentView.addSubview(cellContent)
+        cell.contentView.constraints(equalToEdgeOf: cellContent, constants: cellContentInset)
 
         return cell
     }
