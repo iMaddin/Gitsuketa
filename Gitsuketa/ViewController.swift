@@ -29,6 +29,8 @@ class ViewController: UIViewController {
 
         view.accessibilityIdentifier = "ViewController view"
         searchResultsViewController.view.accessibilityIdentifier = "searchResultsViewController.view"
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Filter", comment: "Filter search button"), style: .plain, target: self, action: #selector(ViewController.showFilter))
         
         searchResultsViewController.tableView.dataSource = resultsDataSource
         searchResultsViewController.tableView.delegate = resultsDataSource
@@ -117,6 +119,14 @@ extension ViewController: UISearchResultsUpdating {
         }
 
         startSearch(searchQuery)
+    }
+
+}
+
+extension ViewController {
+
+    @objc func showFilter() {
+
     }
 
 }
