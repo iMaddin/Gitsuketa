@@ -176,9 +176,7 @@ extension SearchFilterViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "filterCell"
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
+        let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
 
         let cellContent = cellContents[indexPath.section][indexPath.row]
         cell.contentView.addSubview(cellContent)
