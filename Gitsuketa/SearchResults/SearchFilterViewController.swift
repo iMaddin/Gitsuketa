@@ -17,10 +17,18 @@ class SearchFilterViewController: UITableViewController {
         return createdOrPushedStackView
     }()
 
+    let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+
     var createdOrPushedSegmentedControl: UISegmentedControl = {
-        let createdOrPushedSegmentedControl = UISegmentedControl(items: ["created at", "pushed at"])
+        let createdOrPushedSegmentedControl = UISegmentedControl(items: ["created", "pushed"])
         createdOrPushedSegmentedControl.accessibilityIdentifier = "createdOrPushed SegmentedControl"
         return createdOrPushedSegmentedControl
+    }()
+
+    var dateRangeSegmentedControl: UISegmentedControl = {
+        let dateRangeSegmentedControl = UISegmentedControl(items: [">", ">=", "<", "<=", "..", "..*", "*.."])
+        dateRangeSegmentedControl.accessibilityIdentifier = "createdOrPushed dateRange SegmentedControl"
+        return dateRangeSegmentedControl
     }()
 
     var createdOrPushedTextfield: UITextField = {
@@ -44,8 +52,6 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
         createdOrPushedTextfield.inputView = createdOrPushedDatePicker
-        createdOrPushedStackView.addArrangedSubview(createdOrPushedSegmentedControl)
-        createdOrPushedStackView.addArrangedSubview(createdOrPushedTextfield)
     }
 
 }
@@ -65,8 +71,17 @@ extension SearchFilterViewController {
 // MARK: - UITableViewDataSource
 extension SearchFilterViewController {
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 10
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        switch(section) {
+        case 0:
+            return 10
+        default:
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,13 +89,22 @@ extension SearchFilterViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        switch(indexPath.row) {
+        switch indexPath.section {
         case 0:
-            cell.contentView.addSubview(createdOrPushedStackView)
-            cell.contentView.constraints(equalToEdgeOf: createdOrPushedStackView, constants: UIEdgeInsetsMake(15, 15, 15, 15))
+            switch(indexPath.row) {
+            case 0:
+                cell.contentView.addSubview(createdOrPushedSegmentedControl)
+                cell.contentView.constraints(equalToEdgeOf: createdOrPushedSegmentedControl, constants: cellContentInset)
+            case 1:
+                cell.contentView.addSubview(dateRangeSegmentedControl)
+                cell.contentView.constraints(equalToEdgeOf: dateRangeSegmentedControl, constants: cellContentInset)
+            default:
+                break
+            }
         default:
             break
         }
+
 
         return cell
     }
