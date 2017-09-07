@@ -32,6 +32,10 @@ class ViewController: UIViewController {
         searchResultsViewController.tableView.dataSource = resultsDataSource
         searchResultsViewController.tableView.delegate = resultsDataSource
         searchResultsViewController.tableView.separatorStyle = .none
+        
+        if let defaultSearchKeyword = self.defaultSearchKeyword {
+            startSearch(defaultSearchKeyword)
+        }
 
         let searchController = UISearchController(searchResultsController: nil)
         self.searchController = searchController
@@ -46,10 +50,6 @@ class ViewController: UIViewController {
 
         let searchBar = searchController.searchBar
         searchBarContainerView.addSubview(searchBar)
-
-        // default search
-        searchController.isActive = defaultSearchKeyword != nil
-        searchBar.text = defaultSearchKeyword
 
         addChildViewController(searchResultsViewController)
         guard let searchResultsView = searchResultsViewController.view else {
@@ -75,15 +75,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchResultsUpdating {
 
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchQuery = searchController.searchBar.text else {
-            return
-        }
-
-        if searchQuery.trimmingCharacters(in: CharacterSet.whitespaces) == "" {
-            return
-        }
-
+    fileprivate func startSearch(_ searchQuery: String) {
         let query = GitHubSearchQuery(keyword: searchQuery)
         let parameter = GitHubSearchParameter(query: query)
 
@@ -102,6 +94,18 @@ extension ViewController: UISearchResultsUpdating {
                 tableView?.reloadData()
             }
         }
+    }
+
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchQuery = searchController.searchBar.text else {
+            return
+        }
+
+        if searchQuery.trimmingCharacters(in: CharacterSet.whitespaces) == "" {
+            return
+        }
+
+        startSearch(searchQuery)
     }
 
 }
