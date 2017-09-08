@@ -14,7 +14,7 @@ struct SearchFilterReader {
         var searchQuery = GitHubSearchQuery()
 
         for sectionNumber in 0..<searchFilterViewController.tableView.numberOfSections {
-            if !searchFilterViewController.sectionIsExpanded(section: sectionNumber) { break }
+            if !searchFilterViewController.sectionIsExpanded(section: sectionNumber) { continue }
 
             switch sectionNumber {
             case 0:
@@ -84,7 +84,7 @@ struct SearchFilterReader {
                 let rangeValue = SearchFilterReader.createRangeValue(value: Int(intValue), fromValue: Int(intFromValue), rangeSelectionViewController: rangeSelectionVC)
                 searchQuery.numberOfStars = rangeValue
             case 8:
-                guard let topics = searchFilterViewController.topicsTextfield.text else { break }
+                guard let topics = searchFilterViewController.topicsTextfield.text else { continue }
                 let set1 = Set(topics.components(separatedBy: ","))
                 let set2 = Set(topics.components(separatedBy: " "))
                 let unionTopics = Array(set1.union(set2))
