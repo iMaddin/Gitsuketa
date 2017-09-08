@@ -11,6 +11,7 @@
 		1B21C5091F62CC0800883D2F /* RangeQualifierPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B21C5081F62CC0800883D2F /* RangeQualifierPickerManager.swift */; };
 		1B21C50B1F62CFDB00883D2F /* LanguagesPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B21C50A1F62CFDB00883D2F /* LanguagesPickerManager.swift */; };
 		1B21C50D1F6301D200883D2F /* RangeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B21C50C1F6301D200883D2F /* RangeSelectionViewController.swift */; };
+		1B21C5101F63374F00883D2F /* SearchFilterReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B21C50F1F63374E00883D2F /* SearchFilterReader.swift */; };
 		1B2389391F5F0D450048C1D1 /* SearchResultsFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2389381F5F0D450048C1D1 /* SearchResultsFormatter.swift */; };
 		1B23893D1F5F18120048C1D1 /* GitHubSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23893C1F5F18120048C1D1 /* GitHubSearchResult.swift */; };
 		1B2389401F5F183F0048C1D1 /* GitHubRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B23893F1F5F183F0048C1D1 /* GitHubRequest.swift */; };
@@ -59,6 +60,7 @@
 		1B21C5081F62CC0800883D2F /* RangeQualifierPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeQualifierPickerManager.swift; sourceTree = "<group>"; };
 		1B21C50A1F62CFDB00883D2F /* LanguagesPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesPickerManager.swift; sourceTree = "<group>"; };
 		1B21C50C1F6301D200883D2F /* RangeSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSelectionViewController.swift; sourceTree = "<group>"; };
+		1B21C50F1F63374E00883D2F /* SearchFilterReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterReader.swift; sourceTree = "<group>"; };
 		1B2389381F5F0D450048C1D1 /* SearchResultsFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsFormatter.swift; sourceTree = "<group>"; };
 		1B23893C1F5F18120048C1D1 /* GitHubSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubSearchResult.swift; sourceTree = "<group>"; };
 		1B23893F1F5F183F0048C1D1 /* GitHubRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequest.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */,
 				1BAABCDB1F5F0BBA005A0536 /* SearchResultsDataSource.swift */,
 				1B2389381F5F0D450048C1D1 /* SearchResultsFormatter.swift */,
+				1B21C50F1F63374E00883D2F /* SearchFilterReader.swift */,
 				1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */,
 				1B21C50A1F62CFDB00883D2F /* LanguagesPickerManager.swift */,
 				1B21C50C1F6301D200883D2F /* RangeSelectionViewController.swift */,
@@ -350,6 +353,7 @@
 				1B3C42201F627298000A634B /* GitHubRangeValue.swift in Sources */,
 				1BBCC77C1F619EF4006C0782 /* UIView+Layout.swift in Sources */,
 				1B3C421A1F626AC1000A634B /* GitHubForkSearchOption.swift in Sources */,
+				1B21C5101F63374F00883D2F /* SearchFilterReader.swift in Sources */,
 				1BAABCD81F5EFBC7005A0536 /* SearchResultsViewController.swift in Sources */,
 				1B23893D1F5F18120048C1D1 /* GitHubSearchResult.swift in Sources */,
 				1B2389401F5F183F0048C1D1 /* GitHubRequest.swift in Sources */,
