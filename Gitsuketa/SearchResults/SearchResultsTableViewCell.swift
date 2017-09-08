@@ -43,8 +43,7 @@ class SearchResultsTableViewCell: UITableViewCell {
             }
             
             if let stars = viewModel?.stars,
-                let starsLabel = self.starsLabel,
-                stars != 0 {
+                let starsLabel = self.starsLabel {
                 starsLabel.text = "⭐️\(stars)"
                 contentStackView.addArrangedSubview(starsLabel)
             }
