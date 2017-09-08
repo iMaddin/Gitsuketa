@@ -35,10 +35,13 @@ extension GitHubRangeValueProtocol where T == Date {
 
     var stringQualifier: String {
         let stringQualifier: String
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withFullDate, .withDashSeparatorInDate] // Not using .withInternetDateTime because the time zone is only shown as "Z" possibly due to a bug
+
         if let fromValue = fromValue, rangeQualifier == .between {
-            stringQualifier = String(fromValue) + rangeQualifier.description() + String(value)
+            stringQualifier = formatter.string(from: fromValue) + rangeQualifier.description() + formatter.string(from: value)
         } else {
-            stringQualifier = rangeQualifier.description() + String(value)
+            stringQualifier = rangeQualifier.description() + formatter.string(from: value)
         }
         return stringQualifier
     }
