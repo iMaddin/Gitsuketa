@@ -63,7 +63,7 @@ class SearchFilterViewController: UITableViewController {
     // MARK: - Forked
 
     var forkSegmentedControl: UISegmentedControl = {
-        let forkSegmentedControl = UISegmentedControl(items: ["true", "only"])
+        let forkSegmentedControl = UISegmentedControl(items: GitHubForkSearchOption.allValues.map{ $0.description() })
         forkSegmentedControl.accessibilityIdentifier = "fork SegmentedControl"
         forkSegmentedControl.selectedSegmentIndex = 0
         return forkSegmentedControl

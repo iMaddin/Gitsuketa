@@ -9,5 +9,20 @@
 import Foundation
 
 enum GitHubForkSearchOption: String {
+
     case includeForks = "true", onlyForks = "only"
+
+    func description() -> String {
+        switch self {
+        case .includeForks:
+            return "include forks"
+        case .onlyForks:
+            return "only forks"
+        }
+    }
+
+    static var allValues: [GitHubForkSearchOption] {
+        return [.includeForks, .onlyForks]
+    }
+
 }
