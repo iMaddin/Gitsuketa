@@ -13,7 +13,7 @@ class SearchFilterViewController: UITableViewController {
     var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
     
     let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
-    static let rangeItems = ["=",">", ">=", "<", "<=", "..", "..*", "*.."]
+    static let rangeItems = GitHubRangeQualifier.allQualifierDescriptions
 
     var cellContents: [[UIView]] = []
 
