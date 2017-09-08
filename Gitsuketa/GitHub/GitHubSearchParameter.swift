@@ -38,7 +38,9 @@ struct GitHubSearchQuery {
     var query: String {
         var query = "q="
 
-        query += "\(keyword)"
+        if let keyword = keyword {
+            query += "\(keyword)"
+        }
 
         if let created = created {
             query += "+created:\(created.stringQualifier)"
@@ -94,7 +96,11 @@ struct GitHubSearchQuery {
         return query
     }
 
-    let keyword: String
+    var keyword: String? {
+        didSet {
+            self.keyword = keyword?.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+        }
+    }
 
     var created: GitHubRangeValue<Date>?
     var pushed: GitHubRangeValue<Date>?
@@ -111,8 +117,8 @@ struct GitHubSearchQuery {
     var numberOfStars: GitHubRangeValue<Int>?
     var topic: [String]?
 
-    init(keyword: String) {
-        self.keyword = keyword.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
+    init(keyword: String? = nil) {
+        self.keyword = keyword?.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
 
 }
