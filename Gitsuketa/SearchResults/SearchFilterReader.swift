@@ -32,6 +32,12 @@ struct SearchFilterReader {
                 }
             case 1:
                 searchQuery.fork = GitHubForkSearchOption.allValues[searchFilterViewController.forkSegmentedControl.selectedSegmentIndex]
+            case 2:
+                let value = searchFilterViewController.numberOfForksRightTextfield.text
+                let fromValue = searchFilterViewController.numberOfForksLeftTextfield.text
+                let rangeSelectionVC = searchFilterViewController.numberOfForksRangeSelectionViewController!
+                let rangeValue = SearchFilterReader.createRangeValue(value: Int(value!), fromValue: Int(fromValue!), rangeSelectionViewController: rangeSelectionVC)
+                searchQuery.numberOfForks = rangeValue
             default:
                 break
             }
