@@ -14,6 +14,15 @@ class SearchFilterViewController: UITableViewController {
 
     fileprivate var cellContents: [[UIView]] = []
 
+    fileprivate var keyboardAccessoryView: UIView = {
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(SearchFilterViewController.dismissKeyboard(sender:)))
+        let keyboardAccessoryView = UIToolbar()
+        keyboardAccessoryView.setItems([flexibleSpace, doneButton], animated: true)
+        keyboardAccessoryView.sizeToFit()
+        return keyboardAccessoryView
+    }()
+
     // MARK: - Created At / Pushed At
 
     fileprivate weak var createdOrPushedPickerOwner: UIButton?
@@ -227,6 +236,12 @@ class SearchFilterViewController: UITableViewController {
         starsRangeSelectionViewController = RangeSelectionViewController(leftView: starsLeftTextField, rightView: starsRightTextfield)
         addChildViewController(starsRangeSelectionViewController)
         starsRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
+
+        // text fields
+        for textField in [numberOfForksLeftTextfield, numberOfForksRightTextfield, sizeLeftTextfield, sizeRightTextfield, starsLeftTextField, starsRightTextfield] {
+            textField.inputAccessoryView = keyboardAccessoryView
+            textField.keyboardType = .numberPad
+        }
 
         // cell data
 
@@ -525,3 +540,11 @@ fileprivate extension SearchFilterViewController {
 
 }
 
+// MARK: - Keyboard
+extension SearchFilterViewController {
+
+    @objc func dismissKeyboard(sender: UIControl?) {
+        view.endEditing(true)
+    }
+
+}
