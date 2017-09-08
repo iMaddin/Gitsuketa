@@ -20,17 +20,18 @@ class SearchFilterViewController: UITableViewController {
 
     // MARK: - Created At / Pushed At
 
+    fileprivate weak var createdOrPushedPickerOwner: UIButton?
+
+    var createdOrPushedDate: Date?
+    var createdOrPushedFromDate: Date?
+
+    var createdOrPushedRangeSelectionViewController: RangeSelectionViewController!
+
     var createdOrPushedSegmentedControl: UISegmentedControl = {
         let createdOrPushedSegmentedControl = UISegmentedControl(items: ["created", "pushed"])
         createdOrPushedSegmentedControl.accessibilityIdentifier = "createdOrPushed SegmentedControl"
         createdOrPushedSegmentedControl.selectedSegmentIndex = 0
         return createdOrPushedSegmentedControl
-    }()
-
-    var createdOrPushedDateInputStackView: UIStackView = {
-        let createdOrPushedDateInputStackView = UIStackView()
-        createdOrPushedDateInputStackView.distribution = .fillEqually
-        return createdOrPushedDateInputStackView
     }()
 
     var createdOrPushedLeftDateSelectionButton: UIButton = {
@@ -47,32 +48,12 @@ class SearchFilterViewController: UITableViewController {
         return createdOrPushedDateSelectionButton
     }()
 
-    var createdOrPushedRangeQualifierButton: UIButton = {
-        let createdOrPushedRangeQualifierButton = UIButton()
-        createdOrPushedRangeQualifierButton.setTitle(NSLocalizedString("=", comment: "Select Date placeholder text"), for: .normal)
-        createdOrPushedRangeQualifierButton.setTitleColor(UIColor.blue, for: .normal)
-        return createdOrPushedRangeQualifierButton
-    }()
-
-    var createdOrPushedRangeQualifierPickerView: UIPickerView = {
-        let createdOrPushedRangeQualifierPickerView = UIPickerView()
-        createdOrPushedRangeQualifierPickerView.accessibilityIdentifier = "createdOrPushed dateRange SegmentedControl"
-        return createdOrPushedRangeQualifierPickerView
-    }()
-
-    var createdOrPushedRangeQualifierPickerManager: RangeQualifierPickerManager?
-
     var createdOrPushedDatePicker: UIDatePicker = {
         let createdOrPushedDatePicker = UIDatePicker()
         createdOrPushedDatePicker.datePickerMode = .date
         createdOrPushedDatePicker.accessibilityIdentifier = "createdOrPushed DatePicker"
         return createdOrPushedDatePicker
     }()
-
-    fileprivate weak var createdOrPushedPickerOwner: UIButton?
-
-    var createdOrPushedDate: Date?
-    var createdOrPushedFromDate: Date?
 
     // MARK: - Forked
 
@@ -206,11 +187,12 @@ class SearchFilterViewController: UITableViewController {
 
         // created / pushed
 
-        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRangeQualifierButton)
-        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRightDateSelectionButton)
+        createdOrPushedRangeSelectionViewController = RangeSelectionViewController(leftView: createdOrPushedLeftDateSelectionButton, rightView: createdOrPushedRightDateSelectionButton)
 
+        createdOrPushedRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
+
+        // Date picker
         createdOrPushedRightDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
-        createdOrPushedRangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedLeftDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
 
@@ -224,12 +206,6 @@ class SearchFilterViewController: UITableViewController {
         if let createdOrPushedFromDate = createdOrPushedFromDate {
             createdOrPushedLeftDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedFromDate), for: .normal)
         }
-
-        createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
-        createdOrPushedRangeQualifierPickerManager?.didSelectBetweenRangeQualifier = { flag in self.didSelectBetweenRangeQualifier(flag: flag)}
-
-        createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
-        createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
 
         // number of forks
         numberOfForksRangeSelectionViewController = RangeSelectionViewController(leftView: numberOfForksLeftTextfield, rightView: numberOfForksRightTextfield)
@@ -369,8 +345,8 @@ extension SearchFilterViewController {
             case createdOrPushedRightDateSelectionButton:
                 pickerToShow = createdOrPushedDatePicker
                 dateToShow = createdOrPushedDate
-            case createdOrPushedRangeQualifierButton:
-                pickerToShow = createdOrPushedRangeQualifierPickerView
+            case createdOrPushedRangeSelectionViewController.rangeQualifierButton:
+                pickerToShow = createdOrPushedRangeSelectionViewController.rangeQualifierPickerView
             default:
                 assertionFailure()
                 pickerToShow = UIPickerView()
@@ -467,11 +443,11 @@ fileprivate extension SearchFilterViewController {
         return [
             [viewForSection(title: sectionTitles[0]),
              createdOrPushedSegmentedControl,
-             createdOrPushedDateInputStackView],
+             createdOrPushedRangeSelectionViewController.view],
             [viewForSection(title: sectionTitles[1]),
              forkSegmentedControl],
             [viewForSection(title: sectionTitles[2]),
-             numberOfForksRangeSelectionViewController!.view],
+             numberOfForksRangeSelectionViewController.view],
             [viewForSection(title: sectionTitles[3]),
              searchInRepositoryName,
              searchInDescription,
@@ -526,15 +502,6 @@ fileprivate extension SearchFilterViewController {
         let t: String = expanded ? "🔽" : "◀️"
         accessoryView.text = t
         return accessoryView
-    }
-
-    func didSelectBetweenRangeQualifier(flag: Bool) {
-        if flag {
-            createdOrPushedDateInputStackView.insertArrangedSubview(createdOrPushedLeftDateSelectionButton, at: 0)
-        } else {
-            createdOrPushedLeftDateSelectionButton.removeFromSuperview()
-            createdOrPushedDateInputStackView.removeArrangedSubview(createdOrPushedLeftDateSelectionButton)
-        }
     }
 
 }
