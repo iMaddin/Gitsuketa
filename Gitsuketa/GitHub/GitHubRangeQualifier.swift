@@ -26,7 +26,7 @@ enum GitHubRangeQualifier: String {
         }
     }
 
-    static var allQualifiers: [GitHubRangeQualifier] {
+    static var allValues: [GitHubRangeQualifier] {
         return [
             .equal,
 			.moreThan,
@@ -38,7 +38,7 @@ enum GitHubRangeQualifier: String {
     }
 
     static var allQualifierDescriptions: [String] {
-        return allQualifiers.map{$0.description()}
+        return allValues.map{$0.description()}
     }
 
 }

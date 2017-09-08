@@ -27,7 +27,7 @@ extension RangeQualifierPickerManager: UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return GitHubRangeQualifier.allQualifiers.count
+        return GitHubRangeQualifier.allValues.count
     }
 
 }
