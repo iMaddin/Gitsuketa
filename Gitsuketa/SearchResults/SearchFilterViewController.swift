@@ -65,12 +65,14 @@ class SearchFilterViewController: UITableViewController {
     var createdOrPushedSegmentedControl: UISegmentedControl = {
         let createdOrPushedSegmentedControl = UISegmentedControl(items: ["created", "pushed"])
         createdOrPushedSegmentedControl.accessibilityIdentifier = "createdOrPushed SegmentedControl"
+        createdOrPushedSegmentedControl.selectedSegmentIndex = 0
         return createdOrPushedSegmentedControl
     }()
 
     var dateRangeSegmentedControl: UISegmentedControl = {
         let dateRangeSegmentedControl = UISegmentedControl(items: rangeItems)
         dateRangeSegmentedControl.accessibilityIdentifier = "createdOrPushed dateRange SegmentedControl"
+        dateRangeSegmentedControl.selectedSegmentIndex = 0
         return dateRangeSegmentedControl
     }()
 
@@ -87,11 +89,14 @@ class SearchFilterViewController: UITableViewController {
         return createdOrPushedDatePicker
     }()
 
+    var createdOrPushedDate: Date?
+
     // MARK: - Forked
 
     var forkSegmentedControl: UISegmentedControl = {
         let forkSegmentedControl = UISegmentedControl(items: ["true", "only"])
         forkSegmentedControl.accessibilityIdentifier = "fork SegmentedControl"
+        forkSegmentedControl.selectedSegmentIndex = 0
         return forkSegmentedControl
     }()
 
@@ -100,6 +105,7 @@ class SearchFilterViewController: UITableViewController {
     var numberOfForksSegmentedControl: UISegmentedControl = {
         let numberOfForksSegmentedControl = UISegmentedControl(items: rangeItems)
         numberOfForksSegmentedControl.accessibilityIdentifier = "numberOfForks dateRange SegmentedControl"
+        numberOfForksSegmentedControl.selectedSegmentIndex = 0
         return numberOfForksSegmentedControl
     }()
 
@@ -156,6 +162,7 @@ class SearchFilterViewController: UITableViewController {
     var orgOrUserSegmentedControl: UISegmentedControl = {
         let orgOrUserSegmentedControl = UISegmentedControl(items: ["organization", "user"])
         orgOrUserSegmentedControl.accessibilityIdentifier = "orgOrUser SegmentedControl"
+        orgOrUserSegmentedControl.selectedSegmentIndex = 0
         return orgOrUserSegmentedControl
     }()
     
@@ -170,6 +177,7 @@ class SearchFilterViewController: UITableViewController {
     var sizeSegmentedControl: UISegmentedControl = {
         let sizeSegmentedControl = UISegmentedControl(items: rangeItems)
         sizeSegmentedControl.accessibilityIdentifier = "size range SegmentedControl"
+        sizeSegmentedControl.selectedSegmentIndex = 0
         return sizeSegmentedControl
     }()
 
@@ -184,6 +192,7 @@ class SearchFilterViewController: UITableViewController {
     var numberOfStarsSegmentedControl: UISegmentedControl = {
         let numberOfStarsSegmentedControl = UISegmentedControl(items: rangeItems)
         numberOfStarsSegmentedControl.accessibilityIdentifier = "numberOfStars range SegmentedControl"
+        numberOfStarsSegmentedControl.selectedSegmentIndex = 0
         return numberOfStarsSegmentedControl
     }()
 
