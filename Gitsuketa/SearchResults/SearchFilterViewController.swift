@@ -441,6 +441,14 @@ extension SearchFilterViewController {
 
 extension SearchFilterViewController {
 
+    func sectionIsExpanded(section: Int) -> Bool {
+        return cellContents[section].count != 1
+    }
+
+}
+
+fileprivate extension SearchFilterViewController {
+
     func viewForSection(title: String) -> UIView {
         let titleLabel = UILabel()
         titleLabel.text = title
@@ -453,8 +461,10 @@ extension SearchFilterViewController {
         return stackView
     }
 
-    func sectionIsExpanded(section: Int) -> Bool {
-        return cellContents[section].count != 1
+    var dateSelectionFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        return df
     }
 
 }
