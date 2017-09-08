@@ -252,13 +252,14 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
+        // created / pushed
+
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRangeQualifierButton)
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedDateSelectionButton)
 
         createdOrPushedDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedRangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedFromDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
-
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
 
         // default createdOrPushed date selection button titles
@@ -276,6 +277,8 @@ class SearchFilterViewController: UITableViewController {
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
         createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
         createdOrPushedRangeQualifierPickerManager?.didSelectBetweenRangeQualifier = { flag in self.didSelectBetweenRangeQualifier(flag: flag)}
+
+        // languages
 
         languagesPickerManager = LanguagesPickerManager(button: languagesSelectionButton)
         languagesPicker.dataSource = languagesPickerManager
@@ -316,11 +319,16 @@ extension SearchFilterViewController {
         let cellContent = cellContents[indexPath.section][indexPath.row]
         cell.contentView.addSubview(cellContent)
         cell.contentView.constraints(equalToEdgeOf: cellContent, constants: cellContentInset)
+        if indexPath.row == 0 {
+            cell.accessoryView = accessoryView(expanded: sectionIsExpanded(section: indexPath.section))
+        }
 
         return cell
     }
 
 }
+
+// MARK: - UITableViewDelegate
 
 extension SearchFilterViewController {
 
@@ -349,6 +357,7 @@ extension SearchFilterViewController {
                 tableView.insertRows(at: indexPaths, with: .top)
             }
 
+            tableView.cellForRow(at: indexPath)?.accessoryView = accessoryView(expanded: sectionIsExpanded(section: indexPath.section))
         }
     }
 
@@ -461,11 +470,7 @@ fileprivate extension SearchFilterViewController {
         let titleLabel = UILabel()
         titleLabel.text = title
 
-        let isSelectedIndicator = UILabel()
-        isSelectedIndicator.text = "▲"
-        isSelectedIndicator.textAlignment = .right
-
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, isSelectedIndicator])
+        let stackView = UIStackView(arrangedSubviews: [titleLabel])
         return stackView
     }
 
@@ -473,6 +478,14 @@ fileprivate extension SearchFilterViewController {
         let df = DateFormatter()
         df.dateStyle = .medium
         return df
+    }
+
+    func accessoryView(expanded: Bool) -> UIView {
+        let accessoryView = UILabel(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        accessoryView.textAlignment = .right
+        let t: String = expanded ? "🔽" : "◀️"
+        accessoryView.text = t
+        return accessoryView
     }
 
 }
