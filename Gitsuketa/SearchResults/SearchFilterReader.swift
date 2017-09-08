@@ -44,6 +44,8 @@ struct SearchFilterReader {
                     searchQuery.created = nil
                     searchQuery.pushed = value
                 }
+            case 1:
+                searchQuery.fork = GitHubForkSearchOption.allValues[searchFilterViewController.forkSegmentedControl.selectedSegmentIndex]
             default:
                 break
             }
