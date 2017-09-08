@@ -21,8 +21,7 @@ class SearchFilterViewController: UITableViewController {
         return [
             [viewForSection(title: sectionTitles[0]),
              createdOrPushedSegmentedControl,
-             dateRangeSegmentedControl,
-             createdOrPushedButton],
+             createdOrPushedDateInputStackView],
             [viewForSection(title: sectionTitles[1]),
              forkSegmentedControl],
             [viewForSection(title: sectionTitles[2]),
@@ -69,19 +68,32 @@ class SearchFilterViewController: UITableViewController {
         return createdOrPushedSegmentedControl
     }()
 
-    var dateRangeSegmentedControl: UISegmentedControl = {
-        let dateRangeSegmentedControl = UISegmentedControl(items: rangeItems)
-        dateRangeSegmentedControl.accessibilityIdentifier = "createdOrPushed dateRange SegmentedControl"
-        dateRangeSegmentedControl.selectedSegmentIndex = 0
-        return dateRangeSegmentedControl
+    var createdOrPushedDateInputStackView: UIStackView = {
+        let createdOrPushedDateInputStackView = UIStackView()
+        return createdOrPushedDateInputStackView
     }()
 
-    var createdOrPushedButton: UIButton = {
-        let createdOrPushedButton = UIButton()
-        createdOrPushedButton.setTitle(NSLocalizedString("Select Date", comment: "Select Date placeholder text"), for: .normal)
-        createdOrPushedButton.setTitleColor(UIColor.blue, for: .normal)
-        return createdOrPushedButton
+    var createdOrPushedDateSelectionButton: UIButton = {
+        let createdOrPushedDateSelectionButton = UIButton()
+        createdOrPushedDateSelectionButton.setTitle(NSLocalizedString("Select Date", comment: "Select Date placeholder text"), for: .normal)
+        createdOrPushedDateSelectionButton.setTitleColor(UIColor.blue, for: .normal)
+        return createdOrPushedDateSelectionButton
     }()
+
+    var createdOrPushedRangeQualifierButton: UIButton = {
+        let createdOrPushedRangeQualifierButton = UIButton()
+        createdOrPushedRangeQualifierButton.setTitle(NSLocalizedString("=", comment: "Select Date placeholder text"), for: .normal)
+        createdOrPushedRangeQualifierButton.setTitleColor(UIColor.blue, for: .normal)
+        return createdOrPushedRangeQualifierButton
+    }()
+
+    var createdOrPushedRangeQualifierPickerView: UIPickerView = {
+        let createdOrPushedRangeQualifierPickerView = UIPickerView()
+        createdOrPushedRangeQualifierPickerView.accessibilityIdentifier = "createdOrPushed dateRange SegmentedControl"
+        return createdOrPushedRangeQualifierPickerView
+    }()
+
+    var createdOrPushedRangeQualifierPickerManager: RangeQualifierPickerManager?
 
     var createdOrPushedDatePicker: UIDatePicker = {
         let createdOrPushedDatePicker = UIDatePicker()
@@ -227,8 +239,14 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
-        createdOrPushedButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
+        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRangeQualifierButton)
+        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedDateSelectionButton)
+        createdOrPushedDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
+
+        createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
+        createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
+        createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
 
         languagesPicker.dataSource = self
         languagesPicker.delegate = self
