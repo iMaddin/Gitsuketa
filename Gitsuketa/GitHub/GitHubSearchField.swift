@@ -9,5 +9,7 @@
 import Foundation
 
 enum GitHubSearchField: String {
-    case repositoryName, description, readme
+    case repositoryName = "name"
+    case description
+    case readme
 }
