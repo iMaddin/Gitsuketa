@@ -18,7 +18,8 @@ struct GitHubSearchParameter {
         let sort = "sort=\(self.sort.rawValue)"
         let order = "order=\(self.order.rawValue)"
         let url = searchQuery + q + "&" + sort + "&" + order
-        return URL(string: url)
+        guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
+        return URL(string: encodedURL)
     }
 
     let query: GitHubSearchQuery
