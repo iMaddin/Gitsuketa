@@ -25,8 +25,7 @@ class SearchFilterViewController: UITableViewController {
             [viewForSection(title: sectionTitles[1]),
              forkSegmentedControl],
             [viewForSection(title: sectionTitles[2]),
-             numberOfForksSegmentedControl,
-             numberOfForksTextfield],
+             numberOfForksRangeSelectionViewController!.view],
             [viewForSection(title: sectionTitles[3]),
              searchInRepositoryName,
              searchInDescription,
@@ -126,17 +125,18 @@ class SearchFilterViewController: UITableViewController {
 
     // MARK: - Number of forks
 
-    var numberOfForksSegmentedControl: UISegmentedControl = {
-        let numberOfForksSegmentedControl = UISegmentedControl(items: rangeItems)
-        numberOfForksSegmentedControl.accessibilityIdentifier = "numberOfForks dateRange SegmentedControl"
-        numberOfForksSegmentedControl.selectedSegmentIndex = 0
-        return numberOfForksSegmentedControl
+    var numberOfForksRangeSelectionViewController: RangeSelectionViewController?
+
+    var numberOfForksRightTextfield: UITextField = {
+        let numberOfForksRightTextfield = UITextField()
+        numberOfForksRightTextfield.placeholder = NSLocalizedString("Number of forks", comment: "")
+        return numberOfForksRightTextfield
     }()
 
-    var numberOfForksTextfield: UITextField = {
-        let numberOfForksTextfield = UITextField()
-        numberOfForksTextfield.placeholder = NSLocalizedString("Number of forks", comment: "")
-        return numberOfForksTextfield
+    var numberOfForksLeftTextfield: UITextField = {
+        let numberOfForksLeftTextfield = UITextField()
+        numberOfForksLeftTextfield.placeholder = NSLocalizedString("Number of forks", comment: "")
+        return numberOfForksLeftTextfield
     }()
 
     // MARK: - Search in repository name, description, README
@@ -270,6 +270,12 @@ class SearchFilterViewController: UITableViewController {
 
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
         createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
+
+        // number of forks
+        numberOfForksRangeSelectionViewController = RangeSelectionViewController(leftView: numberOfForksLeftTextfield, rightView: numberOfForksRightTextfield)
+        if let numberOfForksRangeSelectionViewController = numberOfForksRangeSelectionViewController {
+            addChildViewController(numberOfForksRangeSelectionViewController)
+        }
 
         // languages
 
