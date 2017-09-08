@@ -170,6 +170,8 @@ class SearchFilterViewController: UITableViewController {
         return languagesPicker
     }()
 
+    var languagesPickerManager: LanguagesPickerManager?
+
     // MARK: - Organization or User repositories
 
     var orgOrUserSegmentedControl: UISegmentedControl = {
@@ -248,8 +250,9 @@ class SearchFilterViewController: UITableViewController {
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
         createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
 
-        languagesPicker.dataSource = self
-        languagesPicker.delegate = self
+        languagesPickerManager = LanguagesPickerManager(button: languagesSelectionButton)
+        languagesPicker.dataSource = languagesPickerManager
+        languagesPicker.delegate = languagesPickerManager
     }
 
 }
@@ -334,30 +337,6 @@ extension SearchFilterViewController {
             let newTitle = (sender.isSelected ? "🔴" : "⭕️") + oldTitle.dropFirst()
             sender.setTitle(newTitle, for: .normal)
         }
-    }
-
-}
-
-extension SearchFilterViewController: UIPickerViewDataSource {
-
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
-    }
-
-}
-
-extension SearchFilterViewController: UIPickerViewDelegate {
-
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "Any"
-    }
-
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
     }
 
 }
