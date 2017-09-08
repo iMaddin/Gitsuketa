@@ -14,7 +14,7 @@ let searchQuery = "https://api.github.com/search/repositories?"
 struct GitHubSearchParameter {
 
     var url: URL? {
-        let q = "q=\(query.query)"
+        let q = "\(query.query)"
         let sort = "sort=\(self.sort.rawValue)"
         let order = "order=\(self.order.rawValue)"
         let url = searchQuery + q + "&" + sort + "&" + order
@@ -36,7 +36,64 @@ struct GitHubSearchParameter {
 struct GitHubSearchQuery {
 
     var query: String {
-        return keyword
+        var query = "q="
+
+         if let keyword = keyword {
+            query += "\(keyword)"
+         }
+
+         if let created = created {
+            query += "+created:\(created)"
+         }
+
+         if let pushed = pushed {
+            query += "+pushed:\(pushed)"
+         }
+
+         if let fork = fork {
+            query += "+fork:\(fork)"
+         }
+
+         if let numberOfForks = numberOfForks {
+            query += "+forks:\(numberOfForks)"
+         }
+
+         if let searchFields = searchFields {
+            var inFieldsQuery = ""
+            for s in searchFields {
+                inFieldsQuery += "\(s),"
+            }
+            let removeLastComma = inFieldsQuery.dropLast()
+            query += "+in:\(removeLastComma)"
+         }
+
+         if let language = language {
+            query += "+language:\(language)"
+         }
+
+         if let repo = repo {
+            query += "+repo:\(repo)"
+         }
+
+         if let user = user {
+            query += "+user:\(user)"
+         }
+
+         if let size = size {
+            query += "+size:\(size)"
+         }
+
+         if let numberOfStars = numberOfStars {
+            query += "+stars:\(numberOfStars)"
+         }
+
+         if let topic = topic {
+            for t in topic {
+                query += "+topic:\(t)"
+            }
+         }
+
+        return query
     }
 
     let keyword: String
@@ -46,7 +103,7 @@ struct GitHubSearchQuery {
 
     var fork: GitHubForkSearchOption?
     var numberOfForks: GitHubRangeValue<Int>?
-    var searchFields: GitHubSearchField?
+    var searchFields: [GitHubSearchField]?
     var language: GitHubLanguage?
 
     var repo: String?
