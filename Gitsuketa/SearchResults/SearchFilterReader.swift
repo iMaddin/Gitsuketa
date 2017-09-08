@@ -36,7 +36,9 @@ struct SearchFilterReader {
                 let value = searchFilterViewController.numberOfForksRightTextfield.text
                 let fromValue = searchFilterViewController.numberOfForksLeftTextfield.text
                 let rangeSelectionVC = searchFilterViewController.numberOfForksRangeSelectionViewController!
-                let rangeValue = SearchFilterReader.createRangeValue(value: Int(value!), fromValue: Int(fromValue!), rangeSelectionViewController: rangeSelectionVC)
+                let intValue = value ?? ""
+                let intFromValue = fromValue ?? ""
+                let rangeValue = SearchFilterReader.createRangeValue(value: Int(intValue), fromValue: Int(intFromValue), rangeSelectionViewController: rangeSelectionVC)
                 searchQuery.numberOfForks = rangeValue
             case 3:
                 var searchInArray: [GitHubSearchField] = []
@@ -54,6 +56,39 @@ struct SearchFilterReader {
                 }
 
                 searchQuery.searchFields = searchInArray
+            case 4:
+                searchQuery.language = GitHubLanguage.allValues[searchFilterViewController.languagesPicker.selectedRow(inComponent: 0)]
+            case 5:
+                let input = searchFilterViewController.orgOrUserTextField.text
+                if searchFilterViewController.orgOrUserSegmentedControl.selectedSegmentIndex == 0 {
+                    searchQuery.repo = input
+                    searchQuery.user = nil
+                } else {
+                    searchQuery.repo = nil
+                    searchQuery.user = input
+                }
+            case 6:
+                let value = searchFilterViewController.sizeRightTextfield.text
+                let fromValue = searchFilterViewController.sizeLeftTextfield.text
+                let rangeSelectionVC = searchFilterViewController.sizeRangeSelectionViewController!
+                let intValue = value ?? ""
+                let intFromValue = fromValue ?? ""
+                let rangeValue = SearchFilterReader.createRangeValue(value: Int(intValue), fromValue: Int(intFromValue), rangeSelectionViewController: rangeSelectionVC)
+                searchQuery.size = rangeValue
+            case 7:
+                let value = searchFilterViewController.starsRightTextfield.text
+                let fromValue = searchFilterViewController.starsLeftTextField.text
+                let rangeSelectionVC = searchFilterViewController.starsRangeSelectionViewController!
+                let intValue = value ?? ""
+                let intFromValue = fromValue ?? ""
+                let rangeValue = SearchFilterReader.createRangeValue(value: Int(intValue), fromValue: Int(intFromValue), rangeSelectionViewController: rangeSelectionVC)
+                searchQuery.numberOfStars = rangeValue
+            case 8:
+                guard let topics = searchFilterViewController.topicsTextfield.text else { break }
+                let set1 = Set(topics.components(separatedBy: ","))
+                let set2 = Set(topics.components(separatedBy: " "))
+                let unionTopics = Array(set1.union(set2))
+                searchQuery.topic = unionTopics
             default:
                 break
             }
