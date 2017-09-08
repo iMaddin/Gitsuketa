@@ -8,41 +8,64 @@
 
 import Foundation
 
-struct GitHubRangeValue<T> {
+protocol GitHubRangeValueProtocol {
+    associatedtype T
+
+    var value: T { get }
+    var rangeQualifier: GitHubRangeQualifier { get }
+    var fromValue: T? { get }
+
+}
+
+extension GitHubRangeValueProtocol where T == Int {
+
+    var stringQualifier: String {
+        let stringQualifier: String
+        if let fromValue = fromValue, rangeQualifier == .between {
+            stringQualifier = String(fromValue) + rangeQualifier.description() + String(value)
+        } else {
+            stringQualifier = rangeQualifier.description() + String(value)
+        }
+        return stringQualifier
+    }
+
+}
+
+extension GitHubRangeValueProtocol where T == Date {
+
+    var stringQualifier: String {
+        let stringQualifier: String
+        if let fromValue = fromValue, rangeQualifier == .between {
+            stringQualifier = String(fromValue) + rangeQualifier.description() + String(value)
+        } else {
+            stringQualifier = rangeQualifier.description() + String(value)
+        }
+        return stringQualifier
+    }
+
+}
+
+struct GitHubRangeValue<T>: GitHubRangeValueProtocol {
 
     let value: T
     let rangeQualifier: GitHubRangeQualifier
-    let optionalValue: T?
+    let fromValue: T?
 
 }
 
 extension GitHubRangeValue {
 
     init(value: T, rangeQualifier: GitHubRangeQualifier) {
+        assert(rangeQualifier != .between)
         self.value = value
         self.rangeQualifier = rangeQualifier
-        self.optionalValue = nil
-        assert(rangeQualifier != .between)
+        self.fromValue = nil
     }
 
-    init(value: T, optionalValue: T?) {
+    init(value: T, fromValue: T?) {
         rangeQualifier = .between
         self.value = value
-        self.optionalValue = optionalValue
-    }
-
-}
-
-extension GitHubRangeValue where T == Int {
-
-    var stringQualifier: String {
-        let stringQualifier: String
-        if let optionalValue = optionalValue, rangeQualifier == .between {
-            stringQualifier = String(optionalValue) + rangeQualifier.description() + String(value)
-        } else {
-            stringQualifier = rangeQualifier.description() + String(value)
-        }
-        return stringQualifier
+        self.fromValue = fromValue
     }
 
 }
