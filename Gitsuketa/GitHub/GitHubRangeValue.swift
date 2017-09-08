@@ -28,7 +28,7 @@ struct GitHubRangeValue<T>: GitHubRangeValueProtocol {
 
 extension GitHubRangeValue {
 
-    init(value: T, rangeQualifier: GitHubRangeQualifier) {
+    init(value: T, rangeQualifier: GitHubRangeQualifier = .equal) {
         assert(rangeQualifier != .between)
         self.value = value
         self.rangeQualifier = rangeQualifier
@@ -59,9 +59,9 @@ extension GitHubRangeValue where T == Int {
     var stringQualifier: String {
         let stringQualifier: String
         if let fromValue = fromValue, rangeQualifier == .between {
-            stringQualifier = String(fromValue) + rangeQualifier.description() + String(value)
+            stringQualifier = String(fromValue) + rangeQualifier.rawValue + String(value)
         } else {
-            stringQualifier = rangeQualifier.description() + String(value)
+            stringQualifier = rangeQualifier.rawValue + String(value)
         }
         return stringQualifier
     }
@@ -76,9 +76,9 @@ extension GitHubRangeValue where T == Date {
         formatter.formatOptions = [.withFullDate, .withDashSeparatorInDate] // Not using .withInternetDateTime because the time zone is only shown as "Z" possibly due to a bug
 
         if let fromValue = fromValue, rangeQualifier == .between {
-            stringQualifier = formatter.string(from: fromValue) + rangeQualifier.description() + formatter.string(from: value)
+            stringQualifier = formatter.string(from: fromValue) + rangeQualifier.rawValue + formatter.string(from: value)
         } else {
-            stringQualifier = rangeQualifier.description() + formatter.string(from: value)
+            stringQualifier = rangeQualifier.rawValue + formatter.string(from: value)
         }
         return stringQualifier
     }
