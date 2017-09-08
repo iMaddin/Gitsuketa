@@ -22,7 +22,7 @@ class SearchFilterViewController: UITableViewController {
             [viewForSection(title: sectionTitles[0]),
              createdOrPushedSegmentedControl,
              dateRangeSegmentedControl,
-             createdOrPushedTextfield],
+             createdOrPushedButton],
             [viewForSection(title: sectionTitles[1]),
              forkSegmentedControl],
             [viewForSection(title: sectionTitles[2]),
@@ -76,10 +76,11 @@ class SearchFilterViewController: UITableViewController {
         return dateRangeSegmentedControl
     }()
 
-    var createdOrPushedTextfield: UITextField = {
-        let createdOrPushedTextfield = UITextField()
-        createdOrPushedTextfield.placeholder = NSLocalizedString("Select Date", comment: "Select Date placeholder text")
-        return createdOrPushedTextfield
+    var createdOrPushedButton: UIButton = {
+        let createdOrPushedButton = UIButton()
+        createdOrPushedButton.setTitle(NSLocalizedString("Select Date", comment: "Select Date placeholder text"), for: .normal)
+        createdOrPushedButton.setTitleColor(UIColor.blue, for: .normal)
+        return createdOrPushedButton
     }()
 
     var createdOrPushedDatePicker: UIDatePicker = {
@@ -226,9 +227,9 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
-        createdOrPushedTextfield.inputView = createdOrPushedDatePicker
+        createdOrPushedButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
+        createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
 
-        languagesTextField.inputView = languagesPicker
         languagesPicker.dataSource = self
         languagesPicker.delegate = self
     }
@@ -338,6 +339,32 @@ extension SearchFilterViewController: UIPickerViewDelegate {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+
+    }
+
+}
+
+// MARK: - Date Picker
+extension SearchFilterViewController {
+
+    @objc func toggleDateButton(sender: UIButton) {
+        let section = 0
+
+        if cellContents[section].last != createdOrPushedDatePicker {
+            cellContents[section].append(createdOrPushedDatePicker)
+
+            let indexPath = IndexPath(row: cellContents[section].count-1, section: section)
+            tableView.insertRows(at: [indexPath], with: .top)
+        } else {
+            let _ = cellContents[0].popLast()
+
+            let indexPath = IndexPath(row: cellContents[section].count, section: section)
+            tableView.deleteRows(at: [indexPath], with: .top)
+        }
+
+    }
+
+    @objc func datePickerDidChangeValue(sender: UIDatePicker) {
 
     }
 
