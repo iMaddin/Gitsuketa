@@ -251,7 +251,6 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
-        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedFromDateSelectionButton)
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRangeQualifierButton)
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedDateSelectionButton)
 
@@ -264,6 +263,7 @@ class SearchFilterViewController: UITableViewController {
         createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
         createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
+        createdOrPushedRangeQualifierPickerManager?.didSelectBetweenRangeQualifier = { flag in self.didSelectBetweenRangeQualifier(flag: flag)}
 
         languagesPickerManager = LanguagesPickerManager(button: languagesSelectionButton)
         languagesPicker.dataSource = languagesPickerManager
@@ -337,7 +337,6 @@ extension SearchFilterViewController {
                 tableView.insertRows(at: indexPaths, with: .top)
             }
 
-
         }
     }
 
@@ -399,6 +398,15 @@ extension SearchFilterViewController {
 
     @objc func datePickerDidChangeValue(sender: UIDatePicker) {
 
+    }
+
+    fileprivate func didSelectBetweenRangeQualifier(flag: Bool) {
+        if flag {
+            createdOrPushedDateInputStackView.insertArrangedSubview(createdOrPushedFromDateSelectionButton, at: 0)
+        } else {
+            createdOrPushedFromDateSelectionButton.removeFromSuperview()
+            createdOrPushedDateInputStackView.removeArrangedSubview(createdOrPushedFromDateSelectionButton)
+        }
     }
 
 }

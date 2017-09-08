@@ -12,6 +12,8 @@ class RangeQualifierPickerManager: NSObject {
 
     let button: UIButton
 
+    var didSelectBetweenRangeQualifier: ((_ flag: Bool) -> Void)?
+
     init(button: UIButton) {
         self.button = button
     }
@@ -38,6 +40,7 @@ extension RangeQualifierPickerManager: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         button.setTitle(GitHubRangeQualifier.allQualifierDescriptions[row], for: .normal)
+        didSelectBetweenRangeQualifier?(row >= GitHubRangeQualifier.allQualifierDescriptions.count - 1)
     }
 
 }
