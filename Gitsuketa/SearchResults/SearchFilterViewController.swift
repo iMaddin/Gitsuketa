@@ -94,7 +94,7 @@ class SearchFilterViewController: UITableViewController {
         searchInRepositoryName.setTitleColor(UIColor.black, for: .normal)
         searchInRepositoryName.setTitle(NSLocalizedString("⭕️ Repository Name", comment: ""), for: .normal)
         searchInRepositoryName.contentHorizontalAlignment = .leading
-        searchInRepositoryName.addTarget(self, action: #selector(SearchFilterViewController.toggleButton(sender:)), for: .touchUpInside)
+        searchInRepositoryName.addTarget(self, action: #selector(SearchFilterViewController.toggleSearchInButton(sender:)), for: .touchUpInside)
         return searchInRepositoryName
     }()
 
@@ -103,7 +103,7 @@ class SearchFilterViewController: UITableViewController {
         searchInDescription.setTitleColor(UIColor.black, for: .normal)
         searchInDescription.setTitle(NSLocalizedString("⭕️ Description", comment: ""), for: .normal)
         searchInDescription.contentHorizontalAlignment = .leading
-        searchInDescription.addTarget(self, action: #selector(SearchFilterViewController.toggleButton(sender:)), for: .touchUpInside)
+        searchInDescription.addTarget(self, action: #selector(SearchFilterViewController.toggleSearchInButton(sender:)), for: .touchUpInside)
         return searchInDescription
     }()
 
@@ -112,7 +112,7 @@ class SearchFilterViewController: UITableViewController {
         searchInReadme.setTitleColor(UIColor.black, for: .normal)
         searchInReadme.setTitle(NSLocalizedString("⭕️ Readme", comment: ""), for: .normal)
         searchInReadme.contentHorizontalAlignment = .leading
-        searchInReadme.addTarget(self, action: #selector(SearchFilterViewController.toggleButton(sender:)), for: .touchUpInside)
+        searchInReadme.addTarget(self, action: #selector(SearchFilterViewController.toggleSearchInButton(sender:)), for: .touchUpInside)
         return searchInReadme
     }()
 
@@ -339,7 +339,7 @@ extension SearchFilterViewController {
 // MARK: - Search In button action
 extension SearchFilterViewController {
 
-    @objc func toggleButton(sender: UIButton) {
+    @objc func toggleSearchInButton(sender: UIButton) {
         sender.isSelected = !sender.isSelected
         if let oldTitle = sender.title(for: .normal) {
             let newTitle = (sender.isSelected ? "🔴" : "⭕️") + oldTitle.dropFirst()
@@ -453,7 +453,6 @@ extension SearchFilterViewController {
             let indexPath = IndexPath(row: cellContents[section].count, section: section)
             tableView.deleteRows(at: [indexPath], with: .top)
         } else {
-
             cellContents[section].append(rangeSelectionViewController.rangeQualifierPickerView)
             let indexPath = IndexPath(row: cellContents[section].count-1, section: section)
             tableView.insertRows(at: [indexPath], with: .top)

@@ -140,9 +140,9 @@
 				1BAABCDB1F5F0BBA005A0536 /* SearchResultsDataSource.swift */,
 				1B2389381F5F0D450048C1D1 /* SearchResultsFormatter.swift */,
 				1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */,
-				1B21C5081F62CC0800883D2F /* RangeQualifierPickerManager.swift */,
 				1B21C50A1F62CFDB00883D2F /* LanguagesPickerManager.swift */,
 				1B21C50C1F6301D200883D2F /* RangeSelectionViewController.swift */,
+				1B21C5081F62CC0800883D2F /* RangeQualifierPickerManager.swift */,
 			);
 			path = SearchResults;
 			sourceTree = "<group>";
