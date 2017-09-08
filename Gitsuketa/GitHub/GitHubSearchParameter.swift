@@ -11,9 +11,9 @@ import Foundation
 let searchQuery = "https://api.github.com/search/repositories?"
 //"q=tetris+language:assembly&sort=stars&order=desc"
 
-public struct GitHubSearchParameter {
+struct GitHubSearchParameter {
 
-    public var url: URL? {
+    var url: URL? {
         let q = "q=\(query.query)"
         let sort = "sort=\(self.sort.rawValue)"
         let order = "order=\(self.order.rawValue)"
@@ -21,11 +21,11 @@ public struct GitHubSearchParameter {
         return URL(string: url)
     }
 
-    public let query: GitHubSearchQuery
-    public let sort: GitHubSort
-    public let order: GitHubOrder
+    let query: GitHubSearchQuery
+    let sort: GitHubSort
+    let order: GitHubOrder
 
-    public init(query: GitHubSearchQuery, sort: GitHubSort = .match, order: GitHubOrder = .descending) {
+    init(query: GitHubSearchQuery, sort: GitHubSort = .match, order: GitHubOrder = .descending) {
         self.query = query
         self.sort = sort
         self.order = order
@@ -33,13 +33,13 @@ public struct GitHubSearchParameter {
 
 }
 
-public struct GitHubSearchQuery {
+struct GitHubSearchQuery {
 
     var query: String {
         return keyword
     }
 
-    public let keyword: String
+    let keyword: String
 
     var created: GitHubDate?
     var pushed: GitHubDate?
@@ -56,17 +56,17 @@ public struct GitHubSearchQuery {
     var numberOfStars: GitHubInt?
     var topic: [String]?
 
-    public init(keyword: String) {
+    init(keyword: String) {
         self.keyword = keyword.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
     }
 
 }
 
-public enum GitHubSort: String {
+enum GitHubSort: String {
     case match, stars, forks, updated
 }
 
-public enum GitHubOrder: String {
+enum GitHubOrder: String {
     case ascending = "asc"
     case descending = "desc"
 }

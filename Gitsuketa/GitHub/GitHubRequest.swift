@@ -8,9 +8,9 @@
 
 import Foundation
 
-public struct GitHubRequest {
+struct GitHubRequest {
 
-    public static func makeRequest(search: GitHubSearchParameter, completionHandler: @escaping (_ gitHubSearchResult: GitHubSearchResult?) -> Void) {
+    static func makeRequest(search: GitHubSearchParameter, completionHandler: @escaping (_ gitHubSearchResult: GitHubSearchResult?) -> Void) {
         guard let url = search.url else {
             assertionFailure("Invalid URL string")
             completionHandler(nil)

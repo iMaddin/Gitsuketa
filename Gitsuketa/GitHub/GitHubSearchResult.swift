@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GitHubSearchResultItem: Codable {
+struct GitHubSearchResultItem: Codable {
     let fullName: String
     let descriptionText: String?
     let url: String
@@ -29,7 +29,7 @@ public struct GitHubSearchResultItem: Codable {
 
 }
 
-public struct GitHubSearchResult: Codable {
+struct GitHubSearchResult: Codable {
     let total_count: Int
     let incomplete_results: Bool
     let items: [GitHubSearchResultItem]

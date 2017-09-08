@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Gitsuketa
+@testable import Gitsuketa
 
 class GitHubSearchParameterTests: XCTestCase {
     

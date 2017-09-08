@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import Gitsuketa
 
 class GitHubRequestTests: XCTestCase {
     
