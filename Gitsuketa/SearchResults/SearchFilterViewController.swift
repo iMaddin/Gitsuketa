@@ -76,12 +76,14 @@ class SearchFilterViewController: UITableViewController {
     var numberOfForksRightTextfield: UITextField = {
         let numberOfForksRightTextfield = UITextField()
         numberOfForksRightTextfield.placeholder = NSLocalizedString("Number of forks", comment: "")
+        numberOfForksRightTextfield.keyboardType = .numberPad
         return numberOfForksRightTextfield
     }()
 
     var numberOfForksLeftTextfield: UITextField = {
         let numberOfForksLeftTextfield = UITextField()
         numberOfForksLeftTextfield.placeholder = NSLocalizedString("Number of forks", comment: "")
+        numberOfForksLeftTextfield.keyboardType = .numberPad
         return numberOfForksLeftTextfield
     }()
 
@@ -141,6 +143,7 @@ class SearchFilterViewController: UITableViewController {
     var orgOrUserTextField: UITextField = {
         let orgOrUserTextField = UITextField()
         orgOrUserTextField.placeholder = NSLocalizedString("Organization / User name", comment: "") // TODO: change placeholder depeing on what is selected in orgOrUserSegmentedControl
+        orgOrUserTextField.keyboardType = .numberPad
         return orgOrUserTextField
     }()
 
@@ -151,12 +154,14 @@ class SearchFilterViewController: UITableViewController {
     var sizeRightTextfield: UITextField = {
         let sizeRightTextfield = UITextField()
         sizeRightTextfield.placeholder = NSLocalizedString("Size in KB", comment: "")
+        sizeRightTextfield.keyboardType = .numberPad
         return sizeRightTextfield
     }()
 
     var sizeLeftTextfield: UITextField = {
         let sizeLeftTextfield = UITextField()
         sizeLeftTextfield.placeholder = NSLocalizedString("Size in KB", comment: "")
+        sizeLeftTextfield.keyboardType = .numberPad
         return sizeLeftTextfield
     }()
 
@@ -167,6 +172,7 @@ class SearchFilterViewController: UITableViewController {
     var starsRightTextfield: UITextField = {
         let starsRightTextfield = UITextField()
         starsRightTextfield.placeholder = NSLocalizedString("Number of stars", comment: "")
+        starsRightTextfield.keyboardType = .numberPad
         return starsRightTextfield
     }()
 
@@ -238,9 +244,8 @@ class SearchFilterViewController: UITableViewController {
         starsRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
 
         // text fields
-        for textField in [numberOfForksLeftTextfield, numberOfForksRightTextfield, sizeLeftTextfield, sizeRightTextfield, starsLeftTextField, starsRightTextfield] {
+        for textField in [numberOfForksLeftTextfield, numberOfForksRightTextfield, sizeLeftTextfield, sizeRightTextfield, starsLeftTextField, starsRightTextfield, orgOrUserTextField, topicsTextfield] {
             textField.inputAccessoryView = keyboardAccessoryView
-            textField.keyboardType = .numberPad
         }
 
         // cell data
@@ -298,7 +303,6 @@ extension SearchFilterViewController {
 }
 
 // MARK: - UITableViewDelegate
-
 extension SearchFilterViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
