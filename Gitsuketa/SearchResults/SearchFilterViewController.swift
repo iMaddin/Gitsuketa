@@ -260,7 +260,17 @@ class SearchFilterViewController: UITableViewController {
         createdOrPushedFromDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
 
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
-        datePickerDidChangeValue(sender: createdOrPushedDatePicker)
+
+        // default createdOrPushed date selection button titles
+        createdOrPushedDate = createdOrPushedDatePicker.date
+        if let createdOrPushedDate = createdOrPushedDate {
+            createdOrPushedDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedDate), for: .normal)
+        }
+
+        createdOrPushedFromDate = createdOrPushedDatePicker.date.addingTimeInterval(-86400)
+        if let createdOrPushedFromDate = createdOrPushedFromDate {
+            createdOrPushedFromDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedFromDate), for: .normal)
+        }
 
         createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
@@ -423,9 +433,7 @@ extension SearchFilterViewController {
             createdOrPushedFromDate = sender.date
         }
 
-        let df = DateFormatter()
-        df.dateStyle = .medium
-        createdOrPushedPickerOwner.setTitle(df.string(from: sender.date), for: .normal)
+        createdOrPushedPickerOwner.setTitle(dateSelectionFormatter.string(from: sender.date), for: .normal)
     }
 
     fileprivate func didSelectBetweenRangeQualifier(flag: Bool) {
