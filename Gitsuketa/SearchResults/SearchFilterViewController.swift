@@ -113,6 +113,7 @@ class SearchFilterViewController: UITableViewController {
     fileprivate weak var createdOrPushedPickerOwner: UIButton?
 
     var createdOrPushedDate: Date?
+    var createdOrPushedFromDate: Date?
 
     // MARK: - Forked
 
@@ -259,6 +260,7 @@ class SearchFilterViewController: UITableViewController {
         createdOrPushedFromDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
 
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
+        datePickerDidChangeValue(sender: createdOrPushedDatePicker)
 
         createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
@@ -370,10 +372,15 @@ extension SearchFilterViewController {
         } else {
 
             let pickerToShow: UIView
+            var dateToShow: Date?
 
             switch sender {
-            case createdOrPushedFromDateSelectionButton, createdOrPushedDateSelectionButton:
+            case createdOrPushedFromDateSelectionButton:
                 pickerToShow = createdOrPushedDatePicker
+                dateToShow = createdOrPushedFromDate
+            case createdOrPushedDateSelectionButton:
+                pickerToShow = createdOrPushedDatePicker
+                dateToShow = createdOrPushedDate
             case createdOrPushedRangeQualifierButton:
                 pickerToShow = createdOrPushedRangeQualifierPickerView
             default:
@@ -382,14 +389,22 @@ extension SearchFilterViewController {
                 break
             }
 
+            if let dateToShow = dateToShow {
+                (pickerToShow as? UIDatePicker)?.setDate(dateToShow, animated: true)
+            }
+
             if createdOrPushedPickerOwner == nil {
                 cellContents[section].append(pickerToShow)
                 let indexPath = IndexPath(row: cellContents[section].count-1, section: section)
                 tableView.insertRows(at: [indexPath], with: .top)
             } else {
-                let _ = cellContents[section].popLast()
-                cellContents[section].append(pickerToShow)
-                tableView.reloadData() // check if this is really needed
+                let a = [sender, createdOrPushedPickerOwner]
+                let fromDateSelectorToAnotherDateSelector = a.contains(where: { $0 == createdOrPushedFromDateSelectionButton}) && a.contains(where: { $0 == createdOrPushedDateSelectionButton})
+                if !fromDateSelectorToAnotherDateSelector {
+                    let _ = cellContents[section].popLast()
+                    cellContents[section].append(pickerToShow)
+                    tableView.reloadData()
+                }
             }
 
             createdOrPushedPickerOwner = sender
@@ -397,7 +412,20 @@ extension SearchFilterViewController {
     }
 
     @objc func datePickerDidChangeValue(sender: UIDatePicker) {
+        guard let createdOrPushedPickerOwner = createdOrPushedPickerOwner,
+            (createdOrPushedPickerOwner == createdOrPushedFromDateSelectionButton) || ( createdOrPushedPickerOwner == createdOrPushedDateSelectionButton) else {
+            return
+        }
 
+        if createdOrPushedPickerOwner == createdOrPushedDateSelectionButton {
+            createdOrPushedDate = sender.date
+        } else if createdOrPushedPickerOwner == createdOrPushedFromDateSelectionButton {
+            createdOrPushedFromDate = sender.date
+        }
+
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        createdOrPushedPickerOwner.setTitle(df.string(from: sender.date), for: .normal)
     }
 
     fileprivate func didSelectBetweenRangeQualifier(flag: Bool) {
