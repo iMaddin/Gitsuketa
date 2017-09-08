@@ -32,7 +32,7 @@ class SearchFilterViewController: UITableViewController {
              searchInDescription,
              searchInReadme],
             [viewForSection(title: sectionTitles[4]),
-             languagesTextField],
+             languagesSelectionButton],
             [viewForSection(title: sectionTitles[5]),
              orgOrUserSegmentedControl,
              orgOrUserTextField],
@@ -159,10 +159,10 @@ class SearchFilterViewController: UITableViewController {
 
     // MARK: - Languages
 
-    var languagesTextField: UITextField = {
-        let languagesTextField = UITextField()
-        languagesTextField.placeholder = NSLocalizedString("Language", comment: "")
-        return languagesTextField
+    var languagesSelectionButton: UIButton = {
+        let languagesSelectionButton = UIButton()
+        languagesSelectionButton.setTitle(NSLocalizedString("Language", comment: ""), for: .normal)
+        return languagesSelectionButton
     }()
 
     var languagesPicker: UIPickerView = {
