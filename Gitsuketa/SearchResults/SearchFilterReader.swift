@@ -38,6 +38,22 @@ struct SearchFilterReader {
                 let rangeSelectionVC = searchFilterViewController.numberOfForksRangeSelectionViewController!
                 let rangeValue = SearchFilterReader.createRangeValue(value: Int(value!), fromValue: Int(fromValue!), rangeSelectionViewController: rangeSelectionVC)
                 searchQuery.numberOfForks = rangeValue
+            case 3:
+                var searchInArray: [GitHubSearchField] = []
+
+                if searchFilterViewController.searchInRepositoryName.isSelected {
+                    searchInArray.append(.repositoryName)
+                }
+                
+                if searchFilterViewController.searchInDescription.isSelected {
+                    searchInArray.append(.description)
+                }
+                
+                if searchFilterViewController.searchInReadme.isSelected {
+                    searchInArray.append(.readme)
+                }
+
+                searchQuery.searchFields = searchInArray
             default:
                 break
             }
