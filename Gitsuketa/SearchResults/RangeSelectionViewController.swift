@@ -74,7 +74,7 @@ fileprivate extension RangeSelectionViewController {
         if flag {
             stackView.insertArrangedSubview(leftView, at: 0)
         } else {
-            rangeQualifierButton.removeFromSuperview()
+            leftView.removeFromSuperview()
             stackView.removeArrangedSubview(leftView)
         }
     }
