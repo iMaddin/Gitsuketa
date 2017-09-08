@@ -18,6 +18,8 @@
 		1B3C421A1F626AC1000A634B /* GitHubForkSearchOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C42191F626AC1000A634B /* GitHubForkSearchOption.swift */; };
 		1B3C421C1F626D08000A634B /* GitHubRangeQualifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C421B1F626D08000A634B /* GitHubRangeQualifier.swift */; };
 		1B3C421E1F626F4B000A634B /* GitHubRangeQualifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C421D1F626F4B000A634B /* GitHubRangeQualifierTests.swift */; };
+		1B3C42201F627298000A634B /* GitHubRangeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C421F1F627298000A634B /* GitHubRangeValue.swift */; };
+		1B3C42221F62771D000A634B /* GitHubIntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C42211F62771D000A634B /* GitHubIntTests.swift */; };
 		1B410C881F60746D00D09511 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */; };
 		1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */; };
 		1B6E66831F6265FB00260B38 /* GitHubLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */; };
@@ -62,6 +64,8 @@
 		1B3C42191F626AC1000A634B /* GitHubForkSearchOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubForkSearchOption.swift; sourceTree = "<group>"; };
 		1B3C421B1F626D08000A634B /* GitHubRangeQualifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRangeQualifier.swift; sourceTree = "<group>"; };
 		1B3C421D1F626F4B000A634B /* GitHubRangeQualifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRangeQualifierTests.swift; sourceTree = "<group>"; };
+		1B3C421F1F627298000A634B /* GitHubRangeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRangeValue.swift; sourceTree = "<group>"; };
+		1B3C42211F62771D000A634B /* GitHubIntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubIntTests.swift; sourceTree = "<group>"; };
 		1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
 		1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterViewController.swift; sourceTree = "<group>"; };
 		1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLanguage.swift; sourceTree = "<group>"; };
@@ -116,9 +120,10 @@
 				1B23893C1F5F18120048C1D1 /* GitHubSearchResult.swift */,
 				1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */,
 				1B3C42131F62698F000A634B /* GitHubSearchField.swift */,
+				1B3C421F1F627298000A634B /* GitHubRangeValue.swift */,
 				1B3C42151F626A42000A634B /* GitHubDate.swift */,
-				1B3C421B1F626D08000A634B /* GitHubRangeQualifier.swift */,
 				1B3C42171F626A64000A634B /* GitHubInt.swift */,
+				1B3C421B1F626D08000A634B /* GitHubRangeQualifier.swift */,
 				1B3C42191F626AC1000A634B /* GitHubForkSearchOption.swift */,
 			);
 			path = GitHub;
@@ -178,6 +183,7 @@
 				1BAABCD51F5ECB2D005A0536 /* GitHubRequestTests.swift */,
 				1B3C421D1F626F4B000A634B /* GitHubRangeQualifierTests.swift */,
 				1B16BDE21F5FF80F00172B0D /* GitHubSearchParameterTests.swift */,
+				1B3C42211F62771D000A634B /* GitHubIntTests.swift */,
 				1BAABCB91F5EBD50005A0536 /* Info.plist */,
 			);
 			path = GitsuketaTests;
@@ -335,6 +341,7 @@
 				1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */,
 				1B3C42181F626A64000A634B /* GitHubInt.swift in Sources */,
 				1BAABCDC1F5F0BBA005A0536 /* SearchResultsDataSource.swift in Sources */,
+				1B3C42201F627298000A634B /* GitHubRangeValue.swift in Sources */,
 				1BBCC77C1F619EF4006C0782 /* UIView+Layout.swift in Sources */,
 				1B3C421A1F626AC1000A634B /* GitHubForkSearchOption.swift in Sources */,
 				1BAABCD81F5EFBC7005A0536 /* SearchResultsViewController.swift in Sources */,
@@ -353,6 +360,7 @@
 				1B16BDE31F5FF80F00172B0D /* GitHubSearchParameterTests.swift in Sources */,
 				1BAABCB81F5EBD50005A0536 /* GitsuketaTests.swift in Sources */,
 				1B3C421E1F626F4B000A634B /* GitHubRangeQualifierTests.swift in Sources */,
+				1B3C42221F62771D000A634B /* GitHubIntTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
