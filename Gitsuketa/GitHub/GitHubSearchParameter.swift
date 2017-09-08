@@ -40,17 +40,21 @@ public struct GitHubSearchQuery {
     }
 
     public let keyword: String
-//    let created: Date? //  ISO8601
-//    let pushed: Date?
-//    let fork: String?
-//    let forks: String?
-//    let searchFields: String?
-//    let language: String?
-//    let repo: String?
-//    let user: String?
-//    let size: Int?
-//    let stars: Int?
-//    let topic: [String?]
+
+    var created: GitHubDate?
+    var pushed: GitHubDate?
+
+    var fork: GitHubForkSearchOption?
+    var numberOfForks: GitHubInt?
+    var searchFields: GitHubSearchField?
+    var language: GitHubLanguage?
+
+    var repo: String?
+    var user: String?
+
+    var size: GitHubInt?
+    var numberOfStars: GitHubInt?
+    var topic: [String]?
 
     public init(keyword: String) {
         self.keyword = keyword.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
