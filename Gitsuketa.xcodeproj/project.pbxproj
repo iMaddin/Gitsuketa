@@ -18,7 +18,6 @@
 		1B3C421E1F626F4B000A634B /* GitHubRangeQualifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C421D1F626F4B000A634B /* GitHubRangeQualifierTests.swift */; };
 		1B3C42201F627298000A634B /* GitHubRangeValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C421F1F627298000A634B /* GitHubRangeValue.swift */; };
 		1B3C42241F627F07000A634B /* GitHubRangeValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C42231F627F07000A634B /* GitHubRangeValueTests.swift */; };
-		1B3C42261F6282C6000A634B /* Date+ISO8601.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B3C42251F6282C6000A634B /* Date+ISO8601.swift */; };
 		1B410C881F60746D00D09511 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */; };
 		1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */; };
 		1B6E66831F6265FB00260B38 /* GitHubLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */; };
@@ -63,7 +62,6 @@
 		1B3C421D1F626F4B000A634B /* GitHubRangeQualifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRangeQualifierTests.swift; sourceTree = "<group>"; };
 		1B3C421F1F627298000A634B /* GitHubRangeValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRangeValue.swift; sourceTree = "<group>"; };
 		1B3C42231F627F07000A634B /* GitHubRangeValueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRangeValueTests.swift; sourceTree = "<group>"; };
-		1B3C42251F6282C6000A634B /* Date+ISO8601.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Date+ISO8601.swift"; path = "GitHub/Date+ISO8601.swift"; sourceTree = "<group>"; };
 		1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
 		1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterViewController.swift; sourceTree = "<group>"; };
 		1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLanguage.swift; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 				1B60F83B1F61616100854B28 /* SearchResults */,
 				1B23893E1F5F18250048C1D1 /* GitHub */,
 				1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */,
-				1B3C42251F6282C6000A634B /* Date+ISO8601.swift */,
 				1BAABCA91F5EBD50005A0536 /* Assets.xcassets */,
 				1BAABCAB1F5EBD50005A0536 /* LaunchScreen.storyboard */,
 				1BAABCAE1F5EBD50005A0536 /* Info.plist */,
@@ -333,7 +330,6 @@
 				1B6E66831F6265FB00260B38 /* GitHubLanguage.swift in Sources */,
 				1B410C881F60746D00D09511 /* SearchResultsTableViewCell.swift in Sources */,
 				1B2389421F5F18440048C1D1 /* GitHubSearchParameter.swift in Sources */,
-				1B3C42261F6282C6000A634B /* Date+ISO8601.swift in Sources */,
 				1B3C42141F62698F000A634B /* GitHubSearchField.swift in Sources */,
 				1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */,
 				1BAABCDC1F5F0BBA005A0536 /* SearchResultsDataSource.swift in Sources */,
