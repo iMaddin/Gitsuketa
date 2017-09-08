@@ -17,7 +17,7 @@ class SearchFilterViewController: UITableViewController {
     fileprivate var cellContents: [[UIView]] = []
 
     var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
-    
+
     // MARK: - Created At / Pushed At
 
     var createdOrPushedSegmentedControl: UISegmentedControl = {
@@ -85,7 +85,7 @@ class SearchFilterViewController: UITableViewController {
 
     // MARK: - Number of forks
 
-    var numberOfForksRangeSelectionViewController: RangeSelectionViewController?
+    var numberOfForksRangeSelectionViewController: RangeSelectionViewController!
 
     var numberOfForksRightTextfield: UITextField = {
         let numberOfForksRightTextfield = UITextField()
@@ -235,6 +235,8 @@ class SearchFilterViewController: UITableViewController {
         numberOfForksRangeSelectionViewController = RangeSelectionViewController(leftView: numberOfForksLeftTextfield, rightView: numberOfForksRightTextfield)
         if let numberOfForksRangeSelectionViewController = numberOfForksRangeSelectionViewController {
             addChildViewController(numberOfForksRangeSelectionViewController)
+
+            numberOfForksRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
         }
 
         // languages
@@ -351,7 +353,7 @@ extension SearchFilterViewController {
 
         if createdOrPushedPickerOwner == sender {
             createdOrPushedPickerOwner = nil
-            let _ = cellContents[0].popLast()
+            let _ = cellContents[section].popLast()
 
             let indexPath = IndexPath(row: cellContents[section].count, section: section)
             tableView.deleteRows(at: [indexPath], with: .top)
@@ -410,6 +412,43 @@ extension SearchFilterViewController {
         }
 
         createdOrPushedPickerOwner.setTitle(dateSelectionFormatter.string(from: sender.date), for: .normal)
+    }
+
+}
+
+// MARK: Range Selection
+extension SearchFilterViewController {
+
+    @objc func toggleRangeSelectionButton(sender: UIButton) {
+        let section: Int
+        var _rangeSelectionViewController: RangeSelectionViewController?
+
+        switch sender {
+        case numberOfForksRangeSelectionViewController.rangeQualifierButton:
+            section = 2
+            _rangeSelectionViewController = numberOfForksRangeSelectionViewController
+        default:
+            section = -1
+        }
+
+        guard let rangeSelectionViewController = _rangeSelectionViewController else {
+            assertionFailure()
+            return
+        }
+
+        if rangeSelectionViewController.pickerViewIsVisible {
+            let _ = cellContents[section].popLast()
+
+            let indexPath = IndexPath(row: cellContents[section].count, section: section)
+            tableView.deleteRows(at: [indexPath], with: .top)
+        } else {
+
+            cellContents[section].append(rangeSelectionViewController.rangeQualifierPickerView)
+            let indexPath = IndexPath(row: cellContents[section].count-1, section: section)
+            tableView.insertRows(at: [indexPath], with: .top)
+        }
+
+        rangeSelectionViewController.pickerViewIsVisible = !rangeSelectionViewController.pickerViewIsVisible
     }
 
 }

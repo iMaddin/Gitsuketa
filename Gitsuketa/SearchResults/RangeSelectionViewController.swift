@@ -12,6 +12,8 @@ class RangeSelectionViewController: UIViewController {
 
     // MARK: - Properties
 
+    var pickerViewIsVisible = false
+
     var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
