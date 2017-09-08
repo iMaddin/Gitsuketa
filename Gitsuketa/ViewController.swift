@@ -87,7 +87,9 @@ class ViewController: UIViewController {
 
         searchFilterViewController.dismissAction = {
             vc in
-            
+            var filteredQuery = SearchFilterReader.read(searchFilterViewController: vc)
+            filteredQuery.keyword = searchBar.text
+            self.startSearch(filteredQuery)
         }
     }
 
@@ -95,8 +97,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchResultsUpdating {
 
-    fileprivate func startSearch(_ searchQuery: String) {
-        let query = GitHubSearchQuery(keyword: searchQuery)
+    fileprivate func startSearch(_ query: GitHubSearchQuery) {
         let parameter = GitHubSearchParameter(query: query)
 
         GitHubRequest.makeRequest(search: parameter) {
@@ -114,6 +115,11 @@ extension ViewController: UISearchResultsUpdating {
                 tableView?.reloadData()
             }
         }
+    }
+
+    fileprivate func startSearch(_ searchQuery: String) {
+        let query = GitHubSearchQuery(keyword: searchQuery)
+        startSearch(query)
     }
 
     func updateSearchResults(for searchController: UISearchController) {

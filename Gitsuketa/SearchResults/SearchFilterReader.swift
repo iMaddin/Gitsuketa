@@ -11,15 +11,31 @@ import Foundation
 struct SearchFilterReader {
 
     static func read(searchFilterViewController: SearchFilterViewController) -> GitHubSearchQuery {
-        var searchQuery = GitHubSearchQuery(keyword: "")
-        for sectionNumber in 0..<searchFilterViewController.sectionTitles.count {
+        var searchQuery = GitHubSearchQuery()
+        let selectedRow = searchFilterViewController.createdOrPushedRangeSelectionViewController.rangeQualifierPickerView.selectedRow(inComponent: 0)
+        let rangeQualifier = GitHubRangeQualifier.allValues[selectedRow]
+
+        for sectionNumber in 0..<searchFilterViewController.tableView.numberOfSections {
+            if !searchFilterViewController.sectionIsExpanded(section: sectionNumber) { break }
+
             switch sectionNumber {
             case 0:
-                let rangeQualifier = GitHubRangeQualifier.allQualifiers[searchFilterViewController.dateRangeSegmentedControl.selectedSegmentIndex]
                 guard let date = searchFilterViewController.createdOrPushedDate else {
                     break
                 }
-                let value = GitHubRangeValue(value: date, rangeQualifier: rangeQualifier)
+
+                let value: GitHubRangeValue<Date>
+
+                if rangeQualifier == .between {
+                    guard let fromDate = searchFilterViewController.createdOrPushedFromDate else {
+                        assertionFailure()
+                        break
+                    }
+
+                    value = GitHubRangeValue(value: date, fromValue: fromDate)
+                } else {
+                    value = GitHubRangeValue(value: date, rangeQualifier: rangeQualifier)
+                }
 
                 if searchFilterViewController.createdOrPushedSegmentedControl.selectedSegmentIndex == 0 {
                     searchQuery.created = value
