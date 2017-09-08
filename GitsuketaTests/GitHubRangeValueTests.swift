@@ -46,19 +46,11 @@ extension GitHubRangeValueTests {
 
 extension GitHubRangeValueTests {
 
-    func testBetweenDateStringQualifier() {
-        var fromDate = DateComponents()
-        fromDate.day = 4
-        fromDate.month = 7
-        fromDate.year = 2017
-
-        var toDate = DateComponents()
-        toDate.day = 13
-        toDate.month = 12
-        toDate.year = 2017
-
-        let between = GitHubRangeValue(value: toDate.date, fromValue: fromDate.date)
-        XCTAssertEqual(between, "2017-07-04..2017-12-13")
+    func testBetweenDateWithoutTimeStringQualifier() {
+        let fromDate = "2017-07-04T00:00:00+00:00"
+        let toDate = "2017-12-13T00:00:00+00:00"
+        let between = GitHubRangeValue(value: ISO8601DateFormatter().date(from: toDate)!, fromValue: ISO8601DateFormatter().date(from: fromDate)!)
+        XCTAssertEqual(between.stringQualifier, "2017-07-04..2017-12-13")
     }
 
 }
