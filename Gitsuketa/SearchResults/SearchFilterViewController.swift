@@ -73,6 +73,13 @@ class SearchFilterViewController: UITableViewController {
         return createdOrPushedDateInputStackView
     }()
 
+    var createdOrPushedFromDateSelectionButton: UIButton = {
+        let createdOrPushedFromDateSelectionButton = UIButton()
+        createdOrPushedFromDateSelectionButton.setTitle(NSLocalizedString("From Date", comment: "Select Date placeholder text"), for: .normal)
+        createdOrPushedFromDateSelectionButton.setTitleColor(UIColor.blue, for: .normal)
+        return createdOrPushedFromDateSelectionButton
+    }()
+
     var createdOrPushedDateSelectionButton: UIButton = {
         let createdOrPushedDateSelectionButton = UIButton()
         createdOrPushedDateSelectionButton.setTitle(NSLocalizedString("Select Date", comment: "Select Date placeholder text"), for: .normal)
@@ -241,6 +248,7 @@ class SearchFilterViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
+        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedFromDateSelectionButton)
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRangeQualifierButton)
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedDateSelectionButton)
         createdOrPushedDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
