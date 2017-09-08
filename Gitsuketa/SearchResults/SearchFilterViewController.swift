@@ -10,54 +10,14 @@ import UIKit
 
 class SearchFilterViewController: UITableViewController {
 
-    var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
-    
     let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
+
     static let rangeItems = GitHubRangeQualifier.allQualifierDescriptions
 
-    var cellContents: [[UIView]] = []
+    fileprivate var cellContents: [[UIView]] = []
 
-    var expandedCellContents: [[UIView]] {
-        return [
-            [viewForSection(title: sectionTitles[0]),
-             createdOrPushedSegmentedControl,
-             createdOrPushedDateInputStackView],
-            [viewForSection(title: sectionTitles[1]),
-             forkSegmentedControl],
-            [viewForSection(title: sectionTitles[2]),
-             numberOfForksRangeSelectionViewController!.view],
-            [viewForSection(title: sectionTitles[3]),
-             searchInRepositoryName,
-             searchInDescription,
-             searchInReadme],
-            [viewForSection(title: sectionTitles[4]),
-             languagesSelectionButton],
-            [viewForSection(title: sectionTitles[5]),
-             orgOrUserSegmentedControl,
-             orgOrUserTextField],
-            [viewForSection(title: sectionTitles[6]),
-             sizeSegmentedControl,
-             sizeTextfield],
-            [viewForSection(title: sectionTitles[7]),
-             numberOfStarsSegmentedControl,
-             numberOfStarsTextfield],
-            [viewForSection(title: sectionTitles[8]),
-             topicsTextfield]
-        ]
-    }
-
-    let sectionTitles = [
-        NSLocalizedString("Date", comment: ""),
-        NSLocalizedString("Fork", comment: ""),
-        NSLocalizedString("Number of Forks", comment: ""),
-        NSLocalizedString("Search in", comment: ""),
-        NSLocalizedString("Language", comment: ""),
-        NSLocalizedString("Organization / User", comment: ""),
-        NSLocalizedString("Size", comment: ""),
-        NSLocalizedString("Stars", comment: ""),
-        NSLocalizedString("Topics", comment: ""),
-        ]
-
+    var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
+    
     // MARK: - Created At / Pushed At
 
     var createdOrPushedSegmentedControl: UISegmentedControl = {
@@ -463,6 +423,49 @@ extension SearchFilterViewController {
 }
 
 fileprivate extension SearchFilterViewController {
+
+    var expandedCellContents: [[UIView]] {
+        return [
+            [viewForSection(title: sectionTitles[0]),
+             createdOrPushedSegmentedControl,
+             createdOrPushedDateInputStackView],
+            [viewForSection(title: sectionTitles[1]),
+             forkSegmentedControl],
+            [viewForSection(title: sectionTitles[2]),
+             numberOfForksRangeSelectionViewController!.view],
+            [viewForSection(title: sectionTitles[3]),
+             searchInRepositoryName,
+             searchInDescription,
+             searchInReadme],
+            [viewForSection(title: sectionTitles[4]),
+             languagesSelectionButton],
+            [viewForSection(title: sectionTitles[5]),
+             orgOrUserSegmentedControl,
+             orgOrUserTextField],
+            [viewForSection(title: sectionTitles[6]),
+             sizeSegmentedControl,
+             sizeTextfield],
+            [viewForSection(title: sectionTitles[7]),
+             numberOfStarsSegmentedControl,
+             numberOfStarsTextfield],
+            [viewForSection(title: sectionTitles[8]),
+             topicsTextfield]
+        ]
+    }
+
+    var sectionTitles: [String] {
+        return [
+            NSLocalizedString("Date", comment: ""),
+            NSLocalizedString("Fork", comment: ""),
+            NSLocalizedString("Number of Forks", comment: ""),
+            NSLocalizedString("Search in", comment: ""),
+            NSLocalizedString("Language", comment: ""),
+            NSLocalizedString("Organization / User", comment: ""),
+            NSLocalizedString("Size", comment: ""),
+            NSLocalizedString("Stars", comment: ""),
+            NSLocalizedString("Topics", comment: ""),
+        ]
+    }
 
     func viewForSection(title: String) -> UIView {
         let titleLabel = UILabel()
