@@ -33,14 +33,14 @@ class SearchFilterViewController: UITableViewController {
         return createdOrPushedDateInputStackView
     }()
 
-    var createdOrPushedFromDateSelectionButton: UIButton = {
+    var createdOrPushedLeftDateSelectionButton: UIButton = {
         let createdOrPushedFromDateSelectionButton = UIButton()
         createdOrPushedFromDateSelectionButton.setTitle(NSLocalizedString("From Date", comment: "Select Date placeholder text"), for: .normal)
         createdOrPushedFromDateSelectionButton.setTitleColor(UIColor.blue, for: .normal)
         return createdOrPushedFromDateSelectionButton
     }()
 
-    var createdOrPushedDateSelectionButton: UIButton = {
+    var createdOrPushedRightDateSelectionButton: UIButton = {
         let createdOrPushedDateSelectionButton = UIButton()
         createdOrPushedDateSelectionButton.setTitle(NSLocalizedString("Select Date", comment: "Select Date placeholder text"), for: .normal)
         createdOrPushedDateSelectionButton.setTitleColor(UIColor.blue, for: .normal)
@@ -207,22 +207,22 @@ class SearchFilterViewController: UITableViewController {
         // created / pushed
 
         createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRangeQualifierButton)
-        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedDateSelectionButton)
+        createdOrPushedDateInputStackView.addArrangedSubview(createdOrPushedRightDateSelectionButton)
 
-        createdOrPushedDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
+        createdOrPushedRightDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedRangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
-        createdOrPushedFromDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
+        createdOrPushedLeftDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
 
         // default createdOrPushed date selection button titles
         createdOrPushedDate = createdOrPushedDatePicker.date
         if let createdOrPushedDate = createdOrPushedDate {
-            createdOrPushedDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedDate), for: .normal)
+            createdOrPushedRightDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedDate), for: .normal)
         }
 
         createdOrPushedFromDate = createdOrPushedDatePicker.date.addingTimeInterval(-86400)
         if let createdOrPushedFromDate = createdOrPushedFromDate {
-            createdOrPushedFromDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedFromDate), for: .normal)
+            createdOrPushedLeftDateSelectionButton.setTitle(dateSelectionFormatter.string(from: createdOrPushedFromDate), for: .normal)
         }
 
         createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
@@ -363,10 +363,10 @@ extension SearchFilterViewController {
             var dateToShow: Date?
 
             switch sender {
-            case createdOrPushedFromDateSelectionButton:
+            case createdOrPushedLeftDateSelectionButton:
                 pickerToShow = createdOrPushedDatePicker
                 dateToShow = createdOrPushedFromDate
-            case createdOrPushedDateSelectionButton:
+            case createdOrPushedRightDateSelectionButton:
                 pickerToShow = createdOrPushedDatePicker
                 dateToShow = createdOrPushedDate
             case createdOrPushedRangeQualifierButton:
@@ -387,7 +387,7 @@ extension SearchFilterViewController {
                 tableView.insertRows(at: [indexPath], with: .top)
             } else {
                 let a = [sender, createdOrPushedPickerOwner]
-                let fromDateSelectorToAnotherDateSelector = a.contains(where: { $0 == createdOrPushedFromDateSelectionButton}) && a.contains(where: { $0 == createdOrPushedDateSelectionButton})
+                let fromDateSelectorToAnotherDateSelector = a.contains(where: { $0 == createdOrPushedLeftDateSelectionButton}) && a.contains(where: { $0 == createdOrPushedRightDateSelectionButton})
                 if !fromDateSelectorToAnotherDateSelector {
                     let _ = cellContents[section].popLast()
                     cellContents[section].append(pickerToShow)
@@ -401,13 +401,13 @@ extension SearchFilterViewController {
 
     @objc func datePickerDidChangeValue(sender: UIDatePicker) {
         guard let createdOrPushedPickerOwner = createdOrPushedPickerOwner,
-            (createdOrPushedPickerOwner == createdOrPushedFromDateSelectionButton) || ( createdOrPushedPickerOwner == createdOrPushedDateSelectionButton) else {
+            (createdOrPushedPickerOwner == createdOrPushedLeftDateSelectionButton) || ( createdOrPushedPickerOwner == createdOrPushedRightDateSelectionButton) else {
             return
         }
 
-        if createdOrPushedPickerOwner == createdOrPushedDateSelectionButton {
+        if createdOrPushedPickerOwner == createdOrPushedRightDateSelectionButton {
             createdOrPushedDate = sender.date
-        } else if createdOrPushedPickerOwner == createdOrPushedFromDateSelectionButton {
+        } else if createdOrPushedPickerOwner == createdOrPushedLeftDateSelectionButton {
             createdOrPushedFromDate = sender.date
         }
 
@@ -530,10 +530,10 @@ fileprivate extension SearchFilterViewController {
 
     func didSelectBetweenRangeQualifier(flag: Bool) {
         if flag {
-            createdOrPushedDateInputStackView.insertArrangedSubview(createdOrPushedFromDateSelectionButton, at: 0)
+            createdOrPushedDateInputStackView.insertArrangedSubview(createdOrPushedLeftDateSelectionButton, at: 0)
         } else {
-            createdOrPushedFromDateSelectionButton.removeFromSuperview()
-            createdOrPushedDateInputStackView.removeArrangedSubview(createdOrPushedFromDateSelectionButton)
+            createdOrPushedLeftDateSelectionButton.removeFromSuperview()
+            createdOrPushedDateInputStackView.removeArrangedSubview(createdOrPushedLeftDateSelectionButton)
         }
     }
 
