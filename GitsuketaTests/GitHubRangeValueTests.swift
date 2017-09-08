@@ -1,5 +1,5 @@
 //
-//  GitHubIntTests.swift
+//  GitHubRangeValueTests.swift
 //  GitsuketaTests
 //
 //  Created by Maddin on 08.09.17.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Gitsuketa
 
-class GitHubIntTests: XCTestCase {
+class GitHubRangeValueTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
@@ -35,10 +35,30 @@ class GitHubIntTests: XCTestCase {
     
 }
 
-extension GitHubIntTests {
+extension GitHubRangeValueTests {
 
-    func testBetweenStringQualifier() {
-        let between = GitHubInt(value: 0, rangeQualifier: .between, optionalValue: 4)
-        
+    func testBetweenIntStringQualifier() {
+        let between = GitHubRangeValue(value: 4, fromValue: 0)
+        XCTAssertEqual(between.stringQualifier, "0..4")
     }
+
+}
+
+extension GitHubRangeValueTests {
+
+    func testBetweenDateStringQualifier() {
+        var fromDate = DateComponents()
+        fromDate.day = 4
+        fromDate.month = 7
+        fromDate.year = 2017
+
+        var toDate = DateComponents()
+        toDate.day = 13
+        toDate.month = 12
+        toDate.year = 2017
+
+        let between = GitHubRangeValue(value: toDate.date, fromValue: fromDate.date)
+        XCTAssertEqual(between, "2017-07-04..2017-12-13")
+    }
+
 }
