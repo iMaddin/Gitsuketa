@@ -10,4 +10,9 @@ import Foundation
 
 enum GitHubLanguage: String {
     case Swift
+
+    static var allValues: [GitHubLanguage] {
+        return [.Swift]
+    }
+
 }
