@@ -10,7 +10,6 @@ import UIKit
 
 class SearchFilterViewController: UITableViewController {
 
-    static let rangeItems = GitHubRangeQualifier.allQualifierDescriptions
     var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
 
     fileprivate var cellContents: [[UIView]] = []
@@ -138,32 +137,34 @@ class SearchFilterViewController: UITableViewController {
 
     // MARK: - Size in KB
 
-    var sizeSegmentedControl: UISegmentedControl = {
-        let sizeSegmentedControl = UISegmentedControl(items: rangeItems)
-        sizeSegmentedControl.accessibilityIdentifier = "size range SegmentedControl"
-        sizeSegmentedControl.selectedSegmentIndex = 0
-        return sizeSegmentedControl
+    var sizeRangeSelectionViewController: RangeSelectionViewController!
+
+    var sizeRightTextfield: UITextField = {
+        let sizeRightTextfield = UITextField()
+        sizeRightTextfield.placeholder = NSLocalizedString("Size in KB", comment: "")
+        return sizeRightTextfield
     }()
 
-    var sizeTextfield: UITextField = {
-        let sizeTextfield = UITextField()
-        sizeTextfield.placeholder = NSLocalizedString("Size in KB", comment: "")
-        return sizeTextfield
+    var sizeLeftTextfield: UITextField = {
+        let sizeLeftTextfield = UITextField()
+        sizeLeftTextfield.placeholder = NSLocalizedString("Size in KB", comment: "")
+        return sizeLeftTextfield
     }()
 
     // MARK: - Number of stars
 
-    var numberOfStarsSegmentedControl: UISegmentedControl = {
-        let numberOfStarsSegmentedControl = UISegmentedControl(items: rangeItems)
-        numberOfStarsSegmentedControl.accessibilityIdentifier = "numberOfStars range SegmentedControl"
-        numberOfStarsSegmentedControl.selectedSegmentIndex = 0
-        return numberOfStarsSegmentedControl
+    var starsRangeSelectionViewController: RangeSelectionViewController!
+
+    var starsRightTextfield: UITextField = {
+        let starsRightTextfield = UITextField()
+        starsRightTextfield.placeholder = NSLocalizedString("Number of stars", comment: "")
+        return starsRightTextfield
     }()
 
-    var numberOfStarsTextfield: UITextField = {
-        let numberOfStarsTextfield = UITextField()
-        numberOfStarsTextfield.placeholder = NSLocalizedString("Number of stars", comment: "")
-        return numberOfStarsTextfield
+    var starsLeftTextField: UITextField = {
+        let starsLeftTextField = UITextField()
+        starsLeftTextField.placeholder = NSLocalizedString("Number of stars", comment: "")
+        return starsLeftTextField
     }()
 
     // MARK: - Topics
@@ -206,17 +207,28 @@ class SearchFilterViewController: UITableViewController {
 
         // number of forks
         numberOfForksRangeSelectionViewController = RangeSelectionViewController(leftView: numberOfForksLeftTextfield, rightView: numberOfForksRightTextfield)
-        if let numberOfForksRangeSelectionViewController = numberOfForksRangeSelectionViewController {
-            addChildViewController(numberOfForksRangeSelectionViewController)
-
-            numberOfForksRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
-        }
+        addChildViewController(numberOfForksRangeSelectionViewController)
+        numberOfForksRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
 
         // languages
 
         languagesPickerManager = LanguagesPickerManager(button: languagesSelectionButton)
         languagesPicker.dataSource = languagesPickerManager
         languagesPicker.delegate = languagesPickerManager
+
+        // size
+
+        sizeRangeSelectionViewController = RangeSelectionViewController(leftView: sizeLeftTextfield, rightView: sizeRightTextfield)
+        addChildViewController(sizeRangeSelectionViewController)
+        sizeRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
+
+        // stars
+
+        starsRangeSelectionViewController = RangeSelectionViewController(leftView: starsLeftTextField, rightView: starsRightTextfield)
+        addChildViewController(starsRangeSelectionViewController)
+        starsRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
+
+        // cell data
 
         var initialCellContents: [[UIView]] = []
 
@@ -396,10 +408,17 @@ extension SearchFilterViewController {
         let section: Int
         var _rangeSelectionViewController: RangeSelectionViewController?
 
+        // TODO: add method to get section and vc for sender
         switch sender {
         case numberOfForksRangeSelectionViewController.rangeQualifierButton:
             section = 2
             _rangeSelectionViewController = numberOfForksRangeSelectionViewController
+        case sizeRangeSelectionViewController.rangeQualifierButton:
+            section = 6
+            _rangeSelectionViewController = sizeRangeSelectionViewController
+        case starsRangeSelectionViewController.rangeQualifierButton:
+            section = 7
+            _rangeSelectionViewController = starsRangeSelectionViewController
         default:
             section = -1
         }
@@ -460,11 +479,9 @@ fileprivate extension SearchFilterViewController {
              orgOrUserSegmentedControl,
              orgOrUserTextField],
             [viewForSection(title: sectionTitles[6]),
-             sizeSegmentedControl,
-             sizeTextfield],
+             sizeRangeSelectionViewController.view],
             [viewForSection(title: sectionTitles[7]),
-             numberOfStarsSegmentedControl,
-             numberOfStarsTextfield],
+             starsRangeSelectionViewController.view],
             [viewForSection(title: sectionTitles[8]),
              topicsTextfield]
         ]
