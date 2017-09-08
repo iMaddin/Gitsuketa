@@ -21,11 +21,11 @@ class RangeQualifierPickerManager: NSObject {
 extension RangeQualifierPickerManager: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return GitHubRangeQualifier.allQualifiers.count
+        return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
+        return GitHubRangeQualifier.allQualifiers.count
     }
 
 }

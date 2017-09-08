@@ -21,11 +21,11 @@ class LanguagesPickerManager: NSObject {
 extension LanguagesPickerManager: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return GitHubLanguage.allValues.count
+        return 1
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 1
+        return GitHubLanguage.allValues.count
     }
 
 }
