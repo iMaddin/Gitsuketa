@@ -120,7 +120,8 @@ class SearchFilterViewController: UITableViewController {
 
     var languagesSelectionButton: UIButton = {
         let languagesSelectionButton = UIButton()
-        languagesSelectionButton.setTitle(NSLocalizedString("Language", comment: ""), for: .normal)
+        languagesSelectionButton.setTitleColor(UIColor.black, for: .normal)
+        languagesSelectionButton.setTitle(GitHubLanguage.allValues[0].rawValue, for: .normal)
         return languagesSelectionButton
     }()
 
@@ -130,6 +131,8 @@ class SearchFilterViewController: UITableViewController {
     }()
 
     var languagesPickerManager: LanguagesPickerManager?
+
+    var languagesPickerIsVisible = false
 
     // MARK: - Organization or User repositories
 
@@ -228,6 +231,7 @@ class SearchFilterViewController: UITableViewController {
         // languages
 
         languagesPickerManager = LanguagesPickerManager(button: languagesSelectionButton)
+        languagesSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleLanguagesButton(sender:)), for: .touchUpInside)
         languagesPicker.dataSource = languagesPickerManager
         languagesPicker.delegate = languagesPickerManager
 
@@ -336,7 +340,7 @@ extension SearchFilterViewController {
 
 }
 
-// MARK: - Search In button action
+// MARK: - Button Action
 extension SearchFilterViewController {
 
     @objc func toggleSearchInButton(sender: UIButton) {
@@ -347,7 +351,24 @@ extension SearchFilterViewController {
         }
     }
 
+    @objc func toggleLanguagesButton(sender: UIButton) {
+        let section = 4
+
+        if languagesPickerIsVisible {
+            let _ = cellContents[section].popLast()
+
+            let indexPath = IndexPath(row: cellContents[section].count, section: section)
+            tableView.deleteRows(at: [indexPath], with: .top)
+        } else {
+            cellContents[section].append(languagesPicker)
+            let indexPath = IndexPath(row: cellContents[section].count-1, section: section)
+            tableView.insertRows(at: [indexPath], with: .top)
+        }
+        languagesPickerIsVisible = !languagesPickerIsVisible
+    }
+
 }
+
 
 // MARK: - Date Picker
 extension SearchFilterViewController {
