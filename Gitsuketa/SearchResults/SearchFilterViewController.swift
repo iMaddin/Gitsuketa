@@ -241,14 +241,6 @@ class SearchFilterViewController: UITableViewController {
 
         // Do any additional setup after loading the view.
 
-        var initialCellContents: [[UIView]] = []
-
-        for i in 0..<expandedCellContents.count {
-            initialCellContents.append([viewForSection(title: sectionTitles[i])])
-        }
-
-        cellContents = initialCellContents
-
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
@@ -274,15 +266,24 @@ class SearchFilterViewController: UITableViewController {
         }
 
         createdOrPushedRangeQualifierPickerManager = RangeQualifierPickerManager(button: createdOrPushedRangeQualifierButton)
+        createdOrPushedRangeQualifierPickerManager?.didSelectBetweenRangeQualifier = { flag in self.didSelectBetweenRangeQualifier(flag: flag)}
+
         createdOrPushedRangeQualifierPickerView.dataSource = createdOrPushedRangeQualifierPickerManager
         createdOrPushedRangeQualifierPickerView.delegate = createdOrPushedRangeQualifierPickerManager
-        createdOrPushedRangeQualifierPickerManager?.didSelectBetweenRangeQualifier = { flag in self.didSelectBetweenRangeQualifier(flag: flag)}
 
         // languages
 
         languagesPickerManager = LanguagesPickerManager(button: languagesSelectionButton)
         languagesPicker.dataSource = languagesPickerManager
         languagesPicker.delegate = languagesPickerManager
+
+        var initialCellContents: [[UIView]] = []
+
+        for i in 0..<expandedCellContents.count {
+            initialCellContents.append([viewForSection(title: sectionTitles[i])])
+        }
+
+        cellContents = initialCellContents
     }
 
 }
@@ -445,15 +446,6 @@ extension SearchFilterViewController {
         createdOrPushedPickerOwner.setTitle(dateSelectionFormatter.string(from: sender.date), for: .normal)
     }
 
-    fileprivate func didSelectBetweenRangeQualifier(flag: Bool) {
-        if flag {
-            createdOrPushedDateInputStackView.insertArrangedSubview(createdOrPushedFromDateSelectionButton, at: 0)
-        } else {
-            createdOrPushedFromDateSelectionButton.removeFromSuperview()
-            createdOrPushedDateInputStackView.removeArrangedSubview(createdOrPushedFromDateSelectionButton)
-        }
-    }
-
 }
 
 extension SearchFilterViewController {
@@ -486,6 +478,15 @@ fileprivate extension SearchFilterViewController {
         let t: String = expanded ? "🔽" : "◀️"
         accessoryView.text = t
         return accessoryView
+    }
+
+    func didSelectBetweenRangeQualifier(flag: Bool) {
+        if flag {
+            createdOrPushedDateInputStackView.insertArrangedSubview(createdOrPushedFromDateSelectionButton, at: 0)
+        } else {
+            createdOrPushedFromDateSelectionButton.removeFromSuperview()
+            createdOrPushedDateInputStackView.removeArrangedSubview(createdOrPushedFromDateSelectionButton)
+        }
     }
 
 }
