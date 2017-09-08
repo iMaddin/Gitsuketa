@@ -41,19 +41,19 @@ struct GitHubSearchQuery {
 
     let keyword: String
 
-    var created: GitHubDate?
-    var pushed: GitHubDate?
+    var created: GitHubRangeValue<Date>?
+    var pushed: GitHubRangeValue<Date>?
 
     var fork: GitHubForkSearchOption?
-    var numberOfForks: GitHubInt?
+    var numberOfForks: GitHubRangeValue<Int>?
     var searchFields: GitHubSearchField?
     var language: GitHubLanguage?
 
     var repo: String?
     var user: String?
 
-    var size: GitHubInt?
-    var numberOfStars: GitHubInt?
+    var size: GitHubRangeValue<Int>?
+    var numberOfStars: GitHubRangeValue<Int>?
     var topic: [String]?
 
     init(keyword: String) {
