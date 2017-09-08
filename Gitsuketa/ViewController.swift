@@ -63,6 +63,7 @@ class ViewController: UIViewController {
         view.addSubview(searchBarContainerView)
 
         let searchBar = searchController.searchBar
+        searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
         searchBarContainerView.addSubview(searchBar)
 
         addChildViewController(searchResultsViewController)
@@ -132,6 +133,10 @@ extension ViewController: UISearchResultsUpdating {
 extension ViewController {
 
     @objc func showFilter() {
+        let searchText = searchController?.searchBar.text
+        searchController?.isActive = false
+        searchController?.searchBar.text = searchText
+        
         let filterNavigationcontroller = UINavigationController(rootViewController: searchFilterViewController)
         present(filterNavigationcontroller, animated: true)
     }
