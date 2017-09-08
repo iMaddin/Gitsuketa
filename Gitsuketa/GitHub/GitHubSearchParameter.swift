@@ -38,60 +38,59 @@ struct GitHubSearchQuery {
     var query: String {
         var query = "q="
 
-         if let keyword = keyword {
-            query += "\(keyword)"
-         }
+        query += "\(keyword)"
 
-         if let created = created {
-            query += "+created:\(created)"
-         }
 
-         if let pushed = pushed {
-            query += "+pushed:\(pushed)"
-         }
+        if let created = created {
+            query += "+created:\(created.stringQualifier)"
+        }
 
-         if let fork = fork {
-            query += "+fork:\(fork)"
-         }
+        if let pushed = pushed {
+            query += "+pushed:\(pushed.stringQualifier)"
+        }
 
-         if let numberOfForks = numberOfForks {
-            query += "+forks:\(numberOfForks)"
-         }
+        if let fork = fork {
+            query += "+fork:\(fork.rawValue)"
+        }
 
-         if let searchFields = searchFields {
+        if let numberOfForks = numberOfForks {
+            query += "+forks:\(numberOfForks.stringQualifier)"
+        }
+
+        if let searchFields = searchFields {
             var inFieldsQuery = ""
             for s in searchFields {
-                inFieldsQuery += "\(s),"
+                inFieldsQuery += "\(s.rawValue),"
             }
             let removeLastComma = inFieldsQuery.dropLast()
             query += "+in:\(removeLastComma)"
-         }
+        }
 
-         if let language = language {
-            query += "+language:\(language)"
-         }
+        if let language = language {
+            query += "+language:\(language.rawValue)"
+        }
 
-         if let repo = repo {
-            query += "+repo:\(repo)"
-         }
+        if let repo = repo {
+            query += "+org:\(repo)"
+        }
 
-         if let user = user {
+        if let user = user {
             query += "+user:\(user)"
-         }
+        }
 
-         if let size = size {
-            query += "+size:\(size)"
-         }
+        if let size = size {
+            query += "+size:\(size.stringQualifier)"
+        }
 
-         if let numberOfStars = numberOfStars {
-            query += "+stars:\(numberOfStars)"
-         }
+        if let numberOfStars = numberOfStars {
+            query += "+stars:\(numberOfStars.stringQualifier)"
+        }
 
-         if let topic = topic {
+        if let topic = topic {
             for t in topic {
                 query += "+topic:\(t)"
             }
-         }
+        }
 
         return query
     }
