@@ -146,7 +146,6 @@ class SearchFilterViewController: UITableViewController {
     var orgOrUserTextField: UITextField = {
         let orgOrUserTextField = UITextField()
         orgOrUserTextField.placeholder = NSLocalizedString("Organization / User name", comment: "") // TODO: change placeholder depeing on what is selected in orgOrUserSegmentedControl
-        orgOrUserTextField.keyboardType = .numberPad
         return orgOrUserTextField
     }()
 
