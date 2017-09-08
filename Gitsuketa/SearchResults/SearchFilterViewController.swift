@@ -10,13 +10,10 @@ import UIKit
 
 class SearchFilterViewController: UITableViewController {
 
-    let cellContentInset: UIEdgeInsets = UIEdgeInsetsMake(15, 15, 15, 15)
-
     static let rangeItems = GitHubRangeQualifier.allQualifierDescriptions
+    var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
 
     fileprivate var cellContents: [[UIView]] = []
-
-    var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
 
     // MARK: - Created At / Pushed At
 
@@ -437,7 +434,12 @@ extension SearchFilterViewController {
 
 }
 
+// MARK: - fileprivate extension
 fileprivate extension SearchFilterViewController {
+
+    var cellContentInset: UIEdgeInsets {
+        return UIEdgeInsetsMake(15, 15, 15, 15)
+    }
 
     var expandedCellContents: [[UIView]] {
         return [
