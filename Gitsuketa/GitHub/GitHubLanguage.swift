@@ -9,5 +9,5 @@
 import Foundation
 
 enum GitHubLanguage: String {
-    case AnyLanguage
+    case Swift
 }
