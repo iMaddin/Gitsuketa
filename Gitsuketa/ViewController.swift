@@ -110,7 +110,7 @@ extension ViewController: UISearchResultsUpdating {
             let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
             resultsDataSource?.searchResults = formattedData
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 tableView?.reloadData()
             }
         }
