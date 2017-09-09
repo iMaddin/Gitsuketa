@@ -132,10 +132,10 @@ extension ViewController: UISearchResultsUpdating {
                 return
             }
 
-            let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
-            resultsDataSource?.searchResults = formattedData
-
             DispatchQueue.main.sync {
+                let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
+                resultsDataSource?.searchResults = formattedData
+
                 tableView?.reloadData()
             }
         }
