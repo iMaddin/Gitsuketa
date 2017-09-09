@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol SearchResultsSortingDelegate {
+    func searchResultsSortingViewController(_ searchResultsSortingViewController: SearchResultsSortingViewController, didSelectSortingOption: GitHubSortingOption)
+}
+
 class SearchResultsSortingViewController: UIViewController {
+
+    var delegate: SearchResultsSortingDelegate?
 
     var height: CGFloat = 44 {
         didSet {
@@ -94,6 +100,13 @@ fileprivate extension SearchResultsSortingViewController {
             currentlySelectedButton.isSelected = !currentlySelectedButton.isSelected
         }
         currentlySelectedButton = sender
+
+        guard let senderIndex = stackView.arrangedSubviews.index(of: sender) else {
+            assertionFailure()
+            return
+        }
+        let selectedSortingOption = GitHubSortingOption.allValues[senderIndex]
+        delegate?.searchResultsSortingViewController(self, didSelectSortingOption: selectedSortingOption)
     }
 
     func setDefaultSelectedButton(index: Int) {
