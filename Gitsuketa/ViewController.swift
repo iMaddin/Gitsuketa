@@ -14,6 +14,11 @@ class ViewController: UIViewController {
     // Used to display default search results on app launch. Set to nil to show nothing at launch.
     var defaultSearchKeyword: String? = "Benkio"
 
+    var currentSearchParameter: GitHubSearchParameter? {
+        return _currentSearchParameter
+    }
+    fileprivate var _currentSearchParameter: GitHubSearchParameter?
+
     let searchResultsViewController = SearchResultsViewController()
     let searchFilterViewController = SearchFilterViewController(style: .grouped)
 
@@ -53,7 +58,7 @@ class ViewController: UIViewController {
         }
 
         if let defaultSearchKeyword = self.defaultSearchKeyword {
-            startSearch(defaultSearchKeyword)
+            startSearch(searchKeyword: defaultSearchKeyword)
         }
 
         let searchController = UISearchController(searchResultsController: nil)
@@ -105,7 +110,7 @@ class ViewController: UIViewController {
             vc in
             var filteredQuery = SearchFilterReader.read(searchFilterViewController: vc)
             filteredQuery.keyword = searchBar.text
-            self.startSearch(filteredQuery)
+            self.startSearch(searchQuery: filteredQuery)
         }
     }
 
@@ -113,10 +118,10 @@ class ViewController: UIViewController {
 
 extension ViewController: UISearchResultsUpdating {
 
-    fileprivate func startSearch(_ query: GitHubSearchQuery) {
-        let parameter = GitHubSearchParameter(query: query)
+    fileprivate func startSearch(searchParameter: GitHubSearchParameter) {
+        _currentSearchParameter = searchParameter
 
-        GitHubRequest.makeRequest(search: parameter) {
+        GitHubRequest.makeRequest(search: searchParameter) {
             [weak resultsDataSource, weak tableView] searchResult in
 
             guard let searchResult = searchResult else {
@@ -133,9 +138,22 @@ extension ViewController: UISearchResultsUpdating {
         }
     }
 
-    fileprivate func startSearch(_ searchQuery: String) {
-        let query = GitHubSearchQuery(keyword: searchQuery)
-        startSearch(query)
+    fileprivate func startSearch(searchQuery: GitHubSearchQuery) {
+        let parameter: GitHubSearchParameter
+
+        if let currentSearchParameter = currentSearchParameter {
+            var newParameter = currentSearchParameter
+            newParameter.query = searchQuery
+            parameter = newParameter
+        } else {
+            parameter = GitHubSearchParameter(query: searchQuery)
+        }
+        startSearch(searchParameter: parameter)
+    }
+
+    fileprivate func startSearch(searchKeyword: String) {
+        let query = GitHubSearchQuery(keyword: searchKeyword)
+        startSearch(searchQuery: query)
     }
 
     func updateSearchResults(for searchController: UISearchController) {
@@ -147,7 +165,7 @@ extension ViewController: UISearchResultsUpdating {
             return
         }
 
-        startSearch(searchQuery)
+        startSearch(searchKeyword: searchQuery)
     }
 
 }
