@@ -33,6 +33,7 @@ class SearchResultsSortingViewController: UIViewController {
 
     var stackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.alignment = .center
         return stackView
     }()
 
