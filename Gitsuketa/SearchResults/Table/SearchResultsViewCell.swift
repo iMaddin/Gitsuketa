@@ -160,7 +160,7 @@ fileprivate extension SearchResultsViewCell {
             formattedLanguageLabel,
             formatedUpdatedAtLabel,
             starsLabel,
-            hasReadmeLabel
+//            hasReadmeLabel
         ]
     }
 
