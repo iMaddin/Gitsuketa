@@ -13,7 +13,7 @@ protocol SearchResultItem {
     var title: String { get }
     var description: String? { get }
     var url: String  { get }
-    var formattedLanguage: String { get }
+    var formattedLanguage: String? { get }
     var formatedUpdatedAt: String  { get }
     var stars: Int  { get }
     var hasReadme: Bool { get }
@@ -27,13 +27,11 @@ extension GitHubSearchResultItem: SearchResultItem {
     }
 
     var description: String? {
-        return "A very nice description. 🤷‍♀️"
-//        return self.descriptionText
+        return self.descriptionText
     }
 
-    var formattedLanguage: String {
-        return "Swift 7"
-//        return self.language
+    var formattedLanguage: String? {
+        return self.language
     }
 
     var formatedUpdatedAt: String {
