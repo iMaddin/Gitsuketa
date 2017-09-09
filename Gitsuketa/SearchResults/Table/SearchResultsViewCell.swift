@@ -12,42 +12,43 @@ class SearchResultsViewCell: UICollectionViewCell {
 
     var viewModel: SearchResultItem? {
         didSet {
-            if let title = viewModel?.title {
-                titleLabel.text = title
-                contentStackView.addArrangedSubview(titleLabel)
-            }
-            
-            if let description = viewModel?.description {
-                descriptionLabel.text = description
-                contentStackView.addArrangedSubview(descriptionLabel)
-            }
+            var text: String?
 
-            if let formatedUpdatedAt = viewModel?.formatedUpdatedAt {
-                formatedUpdatedAtLabel.text = formatedUpdatedAt
-                contentStackView.addArrangedSubview(formatedUpdatedAtLabel)
-            }
+            for v in allViews {
+                switch v {
+                case titleLabel:
+                    text = viewModel?.title
+                case descriptionLabel:
+                    text = viewModel?.description
+                case urlLabel:
+                    text = viewModel?.url
+                case formattedLanguageLabel:
+                    text = viewModel?.formattedLanguage
+                case formatedUpdatedAtLabel:
+                    text = viewModel?.formatedUpdatedAt
+                case starsLabel:
+                    if let stars = viewModel?.stars {
+                        text = "⭐️\(stars)"
+                    }
+                case hasReadmeLabel:
+                    if let hasReadme = viewModel?.hasReadme {
+                        text = hasReadme ? "readme ✅" : "readme ❌"
+                    } else {
+                        text = "readme 🤷🏻‍♂️"
+                    }
+                default:
+                    text = nil
+                }
 
-//            if let url = viewModel?.url {
-//                urlLabel.text = url
-//                contentStackView.addArrangedSubview(urlLabel)
-//            }
-//
-            if let formattedLanguage = viewModel?.formattedLanguage {
-                formattedLanguageLabel.text = formattedLanguage
-                contentStackView.addArrangedSubview(formattedLanguageLabel)
+                if let t = text {
+                    v.text = t
+                    contentStackView.addArrangedSubview(v)
+                } else {
+                    contentStackView.removeArrangedSubview(v)
+                    v.removeFromSuperview()
+                }
+
             }
-            
-            if let stars = viewModel?.stars {
-                starsLabel.text = "⭐️\(stars)"
-                contentStackView.addArrangedSubview(starsLabel)
-            }
-            
-            if let hasReadme = viewModel?.hasReadme ,
-                hasReadme == true {
-                hasReadmeLabel.text = "readme"
-                contentStackView.addArrangedSubview(hasReadmeLabel)
-            }
-            
         }
     }
 
@@ -115,6 +116,18 @@ class SearchResultsViewCell: UICollectionViewCell {
 }
 
 fileprivate extension SearchResultsViewCell {
+
+    var allViews: [UILabel] {
+        return [
+            titleLabel,
+            descriptionLabel,
+            urlLabel,
+            formattedLanguageLabel,
+            formatedUpdatedAtLabel,
+            starsLabel,
+            hasReadmeLabel
+        ]
+    }
 
     func _commonInit() {
         contentStackView.translatesAutoresizingMaskIntoConstraints = false

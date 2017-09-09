@@ -14,6 +14,8 @@ class SearchResultsViewController: UICollectionViewController {
     var cellVerticalSpacing: CGFloat = 20
     var didSelectRowAction: ((String?) -> Void)?
 
+    let dynamicSizeCell = SearchResultsViewCell()
+
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
@@ -46,8 +48,8 @@ extension SearchResultsViewController {
         cell.layer.cornerRadius = 4
         cell.layer.borderWidth = 0.5
 
-        if let searchResultsViewCell = cell  as? SearchResultsViewCell {
-            searchResultsViewCell.viewModel = searchResults?.items[indexPath.section]
+        if let searchResultsViewCell = cell as? SearchResultsViewCell {
+            searchResultsViewCell.viewModel = searchResults?.items[indexPath.row]
         }
         return cell
     }
@@ -66,12 +68,11 @@ extension SearchResultsViewController {
 extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height: CGFloat
+        var height: CGFloat = 0
+        dynamicSizeCell.viewModel = searchResults?.items[indexPath.row]
 
-        if let cell = collectionView.cellForItem(at: indexPath) {
-            height = cell.intrinsicContentSize.height
-        } else {
-            height = 200
+        for v in dynamicSizeCell.contentStackView.arrangedSubviews {
+            height = height + v.intrinsicContentSize.height
         }
 
         let width = collectionView.frame.width - spacing*2
