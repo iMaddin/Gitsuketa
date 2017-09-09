@@ -48,6 +48,9 @@ class SearchResultsSortingViewController: UIViewController {
             let sortingButton = SelectableButton()
             sortingButton.setTitle(sortingOption.description, for: .normal)
             sortingButton.setTitleColor(UIColor.blue, for: .normal)
+            sortingButton.setTitleColor(UIColor.white, for: .selected)
+            sortingButton.layer.cornerRadius = 4
+            sortingButton.addTarget(self, action: #selector(sortingButtonPressed(sender:)), for: .touchUpInside)
             stackView.addArrangedSubview(sortingButton)
         }
     }

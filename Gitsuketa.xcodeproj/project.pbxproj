@@ -181,11 +181,11 @@
 		1BAABCA11F5EBD50005A0536 /* Gitsuketa */ = {
 			isa = PBXGroup;
 			children = (
-				1BA793081F63F8C8009BB58B /* SelectableButton.swift */,
 				1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */,
 				1BAABCA41F5EBD50005A0536 /* ViewController.swift */,
 				1B60F83B1F61616100854B28 /* SearchResults */,
 				1B23893E1F5F18250048C1D1 /* GitHub */,
+				1BA793081F63F8C8009BB58B /* SelectableButton.swift */,
 				1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */,
 				1BAABCA91F5EBD50005A0536 /* Assets.xcassets */,
 				1BAABCAB1F5EBD50005A0536 /* LaunchScreen.storyboard */,
