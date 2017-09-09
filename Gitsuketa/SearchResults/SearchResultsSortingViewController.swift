@@ -43,6 +43,15 @@ class SearchResultsSortingViewController: UIViewController {
         heightConstraint = view.heightAnchor.constraint(equalToConstant: height)
         heightConstraint?.isActive = true
 
+        let bottomSeparatorView = UIView()
+        bottomSeparatorView.layer.backgroundColor = UIColor.gray.cgColor
+        view.addSubview(bottomSeparatorView)
+        bottomSeparatorView.translatesAutoresizingMaskIntoConstraints = false
+        bottomSeparatorView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        bottomSeparatorView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bottomSeparatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        bottomSeparatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+
         stackView.spacing = spacing
         scrollView.contentInset = UIEdgeInsetsMake(0, spacing, 0, spacing)
         scrollView.showsHorizontalScrollIndicator = false
