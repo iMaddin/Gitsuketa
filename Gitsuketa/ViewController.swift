@@ -42,8 +42,6 @@ class ViewController: UIViewController {
 
         definesPresentationContext = true // fixes problem where other VC couldn't be presented after a search
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Filter", comment: "Filter search button"), style: .plain, target: self, action: #selector(ViewController.showFilter))
-
         searchResultsViewController.didSelectRowAction = {
             url in
             guard let url = url, let urlObject = URL(string: url) else {
@@ -58,20 +56,15 @@ class ViewController: UIViewController {
             startSearch(searchKeyword: defaultSearchKeyword)
         }
 
-        let searchController = UISearchController(searchResultsController: nil)
-        self.searchController = searchController
-        searchController.searchResultsUpdater = self
-        searchController.hidesNavigationBarDuringPresentation = false // TODO: should be true but UISearchBar behaves strangely with Auto Layout
-        searchController.obscuresBackgroundDuringPresentation = false
+        let filterButton = UIButton()
+        filterButton.setTitle(NSLocalizedString("Filter", comment: "Filter search button"), for: .normal)
+        filterButton.addTarget(self, action: #selector(ViewController.showFilter), for: .touchUpInside)
+        filterButton.widthAnchor.constraint(equalToConstant: filterButton.intrinsicContentSize.width+20).isActive = true
+        filterButton.setTitleColor(view.tintColor, for: .normal)
 
-        let searchBarContainerView = UIView() // add container view to fix strange resizing behaviour of searchbar
-        searchBarContainerView.accessibilityIdentifier = "searchBarContainerView"
-        searchBarContainerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(searchBarContainerView)
-
-        let searchBar = searchController.searchBar
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
-        searchBarContainerView.addSubview(searchBar)
 
         searchResultsSortingViewController.delegate = self
         addChildViewController(searchResultsSortingViewController)
@@ -79,30 +72,30 @@ class ViewController: UIViewController {
             assertionFailure()
             return
         }
-        view.addSubview(sortingBar)
-        sortingBar.translatesAutoresizingMaskIntoConstraints = false
 
         addChildViewController(searchResultsViewController)
         guard let searchResultsView = searchResultsViewController.view else {
             assertionFailure()
             return
         }
-        view.addSubview(searchResultsView)
-        searchResultsView.translatesAutoresizingMaskIntoConstraints = false
 
-        searchBarContainerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        searchBarContainerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        searchBarContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        searchBarContainerView.heightAnchor.constraint(equalToConstant: searchBar.intrinsicContentSize.height).isActive = true
+        sortingBar.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        sortingBar.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        searchResultsView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        searchResultsView.setContentHuggingPriority(.defaultLow, for: .vertical)
 
-        searchBarContainerView.bottomAnchor.constraint(equalTo: sortingBar.topAnchor).isActive = true
-        sortingBar.bottomAnchor.constraint(equalTo: searchResultsView.topAnchor).isActive = true
-        sortingBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        sortingBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        let searchStackView = UIStackView(arrangedSubviews: [searchBar, filterButton])
+        searchStackView.alignment = .center
 
-        searchResultsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        searchResultsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        searchResultsView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        let contentStackView = UIStackView(arrangedSubviews: [searchStackView, sortingBar, searchResultsView])
+        contentStackView.axis = .vertical
+
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(contentStackView)
+        contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        contentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
         searchFilterViewController.dismissAction = {
             vc in
@@ -114,9 +107,9 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: UISearchResultsUpdating {
-
-    fileprivate func startSearch(searchParameter: GitHubSearchParameter) {
+fileprivate extension ViewController {
+    
+    func startSearch(searchParameter: GitHubSearchParameter) {
         _currentSearchParameter = searchParameter
 
         GitHubRequest.makeRequest(search: searchParameter) {
@@ -135,7 +128,7 @@ extension ViewController: UISearchResultsUpdating {
         }
     }
 
-    fileprivate func startSearch(searchQuery: GitHubSearchQuery) {
+    func startSearch(searchQuery: GitHubSearchQuery) {
         let parameter: GitHubSearchParameter
 
         if let currentSearchParameter = currentSearchParameter {
@@ -148,16 +141,17 @@ extension ViewController: UISearchResultsUpdating {
         startSearch(searchParameter: parameter)
     }
 
-    fileprivate func startSearch(searchKeyword: String) {
+    func startSearch(searchKeyword: String) {
         let query = GitHubSearchQuery(keyword: searchKeyword)
         startSearch(searchQuery: query)
     }
 
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let searchQuery = searchController.searchBar.text else {
-            return
-        }
+}
 
+extension ViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let searchQuery = searchText
         if searchQuery.trimmingCharacters(in: CharacterSet.whitespaces) == "" {
             return
         }
