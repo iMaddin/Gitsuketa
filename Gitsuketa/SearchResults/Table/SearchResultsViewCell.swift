@@ -54,36 +54,50 @@ class SearchResultsViewCell: UICollectionViewCell {
 
     var titleLabel: UILabel = {
         let titleLabel = UILabel()
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
+        titleLabel.adjustsFontForContentSizeCategory = true
         return titleLabel
     }()
 
     var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
+        descriptionLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        descriptionLabel.adjustsFontForContentSizeCategory = true
         return descriptionLabel
     }()
 
     var urlLabel: UILabel = {
         let urlLabel = UILabel()
+        urlLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        urlLabel.adjustsFontForContentSizeCategory = true
         return urlLabel
     }()
 
     var formattedLanguageLabel: UILabel = {
         let formattedLanguageLabel = UILabel()
+        formattedLanguageLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        formattedLanguageLabel.adjustsFontForContentSizeCategory = true
         return formattedLanguageLabel
     }()
 
     var formatedUpdatedAtLabel: UILabel = {
         let formatedUpdatedAtLabel = UILabel()
+        formatedUpdatedAtLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        formatedUpdatedAtLabel.adjustsFontForContentSizeCategory = true
         return formatedUpdatedAtLabel
     }()
 
     var starsLabel: UILabel = {
         let starsLabel = UILabel()
+        starsLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        starsLabel.adjustsFontForContentSizeCategory = true
         return starsLabel
     }()
 
     var hasReadmeLabel: UILabel = {
         let hasReadmeLabel = UILabel()
+        hasReadmeLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        hasReadmeLabel.adjustsFontForContentSizeCategory = true
         return hasReadmeLabel
     }()
 
