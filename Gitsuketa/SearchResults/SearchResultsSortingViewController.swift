@@ -55,10 +55,11 @@ class SearchResultsSortingViewController: UIViewController {
         for sortingOption in GitHubSortingOption.allValues {
             let sortingButton = SelectableButton()
             sortingButton.setTitle(sortingOption.description, for: .normal)
-            sortingButton.setTitleColor(UIColor.blue, for: .normal)
-            sortingButton.setTitleColor(UIColor.white, for: .selected)
-            sortingButton.layer.cornerRadius = 4
+            sortingButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
+            sortingButton.setTitleColor(UIColor.gray, for: .normal)
+            sortingButton.setTitleColor(self.view.tintColor, for: .selected)
             sortingButton.addTarget(self, action: #selector(sortingButtonPressed(sender:)), for: .touchUpInside)
+            sortingButton.widthAnchor.constraint(equalToConstant: sortingButton.intrinsicContentSize.width+20).isActive = true
             stackView.addArrangedSubview(sortingButton)
         }
 

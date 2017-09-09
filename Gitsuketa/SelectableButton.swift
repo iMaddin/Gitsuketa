@@ -25,7 +25,9 @@ class SelectableButton: UIButton {
 fileprivate extension SelectableButton {
 
     func enableSelectedStyling(flag: Bool) {
-        layer.backgroundColor = isSelected ? titleColor(for: .normal)?.cgColor : titleColor(for: .selected)?.cgColor
+        layer.cornerRadius = intrinsicContentSize.height/2
+        layer.borderColor = isSelected ? titleColor(for: .selected)?.cgColor : titleColor(for: .normal)?.cgColor
+        layer.borderWidth = isSelected ? 1 : 0
     }
 
 }
