@@ -26,7 +26,9 @@ class SearchResultsViewController: UICollectionViewController {
         super.viewDidLoad()
 
         collectionView?.register(SearchResultsViewCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView?.isPrefetchingEnabled = false
         collectionView?.backgroundColor = UIColor.white
+        collectionView?.contentInset = UIEdgeInsets(top: spacing, left: 0, bottom: spacing, right: 0)
     }
 
 }
@@ -40,6 +42,10 @@ extension SearchResultsViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.layer.cornerRadius = 4
+        cell.layer.borderWidth = 0.5
+
         if let searchResultsViewCell = cell  as? SearchResultsViewCell {
             searchResultsViewCell.viewModel = searchResults?.items[indexPath.section]
         }
@@ -61,15 +67,17 @@ extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height: CGFloat
+
         if let cell = collectionView.cellForItem(at: indexPath) {
             height = cell.intrinsicContentSize.height
         } else {
             height = 200
         }
 
-        let width = collectionView.frame.width
+        let width = collectionView.frame.width - spacing*2
         return CGSize(width: width, height: height)
     }
+
 }
 
 fileprivate extension SearchResultsViewController {
@@ -77,4 +85,9 @@ fileprivate extension SearchResultsViewController {
     var cellIdentifier: String {
         return "CellIdentifier"
     }
+
+    var spacing: CGFloat {
+        return 15
+    }
+
 }

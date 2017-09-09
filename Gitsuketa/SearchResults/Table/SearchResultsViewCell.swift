@@ -116,28 +116,12 @@ class SearchResultsViewCell: UICollectionViewCell {
 fileprivate extension SearchResultsViewCell {
 
     func _commonInit() {
-        let containerView = UIView()
-        containerView.accessibilityIdentifier = "containerView"
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.layer.cornerRadius = 4
-        containerView.layer.borderWidth = 0.5
-        containerView.layer.borderColor = UIColor.black.withAlphaComponent(0.5).cgColor
-
-        contentView.addSubview(containerView)
-        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
-        containerView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.accessibilityIdentifier = "cell.contentStackView"
         contentStackView.axis = .vertical
 
-        containerView.addSubview(contentStackView)
-        contentStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: cellHorizontalSpacing).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
-        contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: cellHorizontalSpacing).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -cellHorizontalSpacing).isActive = true
+        contentView.addSubview(contentStackView)
+        contentView.constraints(equalToEdgeOf: contentStackView)
     }
 
 }
