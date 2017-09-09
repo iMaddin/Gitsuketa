@@ -52,7 +52,6 @@ class SearchResultsSortingViewController: UIViewController {
         bottomSeparatorView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         bottomSeparatorView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
 
-        stackView.spacing = spacing
         scrollView.contentInset = UIEdgeInsetsMake(0, spacing, 0, spacing)
         scrollView.showsHorizontalScrollIndicator = false
 
@@ -81,7 +80,7 @@ class SearchResultsSortingViewController: UIViewController {
 fileprivate extension SearchResultsSortingViewController {
 
     var spacing: CGFloat {
-        return 15
+        return 10
     }
 
 }
