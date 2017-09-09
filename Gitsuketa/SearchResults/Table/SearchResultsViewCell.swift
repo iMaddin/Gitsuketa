@@ -10,24 +10,26 @@ import UIKit
 
 class SearchResultsViewCell: UICollectionViewCell {
 
-    var viewModel: SearchResultItem? {
+    var viewModel: GitHubSearchResultItem? {
         didSet {
             var text: String?
 
             for v in allAxisViews {
                 switch v {
                 case titleLabel:
-                    text = viewModel?.title
+                    text = viewModel?.fullName
                 case descriptionLabel:
-                    text = viewModel?.description
+                    text = viewModel?.descriptionText
                 case urlLabel:
                     text = viewModel?.url
                 case formattedLanguageLabel:
-                    text = viewModel?.formattedLanguage
+                    text = viewModel?.language
                 case formatedUpdatedAtLabel:
-                    text = viewModel?.formatedUpdatedAt
+                    if let updatedAt = viewModel?.updatedAt, let date = ISO8601DateFormatter().date(from: updatedAt) {
+                        text = dateFormatter.string(from: date)
+                    }
                 case starsLabel:
-                    if let stars = viewModel?.stars {
+                    if let stars = viewModel?.stargazersCount {
                         text = "⭐️\(stars)"
                     }
                 case hasReadmeLabel:
@@ -102,6 +104,12 @@ class SearchResultsViewCell: UICollectionViewCell {
     }()
 
     let contentStackView = UIStackView()
+
+    fileprivate var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        return dateFormatter
+    }()
 
     init() {
         super.init(frame: CGRect.zero)

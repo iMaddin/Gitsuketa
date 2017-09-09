@@ -10,7 +10,7 @@ import UIKit
 
 class SearchResultsViewController: UICollectionViewController {
 
-    var searchResults: SearchResultsFormatting?
+    var searchResults: GitHubSearchResult?
     var didSelectRowAction: ((String?) -> Void)?
 
     fileprivate let dynamicSizeCell = SearchResultsViewCell()

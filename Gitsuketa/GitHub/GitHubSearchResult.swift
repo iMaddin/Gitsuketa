@@ -8,11 +8,13 @@
 
 import Foundation
 
-struct GitHubSearchResultItem: Codable {
+struct GitHubSearchResult: Codable {
+    let total_count: Int
+    let incomplete_results: Bool
+    let items: [GitHubSearchResultItem]
+}
 
-    struct GitHubOwner: Codable {
-        let login: String?
-    }
+struct GitHubSearchResultItem: Codable {
 
     let createdAt: String?
     let defaultBranch: String?
@@ -72,8 +74,14 @@ struct GitHubSearchResultItem: Codable {
 
 }
 
-struct GitHubSearchResult: Codable {
-    let total_count: Int
-    let incomplete_results: Bool
-    let items: [GitHubSearchResultItem]
+extension GitHubSearchResultItem {
+
+    var hasReadme: Bool {
+        return true
+    }
+
+}
+
+struct GitHubOwner: Codable {
+    let login: String?
 }

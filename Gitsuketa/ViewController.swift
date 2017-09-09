@@ -128,8 +128,7 @@ extension ViewController: UISearchResultsUpdating {
             }
 
             DispatchQueue.main.sync {
-                let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
-                searchResultsViewController?.searchResults = formattedData
+                searchResultsViewController?.searchResults = searchResult
 
                 collectionView?.reloadData()
             }
