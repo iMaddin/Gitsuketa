@@ -181,6 +181,7 @@ class SearchFilterViewController: UITableViewController {
     var starsLeftTextField: UITextField = {
         let starsLeftTextField = UITextField()
         starsLeftTextField.placeholder = NSLocalizedString("Number of stars", comment: "")
+        starsLeftTextField.keyboardType = .numberPad
         return starsLeftTextField
     }()
 
