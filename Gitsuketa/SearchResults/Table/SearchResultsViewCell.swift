@@ -104,6 +104,14 @@ class SearchResultsViewCell: UICollectionViewCell {
         _commonInit()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        for subview in contentStackView.arrangedSubviews {
+            contentStackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+    }
+
 }
 
 fileprivate extension SearchResultsViewCell {
