@@ -34,6 +34,10 @@ class SearchResultsSortingViewController: UIViewController {
         heightConstraint = view.heightAnchor.constraint(equalToConstant: height)
         heightConstraint?.isActive = true
 
+        stackView.spacing = spacing
+        scrollView.contentInset = UIEdgeInsetsMake(0, spacing, 0, spacing)
+        scrollView.showsHorizontalScrollIndicator = false
+
         view.addSubview(scrollView)
         view.constraints(equalToEdgeOf: scrollView)
         scrollView.addSubview(stackView)
@@ -46,6 +50,14 @@ class SearchResultsSortingViewController: UIViewController {
             sortingButton.setTitleColor(UIColor.blue, for: .normal)
             stackView.addArrangedSubview(sortingButton)
         }
+    }
+
+}
+
+fileprivate extension SearchResultsSortingViewController {
+
+    var spacing: CGFloat {
+        return 15
     }
 
 }
