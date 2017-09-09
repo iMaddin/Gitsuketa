@@ -128,7 +128,7 @@ extension ViewController: UISearchResultsUpdating {
             [weak resultsDataSource, weak tableView] searchResult in
 
             guard let searchResult = searchResult else {
-                assertionFailure("No search results")
+                print("No search results. Possibly exceeded API limit. ")
                 return
             }
 

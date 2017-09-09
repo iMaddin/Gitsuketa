@@ -38,6 +38,7 @@ struct GitHubRequest {
                 let searchResult = try decoder.decode(GitHubSearchResult.self, from: data)
                 completionHandler(searchResult)
             } catch {
+                completionHandler(nil)
                 print("error trying to convert data to JSON")
                 print(error)
             }
