@@ -20,7 +20,6 @@ class SearchResultsSortingViewController: UIViewController {
 
     var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-
         return scrollView
     }()
 
@@ -34,7 +33,19 @@ class SearchResultsSortingViewController: UIViewController {
 
         heightConstraint = view.heightAnchor.constraint(equalToConstant: height)
         heightConstraint?.isActive = true
-        view.backgroundColor = UIColor.green
+
+        view.addSubview(scrollView)
+        view.constraints(equalToEdgeOf: scrollView)
+        scrollView.addSubview(stackView)
+        scrollView.constraints(equalToEdgeOf: stackView)
+        scrollView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 1).isActive = true
+
+        for sortingOption in GitHubSortingOption.allValues {
+            let sortingButton = SelectableButton()
+            sortingButton.setTitle(sortingOption.description, for: .normal)
+            sortingButton.setTitleColor(UIColor.blue, for: .normal)
+            stackView.addArrangedSubview(sortingButton)
+        }
     }
 
 }
