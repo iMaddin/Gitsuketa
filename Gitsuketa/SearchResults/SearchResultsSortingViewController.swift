@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchResultsSortingDelegate {
-    func searchResultsSortingViewController(_ searchResultsSortingViewController: SearchResultsSortingViewController, didSelectSortingOption: GitHubSortingOption)
+    func searchResultsSortingViewController(_ searchResultsSortingViewController: SearchResultsSortingViewController, didSelectSortingOption sortingOption: GitHubSortingOption)
 }
 
 class SearchResultsSortingViewController: UIViewController {
