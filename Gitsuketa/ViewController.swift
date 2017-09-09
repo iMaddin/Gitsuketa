@@ -24,6 +24,11 @@ class ViewController: UIViewController {
     let resultsDataSource = SearchResultsDataSource()
     var searchController: UISearchController?
 
+    var searchResultsSortingViewController: SearchResultsSortingViewController = {
+        let searchResultsSortingViewController = SearchResultsSortingViewController()
+        return searchResultsSortingViewController
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -66,6 +71,14 @@ class ViewController: UIViewController {
         searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
         searchBarContainerView.addSubview(searchBar)
 
+        addChildViewController(searchResultsSortingViewController)
+        guard let sortingBar = searchResultsSortingViewController.view else {
+            assertionFailure()
+            return
+        }
+        view.addSubview(sortingBar)
+        sortingBar.translatesAutoresizingMaskIntoConstraints = false
+
         addChildViewController(searchResultsViewController)
         guard let searchResultsView = searchResultsViewController.view else {
             assertionFailure()
@@ -79,7 +92,10 @@ class ViewController: UIViewController {
         searchBarContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         searchBarContainerView.heightAnchor.constraint(equalToConstant: searchBar.intrinsicContentSize.height).isActive = true
 
-        searchBarContainerView.bottomAnchor.constraint(equalTo: searchResultsView.topAnchor).isActive = true
+        searchBarContainerView.bottomAnchor.constraint(equalTo: sortingBar.topAnchor).isActive = true
+        sortingBar.bottomAnchor.constraint(equalTo: searchResultsView.topAnchor).isActive = true
+        sortingBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        sortingBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
 
         searchResultsView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         searchResultsView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
