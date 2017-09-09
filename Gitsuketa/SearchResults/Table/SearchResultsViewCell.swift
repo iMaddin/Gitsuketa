@@ -131,7 +131,8 @@ class SearchResultsViewCell: UICollectionViewCell {
         for v in contentStackView.arrangedSubviews {
             height = height + v.intrinsicContentSize.height
         }
-        height = height + contentInsetSpacing*2
+        height = height + contentInsetSpacing * 2
+        height = height + CGFloat((allAxisViews.count-1)) * contentStackView.spacing
         return height
     }
 
@@ -147,7 +148,7 @@ fileprivate extension SearchResultsViewCell {
         return [
             titleLabel,
             descriptionLabel,
-            urlLabel,
+//            urlLabel,
             formattedLanguageLabel,
             formatedUpdatedAtLabel,
             starsLabel,
@@ -159,6 +160,7 @@ fileprivate extension SearchResultsViewCell {
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         contentStackView.accessibilityIdentifier = "cell.contentStackView"
         contentStackView.axis = .vertical
+        contentStackView.spacing = 4
 
         contentView.addSubview(contentStackView)
         contentView.constraints(equalToEdgeOf: contentStackView, constants: UIEdgeInsetsMake(contentInsetSpacing, contentInsetSpacing, contentInsetSpacing, contentInsetSpacing))
