@@ -42,22 +42,22 @@ enum GitHubSortingOption {
         }
     }
 
-    func description() -> String {
+    var description: String {
         switch self {
         case .bestMatch:
-            return "Best match"
+            return NSLocalizedString("Best match", comment: "")
         case .mostStars:
-            return "Most stars"
+            return NSLocalizedString("Most stars", comment: "")
         case .fewestStars:
-            return "Fewest stars"
+            return NSLocalizedString("Fewest stars", comment: "")
         case .mostForks:
-            return "Most forks"
+            return NSLocalizedString("Most forks", comment: "")
         case .fewestForks:
-            return "Fewest forks"
+            return NSLocalizedString("Fewest forks", comment: "")
         case .recentlyUpdated:
-            return "Recently updated"
+            return NSLocalizedString("Recently updated", comment: "")
         case .leastRecentlyUpdated:
-            return "Least recently updated"
+            return NSLocalizedString("Least recently updated", comment: "")
         }
     }
 
