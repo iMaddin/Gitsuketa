@@ -17,6 +17,7 @@ protocol SearchResultItem {
     var formatedUpdatedAt: String  { get }
     var stars: Int  { get }
     var hasReadme: Bool { get }
+    
 }
 
 extension GitHubSearchResultItem: SearchResultItem {
