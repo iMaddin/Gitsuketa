@@ -14,7 +14,7 @@ class SearchResultsViewCell: UICollectionViewCell {
         didSet {
             var text: String?
 
-            for v in allViews {
+            for v in allAxisViews {
                 switch v {
                 case titleLabel:
                     text = viewModel?.title
@@ -87,7 +87,6 @@ class SearchResultsViewCell: UICollectionViewCell {
         return hasReadmeLabel
     }()
 
-    var cellHorizontalSpacing: CGFloat = 15
     let contentStackView = UIStackView()
 
     init() {
@@ -113,11 +112,24 @@ class SearchResultsViewCell: UICollectionViewCell {
         }
     }
 
+    var intrinsicContentHeight: CGFloat {
+        var height: CGFloat = 0
+        for v in contentStackView.arrangedSubviews {
+            height = height + v.intrinsicContentSize.height
+        }
+        height = height + contentInsetSpacing*2
+        return height
+    }
+
 }
 
 fileprivate extension SearchResultsViewCell {
 
-    var allViews: [UILabel] {
+    var contentInsetSpacing: CGFloat {
+        return 15
+    }
+
+    var allAxisViews: [UILabel] {
         return [
             titleLabel,
             descriptionLabel,
@@ -135,7 +147,7 @@ fileprivate extension SearchResultsViewCell {
         contentStackView.axis = .vertical
 
         contentView.addSubview(contentStackView)
-        contentView.constraints(equalToEdgeOf: contentStackView)
+        contentView.constraints(equalToEdgeOf: contentStackView, constants: UIEdgeInsetsMake(contentInsetSpacing, contentInsetSpacing, contentInsetSpacing, contentInsetSpacing))
     }
 
 }

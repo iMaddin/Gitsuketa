@@ -67,13 +67,8 @@ extension SearchResultsViewController {
 extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var height: CGFloat = 0
         dynamicSizeCell.viewModel = searchResults?.items[indexPath.row]
-
-        for v in dynamicSizeCell.contentStackView.arrangedSubviews {
-            height = height + v.intrinsicContentSize.height
-        }
-
+        let height = dynamicSizeCell.intrinsicContentHeight
         let width = collectionView.frame.width - spacing*2
         return CGSize(width: width, height: height)
     }
