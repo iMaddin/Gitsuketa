@@ -28,6 +28,7 @@
 		1B410C881F60746D00D09511 /* SearchResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */; };
 		1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */; };
 		1B6E66831F6265FB00260B38 /* GitHubLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */; };
+		1BA793091F63F8C8009BB58B /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA793081F63F8C8009BB58B /* SelectableButton.swift */; };
 		1BAABCA31F5EBD50005A0536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */; };
 		1BAABCA51F5EBD50005A0536 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCA41F5EBD50005A0536 /* ViewController.swift */; };
 		1BAABCAA1F5EBD50005A0536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BAABCA91F5EBD50005A0536 /* Assets.xcassets */; };
@@ -79,6 +80,7 @@
 		1B410C871F60746D00D09511 /* SearchResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsTableViewCell.swift; sourceTree = "<group>"; };
 		1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterViewController.swift; sourceTree = "<group>"; };
 		1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLanguage.swift; sourceTree = "<group>"; };
+		1BA793081F63F8C8009BB58B /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
 		1BAABC9F1F5EBD50005A0536 /* Gitsuketa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gitsuketa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BAABCA41F5EBD50005A0536 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		1BAABCA11F5EBD50005A0536 /* Gitsuketa */ = {
 			isa = PBXGroup;
 			children = (
+				1BA793081F63F8C8009BB58B /* SelectableButton.swift */,
 				1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */,
 				1BAABCA41F5EBD50005A0536 /* ViewController.swift */,
 				1B60F83B1F61616100854B28 /* SearchResults */,
@@ -368,6 +371,7 @@
 				1B21C50B1F62CFDB00883D2F /* LanguagesPickerManager.swift in Sources */,
 				1B21C5121F63E23C00883D2F /* GitHubSortingOption.swift in Sources */,
 				1B3C421C1F626D08000A634B /* GitHubRangeQualifier.swift in Sources */,
+				1BA793091F63F8C8009BB58B /* SelectableButton.swift in Sources */,
 				1B21C5141F63E87C00883D2F /* SearchResultsSortingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
