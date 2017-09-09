@@ -20,7 +20,7 @@ struct GitHubSearchParameter {
         return URL(string: encodedURL)
     }
 
-    let query: GitHubSearchQuery
+    var query: GitHubSearchQuery = GitHubSearchQuery(keyword: "")
     var sortingOption: GitHubSortingOption = .bestMatch
 
     init(query: GitHubSearchQuery, sortingOption: GitHubSortingOption = .bestMatch) {
