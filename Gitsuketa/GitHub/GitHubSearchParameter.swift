@@ -123,32 +123,3 @@ struct GitHubSearchQuery {
     }
 
 }
-
-enum GitHubSort: String {
-
-    case match, stars, forks, updated
-
-    var allValues: [GitHubSort] {
-       return [.match, .stars, .forks, .updated]
-    }
-
-    var allSortingOptions: [String] {
-        return allValues.map{ $0.rawValue }
-    }
-
-}
-
-enum GitHubOrder: String {
-
-    case ascending = "asc"
-    case descending = "desc"
-
-    var allValues: [GitHubOrder] {
-        return [.ascending, .descending]
-    }
-
-    var allOrderingOptions: [String] {
-        return allValues.map{ $0.rawValue }
-    }
-
-}
