@@ -15,21 +15,17 @@ struct GitHubSearchParameter {
 
     var url: URL? {
         let q = "\(query.query)"
-        let sort = "sort=\(self.sort.rawValue)"
-        let order = "order=\(self.order.rawValue)"
-        let url = searchQuery + q + "&" + sort + "&" + order
+        let url = searchQuery + q + sortingOption.stringValue
         guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
         return URL(string: encodedURL)
     }
 
     let query: GitHubSearchQuery
-    let sort: GitHubSort
-    let order: GitHubOrder
+    var sortingOption: GitHubSortingOption = .bestMatch
 
-    init(query: GitHubSearchQuery, sort: GitHubSort = .match, order: GitHubOrder = .descending) {
+    init(query: GitHubSearchQuery, sortingOption: GitHubSortingOption = .bestMatch) {
         self.query = query
-        self.sort = sort
-        self.order = order
+        self.sortingOption = sortingOption
     }
 
 }

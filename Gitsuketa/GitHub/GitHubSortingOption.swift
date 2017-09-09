@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum GitHubSortingOption: String {
+enum GitHubSortingOption {
 
     case bestMatch
     case mostStars
@@ -17,6 +17,30 @@ enum GitHubSortingOption: String {
     case fewestForks
     case recentlyUpdated
     case leastRecentlyUpdated
+
+    var stringValue: String {
+        let (sort, order) = self.sortOrderPair
+        return "&sort=\(sort.rawValue)&order=\(order.rawValue)"
+    }
+
+    private var sortOrderPair: (GitHubSort, GitHubOrder) {
+        switch self {
+        case .bestMatch:
+            return (.match, .descending)
+        case .mostStars:
+            return (.stars, .descending)
+        case .fewestStars:
+            return (.stars, .ascending)
+        case .mostForks:
+            return (.forks, .descending)
+        case .fewestForks:
+            return (.forks, .ascending)
+        case .recentlyUpdated:
+            return (.updated, .descending)
+        case .leastRecentlyUpdated:
+            return (.updated, .ascending)
+        }
+    }
 
     func description() -> String {
         switch self {
@@ -37,7 +61,7 @@ enum GitHubSortingOption: String {
         }
     }
 
-    var allValues: [GitHubSortingOption] {
+    static var allValues: [GitHubSortingOption] {
         return [
             .bestMatch,
             .mostStars,
@@ -52,30 +76,10 @@ enum GitHubSortingOption: String {
 }
 
 enum GitHubSort: String {
-
     case match, stars, forks, updated
-
-    var allValues: [GitHubSort] {
-        return [.match, .stars, .forks, .updated]
-    }
-
-    var allSortingOptions: [String] {
-        return allValues.map{ $0.rawValue }
-    }
-
 }
 
 enum GitHubOrder: String {
-
     case ascending = "asc"
     case descending = "desc"
-
-    var allValues: [GitHubOrder] {
-        return [.ascending, .descending]
-    }
-
-    var allOrderingOptions: [String] {
-        return allValues.map{ $0.rawValue }
-    }
-
 }
