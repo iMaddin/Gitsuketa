@@ -11,10 +11,9 @@ import UIKit
 class SearchResultsViewController: UICollectionViewController {
 
     var searchResults: SearchResultsFormatting?
-    var cellVerticalSpacing: CGFloat = 20
     var didSelectRowAction: ((String?) -> Void)?
 
-    let dynamicSizeCell = SearchResultsViewCell()
+    fileprivate let dynamicSizeCell = SearchResultsViewCell()
 
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
