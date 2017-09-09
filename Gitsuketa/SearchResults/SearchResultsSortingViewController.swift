@@ -16,7 +16,15 @@ class SearchResultsSortingViewController: UIViewController {
         }
     }
 
+    var selectedSortingIndex: Int = 0 {
+        didSet {
+            setDefaultSelectedButton(index: selectedSortingIndex)
+        }
+    }
+
     fileprivate var heightConstraint: NSLayoutConstraint?
+
+    fileprivate var currentlySelectedButton: UIButton!
 
     var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -53,6 +61,8 @@ class SearchResultsSortingViewController: UIViewController {
             sortingButton.addTarget(self, action: #selector(sortingButtonPressed(sender:)), for: .touchUpInside)
             stackView.addArrangedSubview(sortingButton)
         }
+
+        setDefaultSelectedButton(index: selectedSortingIndex)
     }
 
 }
@@ -61,6 +71,25 @@ fileprivate extension SearchResultsSortingViewController {
 
     var spacing: CGFloat {
         return 15
+    }
+
+}
+
+// MARK: - Button Action
+fileprivate extension SearchResultsSortingViewController {
+
+    @objc func sortingButtonPressed(sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if let currentlySelectedButton = currentlySelectedButton {
+            currentlySelectedButton.isSelected = !currentlySelectedButton.isSelected
+        }
+        currentlySelectedButton = sender
+    }
+
+    func setDefaultSelectedButton(index: Int) {
+        if let buttonToSelect = stackView.arrangedSubviews[index] as? UIButton {
+            sortingButtonPressed(sender: buttonToSelect)
+        }
     }
 
 }
