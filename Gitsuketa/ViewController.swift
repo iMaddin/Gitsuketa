@@ -41,6 +41,8 @@ class ViewController: UIViewController {
         view.accessibilityIdentifier = "ViewController view"
         searchResultsViewController.view.accessibilityIdentifier = "searchResultsViewController.view"
 
+        definesPresentationContext = true // fixes problem where other VC couldn't be presented after a search
+
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Filter", comment: "Filter search button"), style: .plain, target: self, action: #selector(ViewController.showFilter))
         
         searchResultsViewController.tableView.dataSource = resultsDataSource
