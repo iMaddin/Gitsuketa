@@ -22,11 +22,10 @@ class ViewController: UIViewController {
     let searchResultsViewController = SearchResultsViewController()
     let searchFilterViewController = SearchFilterViewController(style: .grouped)
 
-    var tableView: UITableView {
-        return searchResultsViewController.tableView
+    var collectionView: UICollectionView {
+        return searchResultsViewController.collectionView!
     }
 
-    let resultsDataSource = SearchResultsDataSource()
     var searchController: UISearchController?
 
     var searchResultsSortingViewController: SearchResultsSortingViewController = {
@@ -44,12 +43,8 @@ class ViewController: UIViewController {
         definesPresentationContext = true // fixes problem where other VC couldn't be presented after a search
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Filter", comment: "Filter search button"), style: .plain, target: self, action: #selector(ViewController.showFilter))
-        
-        searchResultsViewController.tableView.dataSource = resultsDataSource
-        searchResultsViewController.tableView.delegate = resultsDataSource
-        searchResultsViewController.tableView.separatorStyle = .none
 
-        resultsDataSource.didSelectRowAction = {
+        searchResultsViewController.didSelectRowAction = {
             url in
             guard let url = url, let urlObject = URL(string: url) else {
                 assertionFailure()
@@ -125,7 +120,7 @@ extension ViewController: UISearchResultsUpdating {
         _currentSearchParameter = searchParameter
 
         GitHubRequest.makeRequest(search: searchParameter) {
-            [weak resultsDataSource, weak tableView] searchResult in
+            [weak searchResultsViewController, weak collectionView] searchResult in
 
             guard let searchResult = searchResult else {
                 print("No search results. Possibly exceeded API limit. ")
@@ -134,9 +129,9 @@ extension ViewController: UISearchResultsUpdating {
 
             DispatchQueue.main.sync {
                 let formattedData = SearchResultsFormatter(gitHubSearchResult: searchResult)
-                resultsDataSource?.searchResults = formattedData
+                searchResultsViewController?.searchResults = formattedData
 
-                tableView?.reloadData()
+                collectionView?.reloadData()
             }
         }
     }

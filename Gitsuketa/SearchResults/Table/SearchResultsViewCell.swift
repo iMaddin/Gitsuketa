@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchResultsTableViewCell: UITableViewCell {
+class SearchResultsViewCell: UICollectionViewCell {
 
     var viewModel: SearchResultItem? {
         didSet {
@@ -96,9 +96,26 @@ class SearchResultsTableViewCell: UITableViewCell {
     var cellHorizontalSpacing: CGFloat = 15
     let contentStackView = UIStackView()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    init() {
+        super.init(frame: CGRect.zero)
+        _commonInit()
+    }
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        _commonInit()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        _commonInit()
+    }
+
+}
+
+fileprivate extension SearchResultsViewCell {
+
+    func _commonInit() {
         let containerView = UIView()
         containerView.accessibilityIdentifier = "containerView"
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,10 +138,6 @@ class SearchResultsTableViewCell: UITableViewCell {
         contentStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -cellHorizontalSpacing).isActive = true
         contentStackView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: cellHorizontalSpacing).isActive = true
         contentStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -cellHorizontalSpacing).isActive = true
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
     }
 
 }
