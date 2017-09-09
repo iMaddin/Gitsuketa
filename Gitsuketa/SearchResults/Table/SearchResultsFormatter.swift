@@ -35,7 +35,12 @@ extension GitHubSearchResultItem: SearchResultItem {
     }
 
     var formatedUpdatedAt: String {
-        return self.updatedAt
+        guard let formattedDate = ISO8601DateFormatter().date(from: updatedAt) else {
+            return updatedAt
+        }
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        return df.string(from: formattedDate)
     }
 
     var stars: Int {
