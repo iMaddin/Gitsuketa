@@ -76,6 +76,7 @@ class ViewController: UIViewController {
         searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
         searchBarContainerView.addSubview(searchBar)
 
+        searchResultsSortingViewController.delegate = self
         addChildViewController(searchResultsSortingViewController)
         guard let sortingBar = searchResultsSortingViewController.view else {
             assertionFailure()
@@ -179,6 +180,19 @@ extension ViewController {
         
         let filterNavigationcontroller = UINavigationController(rootViewController: searchFilterViewController)
         present(filterNavigationcontroller, animated: true)
+    }
+
+}
+
+extension ViewController: SearchResultsSortingDelegate {
+
+    func searchResultsSortingViewController(_ searchResultsSortingViewController: SearchResultsSortingViewController, didSelectSortingOption sortingOption: GitHubSortingOption) {
+        guard let currentSearchParameter = currentSearchParameter else {
+            return
+        }
+        var sortedSearchParameter = currentSearchParameter
+        sortedSearchParameter.sortingOption = sortingOption
+        startSearch(searchParameter: sortedSearchParameter)
     }
 
 }
