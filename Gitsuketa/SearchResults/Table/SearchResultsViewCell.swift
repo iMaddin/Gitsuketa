@@ -12,44 +12,37 @@ class SearchResultsViewCell: UICollectionViewCell {
 
     var viewModel: SearchResultItem? {
         didSet {
-            if let title = viewModel?.title,
-                let titleLabel = self.titleLabel {
+            if let title = viewModel?.title {
                 titleLabel.text = title
                 contentStackView.addArrangedSubview(titleLabel)
             }
             
-            if let description = viewModel?.description,
-                let descriptionLabel = self.descriptionLabel {
+            if let description = viewModel?.description {
                 descriptionLabel.text = description
                 contentStackView.addArrangedSubview(descriptionLabel)
             }
 
-            if let formatedUpdatedAt = viewModel?.formatedUpdatedAt,
-                let formatedUpdatedAtLabel = self.formatedUpdatedAtLabel {
+            if let formatedUpdatedAt = viewModel?.formatedUpdatedAt {
                 formatedUpdatedAtLabel.text = formatedUpdatedAt
                 contentStackView.addArrangedSubview(formatedUpdatedAtLabel)
             }
 
-//            if let url = viewModel?.url,
-//                let urlLabel = self.urlLabel {
+//            if let url = viewModel?.url {
 //                urlLabel.text = url
 //                contentStackView.addArrangedSubview(urlLabel)
 //            }
 //
-            if let formattedLanguage = viewModel?.formattedLanguage,
-                let formattedLanguageLabel = self.formattedLanguageLabel {
+            if let formattedLanguage = viewModel?.formattedLanguage {
                 formattedLanguageLabel.text = formattedLanguage
                 contentStackView.addArrangedSubview(formattedLanguageLabel)
             }
             
-            if let stars = viewModel?.stars,
-                let starsLabel = self.starsLabel {
+            if let stars = viewModel?.stars {
                 starsLabel.text = "⭐️\(stars)"
                 contentStackView.addArrangedSubview(starsLabel)
             }
             
-            if let hasReadme = viewModel?.hasReadme,
-                let hasReadmeLabel = self.hasReadmeLabel,
+            if let hasReadme = viewModel?.hasReadme ,
                 hasReadme == true {
                 hasReadmeLabel.text = "readme"
                 contentStackView.addArrangedSubview(hasReadmeLabel)
@@ -58,37 +51,37 @@ class SearchResultsViewCell: UICollectionViewCell {
         }
     }
 
-    lazy var titleLabel: UILabel? = {
+    var titleLabel: UILabel = {
         let titleLabel = UILabel()
         return titleLabel
     }()
 
-    lazy var descriptionLabel: UILabel? = {
+    var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         return descriptionLabel
     }()
 
-    lazy var urlLabel: UILabel? = {
+    var urlLabel: UILabel = {
         let urlLabel = UILabel()
         return urlLabel
     }()
 
-    lazy var formattedLanguageLabel: UILabel? = {
+    var formattedLanguageLabel: UILabel = {
         let formattedLanguageLabel = UILabel()
         return formattedLanguageLabel
     }()
 
-    lazy var formatedUpdatedAtLabel: UILabel? = {
+    var formatedUpdatedAtLabel: UILabel = {
         let formatedUpdatedAtLabel = UILabel()
         return formatedUpdatedAtLabel
     }()
 
-    lazy var starsLabel: UILabel? = {
+    var starsLabel: UILabel = {
         let starsLabel = UILabel()
         return starsLabel
     }()
 
-    lazy var hasReadmeLabel: UILabel? = {
+    var hasReadmeLabel: UILabel = {
         let hasReadmeLabel = UILabel()
         return hasReadmeLabel
     }()
