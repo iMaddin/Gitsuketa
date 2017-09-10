@@ -323,3 +323,63 @@ fileprivate extension SearchResultsViewCell {
     }
 
 }
+
+fileprivate extension SearchResultsViewCell {
+
+    func label(forDataViewOption option: DataViewOptions) -> UILabel {
+        switch option {
+        case .createdAt:
+            return createdAtLabel
+        case .defaultBranch:
+            return defaultBranchLabel
+        case .descriptionText:
+            return descriptionTextLabel
+        case .fork:
+            return forkLabel
+        case .forks:
+            return forksLabel
+        case .forksCount:
+            return forksCountLabel
+        case .fullName:
+            return fullNameLabel
+        case .hasDownloads:
+            return hasDownloadsLabel
+        case .hasIssues:
+            return hasIssuesLabel
+        case .hasPages:
+            return hasPagesLabel
+        case .hasProjects:
+            return hasProjectsLabel
+        case .hasWiki:
+            return hasWikiLabel
+        case .language:
+            return languageLabel
+        case .name:
+            return nameLabel
+        case .openIssues:
+            return openIssuesLabel
+        case .openIssuesCount:
+            return openIssuesCountLabel
+        case .owner:
+            return ownerLabel
+        case .isPrivate:
+            return isPrivateLabel
+        case .pushedAt:
+            return pushedAtLabel
+        case .score:
+            return scoreLabel
+        case .size:
+            return sizeLabel
+        case .stargazersCount:
+            return stargazersCountLabel
+        case .updatedAt:
+            return updatedAtLabel
+        case .url:
+            return urlLabel
+        case .watchers:
+            return watchersLabel
+        case .watchersCount:
+            return watchersCountLabel
+        }
+    }
+}
