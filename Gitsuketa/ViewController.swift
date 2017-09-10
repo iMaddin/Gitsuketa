@@ -56,13 +56,21 @@ class ViewController: UIViewController {
             startSearch(searchKeyword: defaultSearchKeyword)
         }
 
-        let filterButton = UIButton()
+        let searchColor = UIColor.lightGray
+
+        let filterButton = SelectableButton()
+        filterButton.style = {
+            button in
+            button.layer.backgroundColor = button.isSelected ? button.tintColor.cgColor : searchColor.cgColor
+        }
+        filterButton.layer.backgroundColor = searchColor.cgColor
         filterButton.setTitle(NSLocalizedString("Filter", comment: "Filter search button"), for: .normal)
+        filterButton.setTitleColor(UIColor.white, for: .normal)
         filterButton.addTarget(self, action: #selector(ViewController.showFilter), for: .touchUpInside)
         filterButton.widthAnchor.constraint(equalToConstant: filterButton.intrinsicContentSize.width+20).isActive = true
-        filterButton.setTitleColor(view.tintColor, for: .normal)
 
         let searchBar = UISearchBar()
+        searchBar.barTintColor = searchColor
         searchBar.delegate = self
         searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
 
@@ -85,7 +93,6 @@ class ViewController: UIViewController {
         searchResultsView.setContentHuggingPriority(.defaultLow, for: .vertical)
 
         let searchStackView = UIStackView(arrangedSubviews: [searchBar, filterButton])
-        searchStackView.alignment = .center
 
         let contentStackView = UIStackView(arrangedSubviews: [searchStackView, sortingBar, searchResultsView])
         contentStackView.axis = .vertical
@@ -102,6 +109,8 @@ class ViewController: UIViewController {
             var filteredQuery = SearchFilterReader.read(searchFilterViewController: vc)
             filteredQuery.keyword = searchBar.text
             self.startSearch(searchQuery: filteredQuery)
+
+            filterButton.isSelected = vc.filtersAreEnabled
         }
     }
 
