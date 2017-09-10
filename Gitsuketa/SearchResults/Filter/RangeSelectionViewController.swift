@@ -23,7 +23,6 @@ class RangeSelectionViewController: UIViewController {
     var rangeQualifierButton: UIButton = {
         let rangeQualifierButton = UIButton()
         rangeQualifierButton.setTitle(NSLocalizedString("=", comment: "Select Date placeholder text"), for: .normal)
-        rangeQualifierButton.setTitleColor(UIColor.blue, for: .normal)
         return rangeQualifierButton
     }()
 
@@ -66,6 +65,8 @@ class RangeSelectionViewController: UIViewController {
 
         rangeQualifierPickerView.dataSource = rangeQualifierPickerManager
         rangeQualifierPickerView.delegate = rangeQualifierPickerManager
+
+        rangeQualifierButton.setTitleColor(view.tintColor, for: .normal)
     }
 
 }

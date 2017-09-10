@@ -51,14 +51,12 @@ final class SearchFilterViewController: UITableViewController, ViewControllerDis
     var createdOrPushedLeftDateSelectionButton: UIButton = {
         let createdOrPushedFromDateSelectionButton = UIButton()
         createdOrPushedFromDateSelectionButton.setTitle(NSLocalizedString("From Date", comment: "Select Date placeholder text"), for: .normal)
-        createdOrPushedFromDateSelectionButton.setTitleColor(UIColor.blue, for: .normal)
         return createdOrPushedFromDateSelectionButton
     }()
 
     var createdOrPushedRightDateSelectionButton: UIButton = {
         let createdOrPushedDateSelectionButton = UIButton()
         createdOrPushedDateSelectionButton.setTitle(NSLocalizedString("Select Date", comment: "Select Date placeholder text"), for: .normal)
-        createdOrPushedDateSelectionButton.setTitleColor(UIColor.blue, for: .normal)
         return createdOrPushedDateSelectionButton
     }()
 
@@ -211,6 +209,9 @@ final class SearchFilterViewController: UITableViewController, ViewControllerDis
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Disable All Filters", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
         // created / pushed
+
+        createdOrPushedLeftDateSelectionButton.setTitleColor(view.tintColor, for: .normal)
+        createdOrPushedRightDateSelectionButton.setTitleColor(view.tintColor, for: .normal)
 
         createdOrPushedRangeSelectionViewController = RangeSelectionViewController(leftView: createdOrPushedLeftDateSelectionButton, rightView: createdOrPushedRightDateSelectionButton)
 
