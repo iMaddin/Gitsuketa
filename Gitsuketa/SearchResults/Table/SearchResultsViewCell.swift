@@ -352,6 +352,8 @@ fileprivate extension SearchResultsViewCell {
             return hasPagesLabel
         case .hasProjects:
             return hasProjectsLabel
+        case .hasReadme:
+            return hasReadmeLabel
         case .hasWiki:
             return hasWikiLabel
         case .language:

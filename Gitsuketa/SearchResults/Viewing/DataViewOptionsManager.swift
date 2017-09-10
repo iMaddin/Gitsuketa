@@ -62,6 +62,8 @@ struct DataViewOptionsManager {
             return hasPages
         case .hasProjects:
             return hasProjects
+        case .hasReadme:
+            return hasReadme
         case .hasWiki:
             return hasWiki
         case .language:

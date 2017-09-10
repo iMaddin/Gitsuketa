@@ -21,6 +21,7 @@ enum DataViewOptions {
     case hasIssues
     case hasPages
     case hasProjects
+    case hasReadme
     case hasWiki
     case language
     case name
@@ -61,6 +62,8 @@ enum DataViewOptions {
             return "hasPages"
         case .hasProjects:
             return "hasProjects"
+        case .hasReadme:
+            return "hasReadme"
         case .hasWiki:
             return "hasWiki"
         case .language:
