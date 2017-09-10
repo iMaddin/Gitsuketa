@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DataViewOptionsSelectionViewController: UITableViewController {
+final class DataViewOptionsSelectionViewController: UITableViewController, ViewControllerDismissing {
 
-    var didDismiss: ((_: DataViewOptionsSelectionViewController) -> Void)?
+    var willDismiss: ((DataViewOptionsSelectionViewController) -> Void)?
 
     var viewOptions: DataViewOptionsManager?
 
@@ -69,10 +69,8 @@ fileprivate extension DataViewOptionsSelectionViewController {
     }
 
     @objc func doneButtonPressed(sender: UIControl?) {
-        dismiss(animated: true) {
-            [unowned self] in
-            self.didDismiss?(self)
-        }
+        willDismiss?(self)
+        dismiss(animated: true)
     }
 
 }

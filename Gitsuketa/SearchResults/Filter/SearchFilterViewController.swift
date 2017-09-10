@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SearchFilterViewController: UITableViewController {
+final class SearchFilterViewController: UITableViewController, ViewControllerDismissing {
 
-    var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
+    var willDismiss: ((SearchFilterViewController) -> Void)?
 
     var filtersAreEnabled: Bool {
         for i in 0..<sectionTitles.count {
@@ -269,10 +269,8 @@ class SearchFilterViewController: UITableViewController {
 extension SearchFilterViewController {
 
     @objc func dismissFilter() {
-        dismiss(animated: true) {
-            [unowned self] in
-            self.dismissAction?(self)
-        }
+        willDismiss?(self)
+        dismiss(animated: true)
     }
 
     @objc func clearFilter() {

@@ -120,7 +120,7 @@ class ViewController: UIViewController {
             self.present(safari, animated: true, completion: nil)
         }
 
-        searchFilterViewController.dismissAction = {
+        searchFilterViewController.willDismiss = {
             [unowned self] vc in
             var filteredQuery = SearchFilterReader.read(searchFilterViewController: vc)
             filteredQuery.keyword = self.searchBar.text
@@ -128,7 +128,7 @@ class ViewController: UIViewController {
             self.tintSearchBar(vc.filtersAreEnabled)
         }
 
-        dataViewOptionsSelectionViewController.didDismiss = {
+        dataViewOptionsSelectionViewController.willDismiss = {
             vc in
             guard let viewOptions = vc.viewOptions else {
                 return
