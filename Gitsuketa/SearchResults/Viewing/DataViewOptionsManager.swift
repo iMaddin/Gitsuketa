@@ -96,5 +96,64 @@ struct DataViewOptionsManager {
             return watchersCount
         }
     }
+
+    mutating func set(bool: Bool, forDataViewOption option: DataViewOptions) {
+        switch option {
+        case .createdAt:
+            createdAt = bool
+        case .defaultBranch:
+            defaultBranch = bool
+        case .descriptionText:
+            descriptionText = bool
+        case .fork:
+            fork = bool
+        case .forks:
+            forks = bool
+        case .forksCount:
+            forksCount = bool
+        case .fullName:
+            fullName = bool
+        case .hasDownloads:
+            hasDownloads = bool
+        case .hasIssues:
+            hasIssues = bool
+        case .hasPages:
+            hasPages = bool
+        case .hasProjects:
+            hasProjects = bool
+        case .hasReadme:
+            hasReadme = bool
+        case .hasWiki:
+            hasWiki = bool
+        case .language:
+            language = bool
+        case .name:
+            name = bool
+        case .openIssues:
+            openIssues = bool
+        case .openIssuesCount:
+            openIssuesCount = bool
+        case .owner:
+            owner = bool
+        case .isPrivate:
+            isPrivate = bool
+        case .pushedAt:
+            pushedAt = bool
+        case .score:
+            score = bool
+        case .size:
+            size = bool
+        case .stargazersCount:
+            stargazersCount = bool
+        case .updatedAt:
+            updatedAt = bool
+        case .url:
+            url = bool
+        case .watchers:
+            watchers = bool
+        case .watchersCount:
+            watchersCount = bool
+        }
+    }
     
 }
