@@ -37,6 +37,9 @@
 		1BAABCD61F5ECB2D005A0536 /* GitHubRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCD51F5ECB2D005A0536 /* GitHubRequestTests.swift */; };
 		1BAABCD81F5EFBC7005A0536 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */; };
 		1BBCC77C1F619EF4006C0782 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */; };
+		1BEC51FE1F64BFE100A3C88C /* DataViewOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC51FD1F64BFE100A3C88C /* DataViewOptions.swift */; };
+		1BEC52011F64C1FD00A3C88C /* DataViewOptionsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC52001F64C1FD00A3C88C /* DataViewOptionsSelectionViewController.swift */; };
+		1BEC52031F64C36600A3C88C /* DataViewOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BEC52021F64C36600A3C88C /* DataViewOptionsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +96,9 @@
 		1BAABCD51F5ECB2D005A0536 /* GitHubRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestTests.swift; sourceTree = "<group>"; };
 		1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		1BEC51FD1F64BFE100A3C88C /* DataViewOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewOptions.swift; sourceTree = "<group>"; };
+		1BEC52001F64C1FD00A3C88C /* DataViewOptionsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewOptionsSelectionViewController.swift; sourceTree = "<group>"; };
+		1BEC52021F64C36600A3C88C /* DataViewOptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewOptionsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 				1BA7930A1F642661009BB58B /* Table */,
 				1BA7930F1F64276F009BB58B /* Filter */,
 				1BA793101F6427C7009BB58B /* Sorting */,
+				1BEC51FF1F64C00300A3C88C /* Viewing */,
 			);
 			path = SearchResults;
 			sourceTree = "<group>";
@@ -264,6 +271,16 @@
 				1BAABCC41F5EBD51005A0536 /* Info.plist */,
 			);
 			path = GitsuketaUITests;
+			sourceTree = "<group>";
+		};
+		1BEC51FF1F64C00300A3C88C /* Viewing */ = {
+			isa = PBXGroup;
+			children = (
+				1BEC51FD1F64BFE100A3C88C /* DataViewOptions.swift */,
+				1BEC52021F64C36600A3C88C /* DataViewOptionsManager.swift */,
+				1BEC52001F64C1FD00A3C88C /* DataViewOptionsSelectionViewController.swift */,
+			);
+			path = Viewing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +418,7 @@
 			files = (
 				1B21C5091F62CC0800883D2F /* RangeQualifierPickerManager.swift in Sources */,
 				1BAABCA51F5EBD50005A0536 /* ViewController.swift in Sources */,
+				1BEC51FE1F64BFE100A3C88C /* DataViewOptions.swift in Sources */,
 				1B21C50D1F6301D200883D2F /* RangeSelectionViewController.swift in Sources */,
 				1B6E66831F6265FB00260B38 /* GitHubLanguage.swift in Sources */,
 				1B410C881F60746D00D09511 /* SearchResultsViewCell.swift in Sources */,
@@ -408,6 +426,7 @@
 				1B3C42141F62698F000A634B /* GitHubSearchField.swift in Sources */,
 				1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */,
 				1BA793121F6427FF009BB58B /* SearchResultsSortingViewController.swift in Sources */,
+				1BEC52031F64C36600A3C88C /* DataViewOptionsManager.swift in Sources */,
 				1B3C42201F627298000A634B /* GitHubRangeValue.swift in Sources */,
 				1BBCC77C1F619EF4006C0782 /* UIView+Layout.swift in Sources */,
 				1B3C421A1F626AC1000A634B /* GitHubForkSearchOption.swift in Sources */,
@@ -419,6 +438,7 @@
 				1B3C42281F628F35000A634B /* GitHubStringQualifier.swift in Sources */,
 				1B21C50B1F62CFDB00883D2F /* LanguagesPickerManager.swift in Sources */,
 				1B21C5121F63E23C00883D2F /* GitHubSortingOption.swift in Sources */,
+				1BEC52011F64C1FD00A3C88C /* DataViewOptionsSelectionViewController.swift in Sources */,
 				1B3C421C1F626D08000A634B /* GitHubRangeQualifier.swift in Sources */,
 				1BA793091F63F8C8009BB58B /* SelectableButton.swift in Sources */,
 			);
