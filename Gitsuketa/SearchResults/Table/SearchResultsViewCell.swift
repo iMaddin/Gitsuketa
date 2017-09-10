@@ -285,7 +285,7 @@ fileprivate extension SearchResultsViewCell {
     }
 
     func updateLabelsToDisplay() {
-        for option in DataViewOptions.allValues {
+        for option in sortedOptions {
             let boolForOption = viewOptions.bool(forDataViewOption: option)
             let textForOption = text(forDataViewOption: option)
             let labelForOption = label(forDataViewOption: option)
@@ -508,6 +508,42 @@ fileprivate extension SearchResultsViewCell {
                 return nil
             }
         }
+    }
+
+    var sortedOptions: [DataViewOptions] {
+        return [
+            .fullName,
+            .name,
+
+            .descriptionText,
+            .language,
+
+            .createdAt,
+            .pushedAt,
+            .updatedAt,
+
+            .defaultBranch,
+            .fork,
+            .forks,
+            .forksCount,
+
+            .hasDownloads,
+            .hasIssues,
+            .hasPages,
+            .hasProjects,
+            .hasWiki,
+
+            .openIssues,
+            .openIssuesCount,
+            .owner,
+            .isPrivate,
+            .score,
+            .size,
+            .stargazersCount,
+            .url,
+            .watchers,
+            .watchersCount
+        ]
     }
 
 }
