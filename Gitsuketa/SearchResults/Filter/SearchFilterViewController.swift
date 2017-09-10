@@ -12,6 +12,15 @@ class SearchFilterViewController: UITableViewController {
 
     var dismissAction: ((_ searchFilterViewController: SearchFilterViewController) -> Void)?
 
+    var filtersAreEnabled: Bool {
+        for i in 0..<sectionTitles.count {
+            if sectionIsExpanded(section: i) {
+                return true
+            }
+        }
+        return false
+    }
+
     fileprivate var cellContents: [[UIView]] = []
 
     fileprivate var keyboardAccessoryView: UIView = {
