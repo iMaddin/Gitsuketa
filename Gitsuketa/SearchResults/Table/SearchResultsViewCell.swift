@@ -68,7 +68,7 @@ class SearchResultsViewCell: UICollectionViewCell {
 
     lazy var fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
-        fullNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        fullNameLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         fullNameLabel.adjustsFontForContentSizeCategory = true
         return fullNameLabel
     }()
@@ -212,6 +212,8 @@ class SearchResultsViewCell: UICollectionViewCell {
         watchersCountLabel.adjustsFontForContentSizeCategory = true
         return watchersCountLabel
     }()
+
+    // MARK: - SearchResultsViewCell
 
     fileprivate var contentStackView: UIStackView = {
         let contentStackView = UIStackView()
@@ -371,19 +373,19 @@ fileprivate extension SearchResultsViewCell {
             return viewModel?.descriptionText
         case .fork:
             if let fork = viewModel?.fork {
-                return option.description + "\(fork)"
+                return option.description + " \(fork)"
             } else {
                 return nil
             }
         case .forks:
             if let forks = viewModel?.forks {
-                return "forks \(forks)"
+                return option.description + " \(forks)"
             } else {
                 return nil
             }
         case .forksCount:
             if let forksCount = viewModel?.forksCount {
-                return option.description + "\(forksCount)"
+                return option.description + " \(forksCount)"
             } else {
                 return nil
             }
@@ -391,37 +393,37 @@ fileprivate extension SearchResultsViewCell {
             return viewModel?.fullName
         case .hasDownloads:
             if let hasDownloads = viewModel?.hasDownloads {
-                return option.description + "\(hasDownloads)"
+                return option.description + " \(hasDownloads)"
             } else {
                 return nil
             }
         case .hasIssues:
             if let hasIssues = viewModel?.hasIssues {
-                return option.description + "\(hasIssues)"
+                return option.description + " \(hasIssues)"
             } else {
                 return nil
             }
         case .hasPages:
             if let hasPages = viewModel?.hasPages {
-                return option.description + "\(hasPages)"
+                return option.description + " \(hasPages)"
             } else {
                 return nil
             }
         case .hasProjects:
             if let hasProjects = viewModel?.hasProjects {
-                return option.description + "\(hasProjects)"
+                return option.description + " \(hasProjects)"
             } else {
                 return nil
             }
         case .hasReadme:
             if let hasReadme = viewModel?.hasReadme {
-                return option.description + "\(hasReadme)"
+                return option.description + " \(hasReadme)"
             } else {
                 return nil
             }
         case .hasWiki:
             if let hasWiki = viewModel?.hasWiki {
-                return option.description + "\(hasWiki)"
+                return option.description + " \(hasWiki)"
             } else {
                 return nil
             }
@@ -431,25 +433,25 @@ fileprivate extension SearchResultsViewCell {
             return viewModel?.name
         case .openIssues:
             if let openIssues = viewModel?.openIssues {
-                return option.description + "\(openIssues)"
+                return option.description + " \(openIssues)"
             } else {
                 return nil
             }
         case .openIssuesCount:
             if let openIssuesCount = viewModel?.openIssuesCount {
-                return option.description + "\(openIssuesCount)"
+                return option.description + " \(openIssuesCount)"
             } else {
                 return nil
             }
         case .owner:
             if let owner = viewModel?.owner {
-                return option.description + "\(owner)"
+                return option.description + " \(owner)"
             } else {
                 return nil
             }
         case .isPrivate:
             if let isPrivate = viewModel?.isPrivate {
-                return option.description + "\(isPrivate)"
+                return option.description + " \(isPrivate)"
             } else {
                 return nil
             }
@@ -457,19 +459,19 @@ fileprivate extension SearchResultsViewCell {
             return viewModel?.pushedAt
         case .score:
             if let score = viewModel?.score {
-                return option.description + "\(score)"
+                return option.description + " \(score)"
             } else {
                 return nil
             }
         case .size:
             if let size = viewModel?.size {
-                return option.description + "\(size)"
+                return option.description + " \(size)"
             } else {
                 return nil
             }
         case .stargazersCount:
             if let stargazersCount = viewModel?.stargazersCount {
-                return option.description + "\(stargazersCount)"
+                return option.description + " \(stargazersCount)"
             } else {
                 return nil
             }
@@ -479,13 +481,13 @@ fileprivate extension SearchResultsViewCell {
             return viewModel?.url
         case .watchers:
             if let watchers = viewModel?.watchers {
-                return option.description + "\(watchers)"
+                return option.description + " \(watchers)"
             } else {
                 return nil
             }
         case .watchersCount:
             if let watchersCount = viewModel?.watchersCount {
-                return option.description + "\(watchersCount)"
+                return option.description + " \(watchersCount)"
             } else {
                 return nil
             }
