@@ -33,6 +33,8 @@ class ViewController: UIViewController {
 
     let dataViewOptionsSelectionViewController = DataViewOptionsSelectionViewController()
 
+    var alertController: UIAlertController?
+
     // MARK: Views
 
     var collectionView: UICollectionView {
@@ -221,13 +223,16 @@ fileprivate extension ViewController {
 
     @objc func authenticateWithGithub() {
         let alertController = UIAlertController(title: "GitHub Login", message: "🔑 + 🔒 = 🔓", preferredStyle: .alert)
+        self.alertController = alertController
         let submitAction = UIAlertAction(title: "Login", style: .default) {
             alertAction in
         }
+        submitAction.isEnabled = false
+
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
             alertAction in
         }
-        
+
         alertController.addAction(submitAction)
         alertController.preferredAction = submitAction
         alertController.addAction(cancelAction)
@@ -236,12 +241,14 @@ fileprivate extension ViewController {
             username in
             username.placeholder = "Username"
             username.textContentType = .username
+            username.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
         })
         alertController.addTextField(configurationHandler: {
             password in
             password.placeholder = "Password"
             password.isSecureTextEntry = true
             password.textContentType = .password
+            password.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
         })
 
         present(alertController, animated: true)
@@ -261,4 +268,20 @@ extension ViewController: SearchResultsSortingDelegate {
         startSearch(searchParameter: sortedSearchParameter)
     }
 
+}
+
+// MARK: - UIAlertController TextFields
+extension ViewController {
+
+    @objc func textChanged(sender: UIControl) {
+        guard let alertController = alertController,
+            let textFields = alertController.textFields,
+            let username = textFields[0].text,
+            let password = textFields[1].text else {
+            assertionFailure()
+            return
+        }
+        let usernameAndPasswordAreFilled = username.count > 0 && password.count > 0
+        alertController.actions[0].isEnabled = usernameAndPasswordAreFilled
+    }
 }
