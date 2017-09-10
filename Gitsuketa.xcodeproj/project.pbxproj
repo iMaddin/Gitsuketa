@@ -99,6 +99,7 @@
 		1BAABCC41F5EBD51005A0536 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BAABCD51F5ECB2D005A0536 /* GitHubRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestTests.swift; sourceTree = "<group>"; };
 		1BAABCD71F5EFBC7005A0536 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		1BACB1671F6588710084708C /* Gitsuketa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gitsuketa.entitlements; sourceTree = "<group>"; };
 		1BBCC77B1F619EF4006C0782 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		1BEC51FD1F64BFE100A3C88C /* DataViewOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewOptions.swift; sourceTree = "<group>"; };
 		1BEC52001F64C1FD00A3C88C /* DataViewOptionsSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataViewOptionsSelectionViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +253,7 @@
 		1BAABCA11F5EBD50005A0536 /* Gitsuketa */ = {
 			isa = PBXGroup;
 			children = (
+				1BACB1671F6588710084708C /* Gitsuketa.entitlements */,
 				1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */,
 				1BAABCA41F5EBD50005A0536 /* ViewController.swift */,
 				1B60F83B1F61616100854B28 /* SearchResults */,
@@ -366,6 +368,11 @@
 					1BAABC9E1F5EBD50005A0536 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					1BAABCB21F5EBD50005A0536 = {
 						CreatedOnToolsVersion = 9.0;
@@ -618,6 +625,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Gitsuketa/Gitsuketa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z7BLFK6AD6;
 				INFOPLIST_FILE = Gitsuketa/Info.plist;
@@ -633,6 +641,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Gitsuketa/Gitsuketa.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z7BLFK6AD6;
 				INFOPLIST_FILE = Gitsuketa/Info.plist;
