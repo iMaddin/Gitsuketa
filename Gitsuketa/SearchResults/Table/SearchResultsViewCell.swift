@@ -386,4 +386,136 @@ fileprivate extension SearchResultsViewCell {
             return watchersCountLabel
         }
     }
+
+    func text(forDataViewOption option: DataViewOptions) -> String? {
+        switch option {
+        case .createdAt:
+            return viewModel?.createdAt
+        case .defaultBranch:
+            return viewModel?.defaultBranch
+        case .descriptionText:
+            return viewModel?.descriptionText
+        case .fork:
+            if let fork = viewModel?.fork {
+                return option.description + "\(fork)"
+            } else {
+                return nil
+            }
+        case .forks:
+            if let forks = viewModel?.forks {
+                return "forks \(forks)"
+            } else {
+                return nil
+            }
+        case .forksCount:
+            if let forksCount = viewModel?.forksCount {
+                return option.description + "\(forksCount)"
+            } else {
+                return nil
+            }
+        case .fullName:
+            return viewModel?.fullName
+        case .hasDownloads:
+            if let hasDownloads = viewModel?.hasDownloads {
+                return option.description + "\(hasDownloads)"
+            } else {
+                return nil
+            }
+        case .hasIssues:
+            if let hasIssues = viewModel?.hasIssues {
+                return option.description + "\(hasIssues)"
+            } else {
+                return nil
+            }
+        case .hasPages:
+            if let hasPages = viewModel?.hasPages {
+                return option.description + "\(hasPages)"
+            } else {
+                return nil
+            }
+        case .hasProjects:
+            if let hasProjects = viewModel?.hasProjects {
+                return option.description + "\(hasProjects)"
+            } else {
+                return nil
+            }
+        case .hasReadme:
+            if let hasReadme = viewModel?.hasReadme {
+                return option.description + "\(hasReadme)"
+            } else {
+                return nil
+            }
+        case .hasWiki:
+            if let hasWiki = viewModel?.hasWiki {
+                return option.description + "\(hasWiki)"
+            } else {
+                return nil
+            }
+        case .language:
+            return viewModel?.language
+        case .name:
+            return viewModel?.name
+        case .openIssues:
+            if let openIssues = viewModel?.openIssues {
+                return option.description + "\(openIssues)"
+            } else {
+                return nil
+            }
+        case .openIssuesCount:
+            if let openIssuesCount = viewModel?.openIssuesCount {
+                return option.description + "\(openIssuesCount)"
+            } else {
+                return nil
+            }
+        case .owner:
+            if let owner = viewModel?.owner {
+                return option.description + "\(owner)"
+            } else {
+                return nil
+            }
+        case .isPrivate:
+            if let isPrivate = viewModel?.isPrivate {
+                return option.description + "\(isPrivate)"
+            } else {
+                return nil
+            }
+        case .pushedAt:
+            return viewModel?.pushedAt
+        case .score:
+            if let score = viewModel?.score {
+                return option.description + "\(score)"
+            } else {
+                return nil
+            }
+        case .size:
+            if let size = viewModel?.size {
+                return option.description + "\(size)"
+            } else {
+                return nil
+            }
+        case .stargazersCount:
+            if let stargazersCount = viewModel?.stargazersCount {
+                return option.description + "\(stargazersCount)"
+            } else {
+                return nil
+            }
+        case .updatedAt:
+            return viewModel?.updatedAt
+        case .url:
+            return viewModel?.url
+        case .watchers:
+            if let watchers = viewModel?.watchers {
+                return option.description + "\(watchers)"
+            } else {
+                return nil
+            }
+        case .watchersCount:
+            if let watchersCount = viewModel?.watchersCount {
+                return option.description + "\(watchersCount)"
+            } else {
+                return nil
+            }
+        }
+    }
+
 }
