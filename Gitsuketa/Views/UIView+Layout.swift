@@ -18,4 +18,11 @@ extension UIView {
         self.trailingAnchor.constraint(equalTo: anotherView.trailingAnchor, constant: constants.right).isActive = true
     }
 
+    func constraints(equalToEdgeOf layoutGuide: UILayoutGuide, constants: UIEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)) {
+        self.topAnchor.constraint(equalTo: layoutGuide.topAnchor, constant: -constants.top).isActive = true
+        self.bottomAnchor.constraint(equalTo: layoutGuide.bottomAnchor, constant: constants.bottom).isActive = true
+        self.leadingAnchor.constraint(equalTo: layoutGuide.leadingAnchor, constant: -constants.left).isActive = true
+        self.trailingAnchor.constraint(equalTo: layoutGuide.trailingAnchor, constant: constants.right).isActive = true
+    }
+
 }

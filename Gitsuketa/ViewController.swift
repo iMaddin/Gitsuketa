@@ -19,12 +19,10 @@ class ViewController: UIViewController {
     }
     fileprivate var _currentSearchParameter: GitHubSearchParameter?
 
+    // MARK: Controllers
+
     let searchResultsViewController = SearchResultsViewController()
     let searchFilterViewController = SearchFilterViewController(style: .grouped)
-
-    var collectionView: UICollectionView {
-        return searchResultsViewController.collectionView!
-    }
 
     var searchController: UISearchController?
 
@@ -33,24 +31,40 @@ class ViewController: UIViewController {
         return searchResultsSortingViewController
     }()
 
+    // MARK: Views
+
+    var collectionView: UICollectionView {
+        return searchResultsViewController.collectionView!
+    }
+
+    fileprivate let filterButton: UIButton = {
+        let filterButton = UIButton()
+        filterButton.setTitle(NSLocalizedString("Filter", comment: "Filter search button"), for: .normal)
+        filterButton.setTitleColor(UIColor.white, for: .normal)
+        return filterButton
+    }()
+
+    fileprivate let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
+        searchBar.backgroundImage = UIImage()
+        return searchBar
+    }()
+
+    fileprivate let searchBackgroundView: UIView = {
+        let searchBackgroundView = UIView()
+        searchBackgroundView.layer.backgroundColor = UIColor.lightGray.cgColor
+        return searchBackgroundView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        view.accessibilityIdentifier = "ViewController view"
+        view.accessibilityIdentifier = "ViewController.view"
         searchResultsViewController.view.accessibilityIdentifier = "searchResultsViewController.view"
 
         definesPresentationContext = true // fixes problem where other VC couldn't be presented after a search
-
-        searchResultsViewController.didSelectRowAction = {
-            url in
-            guard let url = url, let urlObject = URL(string: url) else {
-                assertionFailure()
-                return
-            }
-            let safari = SFSafariViewController(url: urlObject)
-            self.present(safari, animated: true, completion: nil)
-        }
 
         if let defaultSearchKeyword = self.defaultSearchKeyword {
             startSearch(searchKeyword: defaultSearchKeyword)
@@ -87,11 +101,6 @@ class ViewController: UIViewController {
             return
         }
 
-        sortingBar.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        sortingBar.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        searchResultsView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        searchResultsView.setContentHuggingPriority(.defaultLow, for: .vertical)
-
         let searchStackView = UIStackView(arrangedSubviews: [searchBar, filterButton])
 
         let contentStackView = UIStackView(arrangedSubviews: [searchStackView, sortingBar, searchResultsView])
@@ -99,10 +108,22 @@ class ViewController: UIViewController {
 
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(contentStackView)
-        contentStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        contentStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        contentStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        contentStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        contentStackView.constraints(equalToEdgeOf: view.safeAreaLayoutGuide)
+
+        sortingBar.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        sortingBar.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        searchResultsView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        searchResultsView.setContentHuggingPriority(.defaultLow, for: .vertical)
+
+        searchResultsViewController.didSelectRowAction = {
+            url in
+            guard let url = url, let urlObject = URL(string: url) else {
+                assertionFailure()
+                return
+            }
+            let safari = SFSafariViewController(url: urlObject)
+            self.present(safari, animated: true, completion: nil)
+        }
 
         searchFilterViewController.dismissAction = {
             vc in
@@ -173,7 +194,8 @@ extension ViewController: UISearchBarDelegate {
 
 }
 
-extension ViewController {
+// MARK: - Filter
+fileprivate extension ViewController {
 
     @objc func showFilter() {
         let searchText = searchController?.searchBar.text
@@ -186,6 +208,7 @@ extension ViewController {
 
 }
 
+// MARK: - SearchResultsSortingDelegate
 extension ViewController: SearchResultsSortingDelegate {
 
     func searchResultsSortingViewController(_ searchResultsSortingViewController: SearchResultsSortingViewController, didSelectSortingOption sortingOption: GitHubSortingOption) {
