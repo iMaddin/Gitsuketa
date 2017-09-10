@@ -33,7 +33,9 @@ class ViewController: UIViewController {
 
     let dataViewOptionsSelectionViewController = DataViewOptionsSelectionViewController()
 
-    var alertController: UIAlertController?
+    fileprivate var alertController: UIAlertController?
+    fileprivate var username: String?
+    fileprivate var password: String? // TODO: store in keychain
 
     // MARK: Views
 
@@ -221,48 +223,6 @@ fileprivate extension ViewController {
         searchBackgroundView.layer.backgroundColor = flag ? self.view.tintColor.cgColor : UIColor.lightGray.cgColor
     }
 
-    @objc func authenticateWithGithub() {
-        let alertController = UIAlertController(title: "GitHub Login", message: "🔑 + 🔒 = 🔓", preferredStyle: .alert)
-        self.alertController = alertController
-        let submitAction = UIAlertAction(title: "Login", style: .default) {
-            alertAction in
-            guard let textFields = alertController.textFields, let username = textFields[0].text, let password = textFields[1].text else {
-                assertionFailure()
-                return
-            }
-
-            GitHubBasicAuthentication.authenticate(username: username, password: password) {
-                success in
-                print(success)
-            }
-        }
-        submitAction.isEnabled = false
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
-            alertAction in
-        }
-
-        alertController.addAction(submitAction)
-        alertController.preferredAction = submitAction
-        alertController.addAction(cancelAction)
-
-        alertController.addTextField(configurationHandler: {
-            username in
-            username.placeholder = "Username"
-            username.textContentType = .username
-            username.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
-        })
-        alertController.addTextField(configurationHandler: {
-            password in
-            password.placeholder = "Password"
-            password.isSecureTextEntry = true
-            password.textContentType = .password
-            password.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
-        })
-
-        present(alertController, animated: true)
-    }
-
 }
 
 // MARK: - SearchResultsSortingDelegate
@@ -283,14 +243,88 @@ extension ViewController: SearchResultsSortingDelegate {
 extension ViewController {
 
     @objc func textChanged(sender: UIControl) {
+        alertController?.actions[0].isEnabled = nameAndPasswordExist
+    }
+
+    fileprivate var nameAndPasswordExist: Bool {
         guard let alertController = alertController,
             let textFields = alertController.textFields,
             let username = textFields[0].text,
             let password = textFields[1].text else {
-            assertionFailure()
-            return
+                assertionFailure()
+                return false
         }
         let usernameAndPasswordAreFilled = username.count > 0 && password.count > 0
-        alertController.actions[0].isEnabled = usernameAndPasswordAreFilled
+        return usernameAndPasswordAreFilled
     }
+
+}
+
+// MARK: - GitHub Authentication
+extension ViewController {
+
+    @objc func authenticateWithGithub() {
+        showLoginPrompt()
+    }
+
+    func showLoginPrompt() {
+        let alertController = UIAlertController(title: "GitHub Login", message: "🔑 + 🔒 = 🔓", preferredStyle: .alert)
+        self.alertController = alertController
+        let submitAction = UIAlertAction(title: "Login", style: .default) {
+            alertAction in
+            guard let textFields = alertController.textFields, let username = textFields[0].text, let password = textFields[1].text else {
+                assertionFailure()
+                return
+            }
+
+            self.username = username
+            self.password = password
+
+            GitHubBasicAuthentication.authenticate(username: username, password: password, authenticationCode: textFields[2].text) {
+                success in
+                print(success)
+            }
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            alertAction in
+        }
+
+        alertController.addAction(submitAction)
+        alertController.preferredAction = submitAction
+        alertController.addAction(cancelAction)
+
+        alertController.addTextField(configurationHandler: {
+            username in
+            username.placeholder = "Username"
+            username.textContentType = .username
+            username.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
+
+            if let u = self.username {
+                username.text = u
+            }
+        })
+
+        alertController.addTextField(configurationHandler: {
+            password in
+            password.placeholder = "Password"
+            password.isSecureTextEntry = true
+            password.textContentType = .password
+            password.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
+
+            if let p = self.password {
+                password.text = p
+            }
+        })
+
+        alertController.addTextField(configurationHandler: {
+            authenticationCode in
+            authenticationCode.placeholder = "Two-factor authentication code (if required)"
+        })
+
+        submitAction.isEnabled = nameAndPasswordExist
+
+        present(alertController, animated: true)
+    }
+
 }
