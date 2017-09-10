@@ -9,15 +9,13 @@
 import Foundation
 
 let searchQuery = "https://api.github.com/search/repositories?"
-//"q=tetris+language:assembly&sort=stars&order=desc"
 
 struct GitHubSearchParameter {
 
-    var url: URL? {
+    var url: String {
         let q = "\(query.query)"
         let url = searchQuery + q + sortingOption.stringValue
-        guard let encodedURL = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
-        return URL(string: encodedURL)
+        return url
     }
 
     var query: GitHubSearchQuery = GitHubSearchQuery(keyword: "")
