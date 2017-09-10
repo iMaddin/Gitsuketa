@@ -12,51 +12,13 @@ class SearchResultsViewCell: UICollectionViewCell {
 
     var viewModel: GitHubSearchResultItem? {
         didSet {
-            var text: String?
-
-            for v in allAxisViews {
-                switch v {
-                case titleLabel:
-                    text = viewModel?.fullName
-                case descriptionLabel:
-                    text = viewModel?.descriptionText
-                case urlLabel:
-                    text = viewModel?.url
-                case formattedLanguageLabel:
-                    text = viewModel?.language
-                case formatedUpdatedAtLabel:
-                    if let updatedAt = viewModel?.updatedAt, let date = ISO8601DateFormatter().date(from: updatedAt) {
-                        text = dateFormatter.string(from: date)
-                    }
-                case starsLabel:
-                    if let stars = viewModel?.stargazersCount {
-                        text = "⭐️\(stars)"
-                    }
-                case hasReadmeLabel:
-                    if let hasReadme = viewModel?.hasReadme {
-                        text = hasReadme ? "readme ✅" : "readme ❌"
-                    } else {
-                        text = "readme 🤷🏻‍♂️"
-                    }
-                default:
-                    text = nil
-                }
-
-                if let t = text {
-                    v.text = t
-                    contentStackView.addArrangedSubview(v)
-                } else {
-                    contentStackView.removeArrangedSubview(v)
-                    v.removeFromSuperview()
-                }
-
-            }
+            updateLabelsToDisplay()
         }
     }
 
-    var viewOptions: DataViewOptionsManager {
+    var viewOptions = DataViewOptionsManager() {
         didSet {
-            
+            updateLabelsToDisplay()
         }
     }
 
@@ -319,6 +281,23 @@ fileprivate extension SearchResultsViewCell {
             return nil
         }
     }
+
+    func updateLabelsToDisplay() {
+        for option in DataViewOptions.allValues {
+            let boolForOption = viewOptions.bool(forDataViewOption: option)
+            let textForOption = text(forDataViewOption: option)
+            let labelForOption = label(forDataViewOption: option)
+
+            if boolForOption, let text = textForOption {
+                labelForOption.text = text
+                contentStackView.addArrangedSubview(labelForOption)
+            } else {
+                contentStackView.removeArrangedSubview(labelForOption)
+                labelForOption.removeFromSuperview()
+            }
+        }
+    }
+
 }
 
 fileprivate extension SearchResultsViewCell {
