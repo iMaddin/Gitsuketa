@@ -60,189 +60,191 @@ class SearchResultsViewCell: UICollectionViewCell {
         }
     }
 
-    var createdAtLabel: UILabel = {
+    // MARK: - Labels
+
+    lazy var createdAtLabel: UILabel = {
         let createdAtLabel = UILabel()
         createdAtLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         createdAtLabel.adjustsFontForContentSizeCategory = true
         return createdAtLabel
     }()
 
-    var defaultBranchLabel: UILabel = {
+    lazy var defaultBranchLabel: UILabel = {
         let defaultBranchLabel = UILabel()
         defaultBranchLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         defaultBranchLabel.adjustsFontForContentSizeCategory = true
         return defaultBranchLabel
     }()
 
-    var descriptionTextLabel: UILabel = {
+    lazy var descriptionTextLabel: UILabel = {
         let descriptionTextLabel = UILabel()
         descriptionTextLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         descriptionTextLabel.adjustsFontForContentSizeCategory = true
         return descriptionTextLabel
     }()
 
-    var forkLabel: UILabel = {
+    lazy var forkLabel: UILabel = {
         let forkLabel = UILabel()
         forkLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         forkLabel.adjustsFontForContentSizeCategory = true
         return forkLabel
     }()
 
-    var forksLabel: UILabel = {
+    lazy var forksLabel: UILabel = {
         let forksLabel = UILabel()
         forksLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         forksLabel.adjustsFontForContentSizeCategory = true
         return forksLabel
     }()
 
-    var forksCountLabel: UILabel = {
+    lazy var forksCountLabel: UILabel = {
         let forksCountLabel = UILabel()
         forksCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         forksCountLabel.adjustsFontForContentSizeCategory = true
         return forksCountLabel
     }()
 
-    var fullNameLabel: UILabel = {
+    lazy var fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         fullNameLabel.adjustsFontForContentSizeCategory = true
         return fullNameLabel
     }()
 
-    var hasDownloadsLabel: UILabel = {
+    lazy var hasDownloadsLabel: UILabel = {
         let hasDownloadsLabel = UILabel()
         hasDownloadsLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         hasDownloadsLabel.adjustsFontForContentSizeCategory = true
         return hasDownloadsLabel
     }()
 
-    var hasIssuesLabel: UILabel = {
+    lazy var hasIssuesLabel: UILabel = {
         let hasIssuesLabel = UILabel()
         hasIssuesLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         hasIssuesLabel.adjustsFontForContentSizeCategory = true
         return hasIssuesLabel
     }()
 
-    var hasPagesLabel: UILabel = {
+    lazy var hasPagesLabel: UILabel = {
         let hasPagesLabel = UILabel()
         hasPagesLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         hasPagesLabel.adjustsFontForContentSizeCategory = true
         return hasPagesLabel
     }()
 
-    var hasProjectsLabel: UILabel = {
+    lazy var hasProjectsLabel: UILabel = {
         let hasProjectsLabel = UILabel()
         hasProjectsLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         hasProjectsLabel.adjustsFontForContentSizeCategory = true
         return hasProjectsLabel
     }()
 
-    var hasReadmeLabel: UILabel = {
+    lazy var hasReadmeLabel: UILabel = {
         let hasReadmeLabel = UILabel()
         hasReadmeLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         hasReadmeLabel.adjustsFontForContentSizeCategory = true
         return hasReadmeLabel
     }()
 
-    var hasWikiLabel: UILabel = {
+    lazy var hasWikiLabel: UILabel = {
         let hasWikiLabel = UILabel()
         hasWikiLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         hasWikiLabel.adjustsFontForContentSizeCategory = true
         return hasWikiLabel
     }()
 
-    var languageLabel: UILabel = {
+    lazy var languageLabel: UILabel = {
         let languageLabel = UILabel()
         languageLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         languageLabel.adjustsFontForContentSizeCategory = true
         return languageLabel
     }()
 
-    var nameLabel: UILabel = {
+    lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         nameLabel.adjustsFontForContentSizeCategory = true
         return nameLabel
     }()
 
-    var openIssuesLabel: UILabel = {
+    lazy var openIssuesLabel: UILabel = {
         let openIssuesLabel = UILabel()
         openIssuesLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         openIssuesLabel.adjustsFontForContentSizeCategory = true
         return openIssuesLabel
     }()
 
-    var openIssuesCountLabel: UILabel = {
+    lazy var openIssuesCountLabel: UILabel = {
         let openIssuesCountLabel = UILabel()
         openIssuesCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         openIssuesCountLabel.adjustsFontForContentSizeCategory = true
         return openIssuesCountLabel
     }()
 
-    var ownerLabel: UILabel = {
+    lazy var ownerLabel: UILabel = {
         let ownerLabel = UILabel()
         ownerLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         ownerLabel.adjustsFontForContentSizeCategory = true
         return ownerLabel
     }()
 
-    var isPrivateLabel: UILabel = {
+    lazy var isPrivateLabel: UILabel = {
         let isPrivateLabel = UILabel()
         isPrivateLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         isPrivateLabel.adjustsFontForContentSizeCategory = true
         return isPrivateLabel
     }()
 
-    var pushedAtLabel: UILabel = {
+    lazy var pushedAtLabel: UILabel = {
         let pushedAtLabel = UILabel()
         pushedAtLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         pushedAtLabel.adjustsFontForContentSizeCategory = true
         return pushedAtLabel
     }()
 
-    var scoreLabel: UILabel = {
+    lazy var scoreLabel: UILabel = {
         let scoreLabel = UILabel()
         scoreLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         scoreLabel.adjustsFontForContentSizeCategory = true
         return scoreLabel
     }()
 
-    var sizeLabel: UILabel = {
+    lazy var sizeLabel: UILabel = {
         let sizeLabel = UILabel()
         sizeLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         sizeLabel.adjustsFontForContentSizeCategory = true
         return sizeLabel
     }()
 
-    var stargazersCountLabel: UILabel = {
+    lazy var stargazersCountLabel: UILabel = {
         let stargazersCountLabel = UILabel()
         stargazersCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         stargazersCountLabel.adjustsFontForContentSizeCategory = true
         return stargazersCountLabel
     }()
 
-    var updatedAtLabel: UILabel = {
+    lazy var updatedAtLabel: UILabel = {
         let updatedAtLabel = UILabel()
         updatedAtLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         updatedAtLabel.adjustsFontForContentSizeCategory = true
         return updatedAtLabel
     }()
 
-    var urlLabel: UILabel = {
+    lazy var urlLabel: UILabel = {
         let urlLabel = UILabel()
         urlLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         urlLabel.adjustsFontForContentSizeCategory = true
         return urlLabel
     }()
 
-    var watchersLabel: UILabel = {
+    lazy var watchersLabel: UILabel = {
         let watchersLabel = UILabel()
         watchersLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         watchersLabel.adjustsFontForContentSizeCategory = true
         return watchersLabel
     }()
 
-    var watchersCountLabel: UILabel = {
+    lazy var watchersCountLabel: UILabel = {
         let watchersCountLabel = UILabel()
         watchersCountLabel.font = UIFont.preferredFont(forTextStyle: .subheadline)
         watchersCountLabel.adjustsFontForContentSizeCategory = true
