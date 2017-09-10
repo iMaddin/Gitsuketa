@@ -226,6 +226,15 @@ fileprivate extension ViewController {
         self.alertController = alertController
         let submitAction = UIAlertAction(title: "Login", style: .default) {
             alertAction in
+            guard let textFields = alertController.textFields, let username = textFields[0].text, let password = textFields[1].text else {
+                assertionFailure()
+                return
+            }
+
+            GitHubBasicAuthentication.authenticate(username: username, password: password) {
+                success in
+                print(success)
+            }
         }
         submitAction.isEnabled = false
 
