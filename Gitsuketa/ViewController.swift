@@ -70,23 +70,10 @@ class ViewController: UIViewController {
             startSearch(searchKeyword: defaultSearchKeyword)
         }
 
-        let searchColor = UIColor.lightGray
-
-        let filterButton = SelectableButton()
-        filterButton.style = {
-            button in
-            button.layer.backgroundColor = button.isSelected ? button.tintColor.cgColor : searchColor.cgColor
-        }
-        filterButton.layer.backgroundColor = searchColor.cgColor
-        filterButton.setTitle(NSLocalizedString("Filter", comment: "Filter search button"), for: .normal)
-        filterButton.setTitleColor(UIColor.white, for: .normal)
         filterButton.addTarget(self, action: #selector(ViewController.showFilter), for: .touchUpInside)
         filterButton.widthAnchor.constraint(equalToConstant: filterButton.intrinsicContentSize.width+20).isActive = true
 
-        let searchBar = UISearchBar()
-        searchBar.barTintColor = searchColor
         searchBar.delegate = self
-        searchBar.placeholder = NSLocalizedString("Search GitHub repositories", comment: "")
 
         searchResultsSortingViewController.delegate = self
         addChildViewController(searchResultsSortingViewController)
@@ -102,11 +89,15 @@ class ViewController: UIViewController {
         }
 
         let searchStackView = UIStackView(arrangedSubviews: [searchBar, filterButton])
+        searchStackView.translatesAutoresizingMaskIntoConstraints = false
 
-        let contentStackView = UIStackView(arrangedSubviews: [searchStackView, sortingBar, searchResultsView])
+        searchBackgroundView.addSubview(searchStackView)
+        searchBackgroundView.constraints(equalToEdgeOf: searchStackView)
+
+        let contentStackView = UIStackView(arrangedSubviews: [searchBackgroundView, sortingBar, searchResultsView])
         contentStackView.axis = .vertical
-
         contentStackView.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(contentStackView)
         contentStackView.constraints(equalToEdgeOf: view.safeAreaLayoutGuide)
 
@@ -126,15 +117,11 @@ class ViewController: UIViewController {
         }
 
         searchFilterViewController.dismissAction = {
-            vc in
+            [unowned self] vc in
             var filteredQuery = SearchFilterReader.read(searchFilterViewController: vc)
-            filteredQuery.keyword = searchBar.text
+            filteredQuery.keyword = self.searchBar.text
             self.startSearch(searchQuery: filteredQuery)
-
-            filterButton.isSelected = vc.filtersAreEnabled
-            if let color = filterButton.layer.backgroundColor {
-                searchBar.barTintColor = UIColor(cgColor: color)
-            }
+            self.tintSearchBar(vc.filtersAreEnabled)
         }
     }
 
@@ -204,6 +191,10 @@ fileprivate extension ViewController {
         
         let filterNavigationcontroller = UINavigationController(rootViewController: searchFilterViewController)
         present(filterNavigationcontroller, animated: true)
+    }
+
+    func tintSearchBar(_ flag: Bool) {
+        searchBackgroundView.layer.backgroundColor = flag ? self.view.tintColor.cgColor : UIColor.lightGray.cgColor
     }
 
 }
