@@ -28,6 +28,11 @@ struct GitHubRequest {
                 return
             }
 
+            guard let response = response as? HTTPURLResponse else {
+                return
+            }
+            print("\(response.statusCode)") //200 ok // 403 exceeded
+
             guard let data = data else {
                 completionHandler(nil)
                 return
