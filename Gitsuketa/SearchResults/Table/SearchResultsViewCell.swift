@@ -312,6 +312,13 @@ fileprivate extension SearchResultsViewCell {
         contentView.constraints(equalToEdgeOf: contentStackView, constants: UIEdgeInsetsMake(contentInsetSpacing, contentInsetSpacing, contentInsetSpacing, contentInsetSpacing))
     }
 
+    func formatDate(fromString stringDate: String?) -> String? {
+        if let stringDate = stringDate, let date = ISO8601DateFormatter().date(from: stringDate) {
+            return dateFormatter.string(from: date)
+        } else {
+            return nil
+        }
+    }
 }
 
 fileprivate extension SearchResultsViewCell {
