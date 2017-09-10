@@ -69,6 +69,12 @@ class SearchResultsSortingViewController: UIViewController {
 
         for sortingOption in GitHubSortingOption.allValues {
             let sortingButton = SelectableButton()
+            sortingButton.style = {
+                button in
+                button.layer.cornerRadius = button.intrinsicContentSize.height/2
+                button.layer.borderColor = button.isSelected ? button.titleColor(for: .selected)?.cgColor : button.titleColor(for: .normal)?.cgColor
+                button.layer.borderWidth = button.isSelected ? 1 : 0
+            }
             sortingButton.setTitle(sortingOption.description, for: .normal)
             sortingButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .footnote)
             sortingButton.setTitleColor(UIColor.gray, for: .normal)

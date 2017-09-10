@@ -10,24 +10,16 @@ import UIKit
 
 class SelectableButton: UIButton {
 
+    var style: ((_ button: SelectableButton) -> Void)?
+
     override var isSelected: Bool {
         set {
             super.isSelected = newValue
-            enableSelectedStyling(flag: isSelected)
+            style?(self)
         }
         get {
             return super.isSelected
         }
-    }
-
-}
-
-fileprivate extension SelectableButton {
-
-    func enableSelectedStyling(flag: Bool) {
-        layer.cornerRadius = intrinsicContentSize.height/2
-        layer.borderColor = isSelected ? titleColor(for: .selected)?.cgColor : titleColor(for: .normal)?.cgColor
-        layer.borderWidth = isSelected ? 1 : 0
     }
 
 }
