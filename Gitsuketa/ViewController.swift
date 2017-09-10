@@ -200,6 +200,10 @@ fileprivate extension ViewController {
         present(navVC, animated: true)
     }
 
+    func tintSearchBar(_ flag: Bool) {
+        searchBackgroundView.layer.backgroundColor = flag ? self.view.tintColor.cgColor : UIColor.lightGray.cgColor
+    }
+
 }
 
 // MARK: - SearchResultsSortingDelegate
