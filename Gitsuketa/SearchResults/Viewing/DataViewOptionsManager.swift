@@ -12,18 +12,18 @@ struct DataViewOptionsManager {
 
     var createdAt: Bool = false
     var defaultBranch: Bool = false
-    var descriptionText: Bool = false
+    var descriptionText: Bool = true
     var fork: Bool = false
     var forks: Bool = false
     var forksCount: Bool = false
-    var fullName: Bool = false
+    var fullName: Bool = true
     var hasDownloads: Bool = false
     var hasIssues: Bool = false
     var hasPages: Bool = false
     var hasProjects: Bool = false
     var hasReadme: Bool = false
     var hasWiki: Bool = false
-    var language: Bool = false
+    var language: Bool = true
     var name: Bool = false
     var openIssues: Bool = false
     var openIssuesCount: Bool = false
@@ -32,8 +32,8 @@ struct DataViewOptionsManager {
     var pushedAt: Bool = false
     var score: Bool = false
     var size: Bool = false
-    var stargazersCount: Bool = false
-    var updatedAt: Bool = false
+    var stargazersCount: Bool = true
+    var updatedAt: Bool = true
     var url: Bool = false
     var watchers: Bool = false
     var watchersCount: Bool = false
