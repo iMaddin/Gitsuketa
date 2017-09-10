@@ -196,6 +196,10 @@ extension ViewController: UISearchBarDelegate {
         startSearch(searchKeyword: searchQuery)
     }
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
+    
 }
 
 // MARK: - Filter
