@@ -251,7 +251,14 @@ class SearchResultsViewCell: UICollectionViewCell {
         return watchersCountLabel
     }()
 
-    let contentStackView = UIStackView()
+    fileprivate var contentStackView: UIStackView = {
+        let contentStackView = UIStackView()
+        contentStackView.translatesAutoresizingMaskIntoConstraints = false
+        contentStackView.accessibilityIdentifier = "cell.contentStackView"
+        contentStackView.axis = .vertical
+        contentStackView.spacing = 4
+        return contentStackView
+    }()
 
     fileprivate var dateFormatter: DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -313,11 +320,6 @@ fileprivate extension SearchResultsViewCell {
     }
 
     func _commonInit() {
-        contentStackView.translatesAutoresizingMaskIntoConstraints = false
-        contentStackView.accessibilityIdentifier = "cell.contentStackView"
-        contentStackView.axis = .vertical
-        contentStackView.spacing = 4
-
         contentView.addSubview(contentStackView)
         contentView.constraints(equalToEdgeOf: contentStackView, constants: UIEdgeInsetsMake(contentInsetSpacing, contentInsetSpacing, contentInsetSpacing, contentInsetSpacing))
     }
