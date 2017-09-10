@@ -33,10 +33,6 @@ class ViewController: UIViewController {
 
     let dataViewOptionsSelectionViewController = DataViewOptionsSelectionViewController()
 
-    fileprivate var alertController: UIAlertController?
-    fileprivate var username: String?
-    fileprivate var password: String? // TODO: store in keychain
-
     // MARK: Views
 
     var collectionView: UICollectionView {
@@ -73,7 +69,6 @@ class ViewController: UIViewController {
         definesPresentationContext = true // fixes problem where other VC couldn't be presented after a search
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("View Options", comment: ""), style: .plain, target: self, action: #selector(ViewController.showViewOptions))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "GitHub 🔑", style: .plain, target: self, action: #selector(ViewController.authenticateWithGithub))
 
         if let defaultSearchKeyword = self.defaultSearchKeyword {
             startSearch(searchKeyword: defaultSearchKeyword)
@@ -147,6 +142,7 @@ class ViewController: UIViewController {
 
 }
 
+// MARK: - Search Helper
 fileprivate extension ViewController {
     
     func startSearch(searchParameter: GitHubSearchParameter) {
@@ -188,6 +184,7 @@ fileprivate extension ViewController {
 
 }
 
+// MARK: - UISearchBarDelegate
 extension ViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -235,96 +232,6 @@ extension ViewController: SearchResultsSortingDelegate {
         var sortedSearchParameter = currentSearchParameter
         sortedSearchParameter.sortingOption = sortingOption
         startSearch(searchParameter: sortedSearchParameter)
-    }
-
-}
-
-// MARK: - UIAlertController TextFields
-extension ViewController {
-
-    @objc func textChanged(sender: UIControl) {
-        alertController?.actions[0].isEnabled = nameAndPasswordExist
-    }
-
-    fileprivate var nameAndPasswordExist: Bool {
-        guard let alertController = alertController,
-            let textFields = alertController.textFields,
-            let username = textFields[0].text,
-            let password = textFields[1].text else {
-                assertionFailure()
-                return false
-        }
-        let usernameAndPasswordAreFilled = username.count > 0 && password.count > 0
-        return usernameAndPasswordAreFilled
-    }
-
-}
-
-// MARK: - GitHub Authentication
-extension ViewController {
-
-    @objc func authenticateWithGithub() {
-        showLoginPrompt()
-    }
-
-    func showLoginPrompt() {
-        let alertController = UIAlertController(title: "GitHub Login", message: "🔑 + 🔒 = 🔓", preferredStyle: .alert)
-        self.alertController = alertController
-        let submitAction = UIAlertAction(title: "Login", style: .default) {
-            alertAction in
-            guard let textFields = alertController.textFields, let username = textFields[0].text, let password = textFields[1].text else {
-                assertionFailure()
-                return
-            }
-
-            self.username = username
-            self.password = password
-
-            GitHubBasicAuthentication.authenticate(username: username, password: password, authenticationCode: textFields[2].text) {
-                success in
-                print(success)
-            }
-        }
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
-            alertAction in
-        }
-
-        alertController.addAction(submitAction)
-        alertController.preferredAction = submitAction
-        alertController.addAction(cancelAction)
-
-        alertController.addTextField(configurationHandler: {
-            username in
-            username.placeholder = "Username"
-            username.textContentType = .username
-            username.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
-
-            if let u = self.username {
-                username.text = u
-            }
-        })
-
-        alertController.addTextField(configurationHandler: {
-            password in
-            password.placeholder = "Password"
-            password.isSecureTextEntry = true
-            password.textContentType = .password
-            password.addTarget(self, action: #selector(ViewController.textChanged(sender:)), for: .editingChanged)
-
-            if let p = self.password {
-                password.text = p
-            }
-        })
-
-        alertController.addTextField(configurationHandler: {
-            authenticationCode in
-            authenticationCode.placeholder = "Two-factor authentication code (if required)"
-        })
-
-        submitAction.isEnabled = nameAndPasswordExist
-
-        present(alertController, animated: true)
     }
 
 }
