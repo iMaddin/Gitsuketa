@@ -111,6 +111,9 @@ class ViewController: UIViewController {
             self.startSearch(searchQuery: filteredQuery)
 
             filterButton.isSelected = vc.filtersAreEnabled
+            if let color = filterButton.layer.backgroundColor {
+                searchBar.barTintColor = UIColor(cgColor: color)
+            }
         }
     }
 
