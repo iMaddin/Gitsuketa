@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         definesPresentationContext = true // fixes problem where other VC couldn't be presented after a search
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("View Options", comment: ""), style: .plain, target: self, action: #selector(ViewController.showViewOptions))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "GitHub 🔑", style: .plain, target: self, action: #selector(ViewController.authenticateWithGithub))
 
         if let defaultSearchKeyword = self.defaultSearchKeyword {
             startSearch(searchKeyword: defaultSearchKeyword)
@@ -216,6 +217,10 @@ fileprivate extension ViewController {
 
     func tintSearchBar(_ flag: Bool) {
         searchBackgroundView.layer.backgroundColor = flag ? self.view.tintColor.cgColor : UIColor.lightGray.cgColor
+    }
+
+    @objc func authenticateWithGithub() {
+
     }
 
 }
