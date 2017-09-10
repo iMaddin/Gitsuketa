@@ -220,7 +220,31 @@ fileprivate extension ViewController {
     }
 
     @objc func authenticateWithGithub() {
+        let alertController = UIAlertController(title: "GitHub Login", message: "🔑 + 🔒 = 🔓", preferredStyle: .alert)
+        let submitAction = UIAlertAction(title: "Login", style: .default) {
+            alertAction in
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {
+            alertAction in
+        }
+        
+        alertController.addAction(submitAction)
+        alertController.preferredAction = submitAction
+        alertController.addAction(cancelAction)
 
+        alertController.addTextField(configurationHandler: {
+            username in
+            username.placeholder = "Username"
+            username.textContentType = .username
+        })
+        alertController.addTextField(configurationHandler: {
+            password in
+            password.placeholder = "Password"
+            password.isSecureTextEntry = true
+            password.textContentType = .password
+        })
+
+        present(alertController, animated: true)
     }
 
 }
