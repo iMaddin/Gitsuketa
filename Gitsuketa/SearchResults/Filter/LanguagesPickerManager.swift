@@ -18,6 +18,7 @@ class LanguagesPickerManager: NSObject {
 
 }
 
+// MARK: - UIPickerViewDataSource
 extension LanguagesPickerManager: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -30,6 +31,7 @@ extension LanguagesPickerManager: UIPickerViewDataSource {
 
 }
 
+// MARK: - UIPickerViewDelegate
 extension LanguagesPickerManager: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

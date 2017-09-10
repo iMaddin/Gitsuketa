@@ -32,12 +32,12 @@ class SearchResultsSortingViewController: UIViewController {
 
     fileprivate var currentlySelectedButton: UIButton!
 
-    var scrollView: UIScrollView = {
+    fileprivate var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
     }()
 
-    var stackView: UIStackView = {
+    fileprivate var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .center
         return stackView
@@ -89,6 +89,7 @@ class SearchResultsSortingViewController: UIViewController {
 
 }
 
+// MARK: - fileprivate
 fileprivate extension SearchResultsSortingViewController {
 
     var spacing: CGFloat {

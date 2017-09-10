@@ -217,6 +217,7 @@ final class SearchFilterViewController: UITableViewController, ViewControllerDis
         createdOrPushedRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
 
         // Date picker
+
         createdOrPushedRightDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedLeftDateSelectionButton.addTarget(self, action: #selector(SearchFilterViewController.toggleDateButton(sender:)), for: .touchUpInside)
         createdOrPushedDatePicker.addTarget(self, action: #selector(SearchFilterViewController.datePickerDidChangeValue(sender:)), for: .valueChanged)
@@ -233,6 +234,7 @@ final class SearchFilterViewController: UITableViewController, ViewControllerDis
         }
 
         // number of forks
+
         numberOfForksRangeSelectionViewController = RangeSelectionViewController(leftView: numberOfForksLeftTextfield, rightView: numberOfForksRightTextfield)
         addChildViewController(numberOfForksRangeSelectionViewController)
         numberOfForksRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
@@ -257,6 +259,7 @@ final class SearchFilterViewController: UITableViewController, ViewControllerDis
         starsRangeSelectionViewController.rangeQualifierButton.addTarget(self, action: #selector(SearchFilterViewController.toggleRangeSelectionButton(sender:)), for: .touchUpInside)
 
         // text fields
+
         for textField in [numberOfForksLeftTextfield, numberOfForksRightTextfield, sizeLeftTextfield, sizeRightTextfield, starsLeftTextField, starsRightTextfield, orgOrUserTextField, topicsTextfield] {
             textField.inputAccessoryView = keyboardAccessoryView
         }
@@ -266,6 +269,7 @@ final class SearchFilterViewController: UITableViewController, ViewControllerDis
 
 }
 
+// MARK: - Actions
 extension SearchFilterViewController {
 
     @objc func dismissFilter() {

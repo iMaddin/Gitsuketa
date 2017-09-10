@@ -44,7 +44,6 @@ extension GitHubRangeValue {
 }
 
 // MARK: - GitHubStringQualifier
-
 extension GitHubRangeValue: GitHubStringQualifier {
 
     var stringQualifier: String {

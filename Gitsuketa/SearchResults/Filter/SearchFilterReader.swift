@@ -98,6 +98,7 @@ struct SearchFilterReader {
 
 }
 
+// MARK: - fileprivate
 fileprivate extension SearchFilterReader {
 
     static func createRangeValue<T>(value: T?, fromValue: T?, rangeSelectionViewController: RangeSelectionViewController) -> GitHubRangeValue<T>? {

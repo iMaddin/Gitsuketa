@@ -25,7 +25,6 @@ final class DataViewOptionsSelectionViewController: UITableViewController, ViewC
 }
 
 // MARK: - UITableViewDataSource
-
 extension DataViewOptionsSelectionViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,7 +46,6 @@ extension DataViewOptionsSelectionViewController {
 }
 
 // MARK: - UITableViewDelegate
-
 extension DataViewOptionsSelectionViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,7 +59,6 @@ extension DataViewOptionsSelectionViewController {
 }
 
 // MARK: - fileprivate
-
 fileprivate extension DataViewOptionsSelectionViewController {
 
     var cellIdentifier: String {

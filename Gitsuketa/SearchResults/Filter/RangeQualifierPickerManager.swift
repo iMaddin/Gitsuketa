@@ -20,6 +20,7 @@ class RangeQualifierPickerManager: NSObject {
 
 }
 
+// MARK: - UIPickerViewDataSource
 extension RangeQualifierPickerManager: UIPickerViewDataSource {
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -32,6 +33,7 @@ extension RangeQualifierPickerManager: UIPickerViewDataSource {
 
 }
 
+// MARK: - UIPickerViewDelegate
 extension RangeQualifierPickerManager: UIPickerViewDelegate {
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

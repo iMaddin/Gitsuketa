@@ -265,6 +265,7 @@ class SearchResultsViewCell: UICollectionViewCell {
 
 }
 
+// MARK: - fileprivate
 fileprivate extension SearchResultsViewCell {
 
     var contentInsetSpacing: CGFloat {
@@ -302,6 +303,7 @@ fileprivate extension SearchResultsViewCell {
 
 }
 
+// MARK: - DataViewOptions Helper
 fileprivate extension SearchResultsViewCell {
 
     func label(forDataViewOption option: DataViewOptions) -> UILabel {

@@ -66,6 +66,7 @@ extension SearchResultsViewController {
 
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -78,6 +79,7 @@ extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 
 }
 
+// MARK: - fileprivate
 fileprivate extension SearchResultsViewController {
 
     var cellIdentifier: String {

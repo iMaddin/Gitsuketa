@@ -14,7 +14,7 @@ class RangeSelectionViewController: UIViewController {
 
     var pickerViewIsVisible = false
 
-    var stackView: UIStackView = {
+    fileprivate var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fillEqually
         return stackView
@@ -70,6 +70,7 @@ class RangeSelectionViewController: UIViewController {
 
 }
 
+// MARK: - fileprivate
 fileprivate extension RangeSelectionViewController {
 
     func didSelectBetweenRangeQualifier(flag: Bool) {

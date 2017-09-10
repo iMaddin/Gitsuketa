@@ -21,21 +21,21 @@ class ViewController: UIViewController {
 
     // MARK: Controllers
 
-    let searchResultsViewController = SearchResultsViewController()
-    let searchFilterViewController = SearchFilterViewController(style: .grouped)
+    fileprivate let searchResultsViewController = SearchResultsViewController()
+    fileprivate let searchFilterViewController = SearchFilterViewController(style: .grouped)
 
-    var searchController: UISearchController?
+    fileprivate var searchController: UISearchController?
 
-    var searchResultsSortingViewController: SearchResultsSortingViewController = {
+    fileprivate var searchResultsSortingViewController: SearchResultsSortingViewController = {
         let searchResultsSortingViewController = SearchResultsSortingViewController()
         return searchResultsSortingViewController
     }()
 
-    let dataViewOptionsSelectionViewController = DataViewOptionsSelectionViewController()
+    fileprivate let dataViewOptionsSelectionViewController = DataViewOptionsSelectionViewController()
 
     // MARK: Views
 
-    var collectionView: UICollectionView {
+    fileprivate var collectionView: UICollectionView {
         return searchResultsViewController.collectionView!
     }
 
