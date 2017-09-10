@@ -21,6 +21,7 @@ struct DataViewOptionsManager {
     var hasIssues: Bool = false
     var hasPages: Bool = false
     var hasProjects: Bool = false
+    var hasReadme: Bool = false
     var hasWiki: Bool = false
     var language: Bool = false
     var name: Bool = false

@@ -19,7 +19,9 @@ class DataViewOptionsSelectionViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        navigationItem.title = NSLocalizedString("Display Options", comment: "")
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self, action: #selector(DataViewOptionsSelectionViewController.doneButtonPressed(sender:)))
     }
 

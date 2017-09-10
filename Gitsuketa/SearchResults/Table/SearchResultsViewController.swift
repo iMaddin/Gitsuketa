@@ -11,6 +11,7 @@ import UIKit
 class SearchResultsViewController: UICollectionViewController {
 
     var searchResults: GitHubSearchResult?
+    var viewOptions = DataViewOptionsManager()
     var didSelectRowAction: ((String?) -> Void)?
 
     fileprivate let dynamicSizeCell = SearchResultsViewCell()
