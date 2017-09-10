@@ -50,6 +50,7 @@ extension SearchResultsViewController {
 
         if let searchResultsViewCell = cell as? SearchResultsViewCell {
             searchResultsViewCell.viewModel = searchResults?.items[indexPath.row]
+            searchResultsViewCell.viewOptions = viewOptions
         }
         return cell
     }
@@ -69,6 +70,7 @@ extension SearchResultsViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         dynamicSizeCell.viewModel = searchResults?.items[indexPath.row]
+        dynamicSizeCell.viewOptions = viewOptions
         let height = dynamicSizeCell.intrinsicContentHeight
         let width = collectionView.frame.width - spacing*2
         return CGSize(width: width, height: height)

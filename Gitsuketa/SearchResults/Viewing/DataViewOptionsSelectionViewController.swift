@@ -52,8 +52,10 @@ extension DataViewOptionsSelectionViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
+        let enabled = cell?.accessoryType.rawValue == UITableViewCellAccessoryType.none.rawValue
         // cell?.accessoryType.rawValue results in "none" which is apparently not == .none
-        cell?.accessoryType = cell?.accessoryType.rawValue == UITableViewCellAccessoryType.none.rawValue ? .checkmark : .none
+        cell?.accessoryType = enabled ? .checkmark : .none
+        viewOptions?.set(bool: enabled, forDataViewOption: DataViewOptions.allValues[indexPath.row])
     }
 
 }

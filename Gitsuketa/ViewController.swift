@@ -127,6 +127,17 @@ class ViewController: UIViewController {
             self.startSearch(searchQuery: filteredQuery)
             self.tintSearchBar(vc.filtersAreEnabled)
         }
+
+        dataViewOptionsSelectionViewController.didDismiss = {
+            vc in
+            guard let viewOptions = vc.viewOptions else {
+                return
+
+            }
+            self.searchResultsViewController.viewOptions = viewOptions
+            self.searchResultsViewController.collectionView?.reloadData()
+            self.searchResultsViewController.collectionViewLayout.invalidateLayout()
+        }
     }
 
 }
