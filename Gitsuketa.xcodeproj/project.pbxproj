@@ -27,6 +27,7 @@
 		1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */; };
 		1B6E66831F6265FB00260B38 /* GitHubLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */; };
 		1B89365E1F656CCE000C55DE /* ViewControllerDismissing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B89365D1F656CCE000C55DE /* ViewControllerDismissing.swift */; };
+		1B8936611F657527000C55DE /* GitHubBasicAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8936601F657527000C55DE /* GitHubBasicAuthentication.swift */; };
 		1BA793091F63F8C8009BB58B /* SelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA793081F63F8C8009BB58B /* SelectableButton.swift */; };
 		1BA793121F6427FF009BB58B /* SearchResultsSortingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA793111F6427FF009BB58B /* SearchResultsSortingViewController.swift */; };
 		1BAABCA31F5EBD50005A0536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BAABCA21F5EBD50005A0536 /* AppDelegate.swift */; };
@@ -81,6 +82,7 @@
 		1B60F83C1F6172D600854B28 /* SearchFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterViewController.swift; sourceTree = "<group>"; };
 		1B6E66821F6265FB00260B38 /* GitHubLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubLanguage.swift; sourceTree = "<group>"; };
 		1B89365D1F656CCE000C55DE /* ViewControllerDismissing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerDismissing.swift; sourceTree = "<group>"; };
+		1B8936601F657527000C55DE /* GitHubBasicAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GitHubBasicAuthentication.swift; path = Gitsuketa/GitHubBasicAuthentication.swift; sourceTree = SOURCE_ROOT; };
 		1BA793081F63F8C8009BB58B /* SelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableButton.swift; sourceTree = "<group>"; };
 		1BA793111F6427FF009BB58B /* SearchResultsSortingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsSortingViewController.swift; sourceTree = "<group>"; };
 		1BAABC9F1F5EBD50005A0536 /* Gitsuketa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gitsuketa.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 				1B23893F1F5F183F0048C1D1 /* GitHubRequest.swift */,
 				1B2389411F5F18440048C1D1 /* GitHubSearchParameter.swift */,
 				1B23893C1F5F18120048C1D1 /* GitHubSearchResult.swift */,
+				1B89365F1F657509000C55DE /* Authentication */,
 				1BA7930C1F6426A9009BB58B /* GitHubTypes */,
 			);
 			path = GitHub;
@@ -148,6 +151,14 @@
 				1BEC51FF1F64C00300A3C88C /* Viewing */,
 			);
 			path = SearchResults;
+			sourceTree = "<group>";
+		};
+		1B89365F1F657509000C55DE /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				1B8936601F657527000C55DE /* GitHubBasicAuthentication.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		1BA7930A1F642661009BB58B /* Table */ = {
@@ -429,6 +440,7 @@
 				1B3C42141F62698F000A634B /* GitHubSearchField.swift in Sources */,
 				1B89365E1F656CCE000C55DE /* ViewControllerDismissing.swift in Sources */,
 				1B60F83D1F6172D600854B28 /* SearchFilterViewController.swift in Sources */,
+				1B8936611F657527000C55DE /* GitHubBasicAuthentication.swift in Sources */,
 				1BA793121F6427FF009BB58B /* SearchResultsSortingViewController.swift in Sources */,
 				1BEC52031F64C36600A3C88C /* DataViewOptionsManager.swift in Sources */,
 				1B3C42201F627298000A634B /* GitHubRangeValue.swift in Sources */,
