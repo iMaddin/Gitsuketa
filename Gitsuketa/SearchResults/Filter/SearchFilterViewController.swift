@@ -276,8 +276,14 @@ extension SearchFilterViewController {
     }
 
     @objc func clearFilter() {
+        var indexPaths: [IndexPath] = []
+        for section in 0..<sectionTitles.count {
+            for row in 1..<cellContents[section].count {
+                indexPaths.append(IndexPath(row: row, section: section))
+            }
+        }
         setInitialCellsContents()
-        tableView.reloadData()
+        tableView.deleteRows(at: indexPaths, with: .top)
     }
 
 }
