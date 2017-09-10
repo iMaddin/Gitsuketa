@@ -295,7 +295,7 @@ class SearchResultsViewCell: UICollectionViewCell {
             height = height + v.intrinsicContentSize.height
         }
         height = height + contentInsetSpacing * 2
-        height = height + CGFloat((allAxisViews.count-1)) * contentStackView.spacing
+        height = height + CGFloat((contentStackView.arrangedSubviews.count-1)) * contentStackView.spacing
         return height
     }
 
@@ -305,18 +305,6 @@ fileprivate extension SearchResultsViewCell {
 
     var contentInsetSpacing: CGFloat {
         return 15
-    }
-
-    var allAxisViews: [UILabel] {
-        return [
-            titleLabel,
-            descriptionLabel,
-//            urlLabel,
-            formattedLanguageLabel,
-            formatedUpdatedAtLabel,
-            starsLabel,
-//            hasReadmeLabel
-        ]
     }
 
     func _commonInit() {
