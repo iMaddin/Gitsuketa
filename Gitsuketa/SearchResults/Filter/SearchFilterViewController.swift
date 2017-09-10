@@ -208,7 +208,7 @@ class SearchFilterViewController: UITableViewController {
         // Do any additional setup after loading the view.
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: "Done button for dismissing modal view"), style: .done, target: self, action: #selector(SearchFilterViewController.dismissFilter))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Reset filter", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Disable All Filters", comment: "Reset filter button"), style: .plain, target: self, action: #selector(SearchFilterViewController.clearFilter))
 
         // created / pushed
 
@@ -261,15 +261,7 @@ class SearchFilterViewController: UITableViewController {
             textField.inputAccessoryView = keyboardAccessoryView
         }
 
-        // cell data
-
-        var initialCellContents: [[UIView]] = []
-
-        for i in 0..<expandedCellContents.count {
-            initialCellContents.append([viewForSection(title: sectionTitles[i])])
-        }
-
-        cellContents = initialCellContents
+        setInitialCellsContents()
     }
 
 }
@@ -284,7 +276,8 @@ extension SearchFilterViewController {
     }
 
     @objc func clearFilter() {
-
+        setInitialCellsContents()
+        tableView.reloadData()
     }
 
 }
@@ -547,6 +540,16 @@ fileprivate extension SearchFilterViewController {
             NSLocalizedString("Stars", comment: ""),
             NSLocalizedString("Topics", comment: ""),
         ]
+    }
+
+    func setInitialCellsContents() {
+        var initialCellContents: [[UIView]] = []
+
+        for i in 0..<expandedCellContents.count {
+            initialCellContents.append([viewForSection(title: sectionTitles[i])])
+        }
+
+        cellContents = initialCellContents
     }
 
     func viewForSection(title: String) -> UIView {
