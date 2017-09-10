@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         return searchResultsSortingViewController
     }()
 
+    let dataViewOptionsSelectionViewController = DataViewOptionsSelectionViewController()
+
     // MARK: Views
 
     var collectionView: UICollectionView {
@@ -196,7 +198,8 @@ fileprivate extension ViewController {
     }
 
     @objc func showViewOptions() {
-        let navVC = UINavigationController(rootViewController: DataViewOptionsSelectionViewController())
+        dataViewOptionsSelectionViewController.viewOptions = searchResultsViewController.viewOptions
+        let navVC = UINavigationController(rootViewController: dataViewOptionsSelectionViewController)
         present(navVC, animated: true)
     }
 

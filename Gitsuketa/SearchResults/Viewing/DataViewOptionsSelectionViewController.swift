@@ -12,10 +12,7 @@ class DataViewOptionsSelectionViewController: UITableViewController {
 
     var didDismiss: ((_: DataViewOptionsSelectionViewController) -> Void)?
 
-    var dataViewOptions: DataViewOptionsManager {
-        return _dataViewOptions
-    }
-    fileprivate var _dataViewOptions = DataViewOptionsManager()
+    var viewOptions: DataViewOptionsManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +34,13 @@ extension DataViewOptionsSelectionViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-        cell.textLabel?.text = DataViewOptions.allValues[indexPath.row].description
+        let option = DataViewOptions.allValues[indexPath.row]
+        cell.textLabel?.text = option.description
+
+        if let b = viewOptions?.bool(forDataViewOption: option) {
+            cell.accessoryType =  b ? .checkmark : .none
+        }
+
         return cell
     }
 
