@@ -366,9 +366,17 @@ fileprivate extension SearchResultsViewCell {
     func text(forDataViewOption option: DataViewOptions) -> String? {
         switch option {
         case .createdAt:
-            return viewModel?.createdAt
+            if let createdAt = formatDate(fromString: viewModel?.createdAt) {
+                    return option.description + " \(createdAt)"
+                } else {
+                    return nil
+                }
         case .defaultBranch:
-            return viewModel?.defaultBranch
+            if let defaultBranch = viewModel?.defaultBranch {
+                    return option.description + " \(defaultBranch)"
+                } else {
+                    return nil
+                }
         case .descriptionText:
             return viewModel?.descriptionText
         case .fork:
@@ -456,7 +464,11 @@ fileprivate extension SearchResultsViewCell {
                 return nil
             }
         case .pushedAt:
-            return viewModel?.pushedAt
+            if let pushedAt = formatDate(fromString: viewModel?.pushedAt) {
+                    return option.description + " \(pushedAt)"
+                } else {
+                    return nil
+                }
         case .score:
             if let score = viewModel?.score {
                 return option.description + " \(score)"
@@ -465,18 +477,22 @@ fileprivate extension SearchResultsViewCell {
             }
         case .size:
             if let size = viewModel?.size {
-                return option.description + " \(size)"
+                return option.description + "💾 \(size)"
             } else {
                 return nil
             }
         case .stargazersCount:
             if let stargazersCount = viewModel?.stargazersCount {
-                return option.description + " \(stargazersCount)"
+                return "⭐️ \(stargazersCount)"
             } else {
                 return nil
             }
         case .updatedAt:
-            return viewModel?.updatedAt
+            if let updatedAt = formatDate(fromString: viewModel?.updatedAt) {
+                    return option.description + " \(updatedAt)"
+                } else {
+                    return nil
+                }
         case .url:
             return viewModel?.url
         case .watchers:
@@ -487,7 +503,7 @@ fileprivate extension SearchResultsViewCell {
             }
         case .watchersCount:
             if let watchersCount = viewModel?.watchersCount {
-                return option.description + " \(watchersCount)"
+                return option.description + "👀 \(watchersCount)"
             } else {
                 return nil
             }
