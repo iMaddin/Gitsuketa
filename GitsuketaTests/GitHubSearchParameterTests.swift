@@ -46,7 +46,7 @@ extension GitHubSearchParameterTests {
         let searchQuery = GitHubSearchQuery(keyword: searchKeyword)
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)tetris\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testQueryWithWhiteSpace() {
@@ -54,7 +54,7 @@ extension GitHubSearchParameterTests {
         let searchQuery = GitHubSearchQuery(keyword: searchKeyword)
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)Rocket+League\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testQueryWithTrailingWhiteSpaceAndAdditionalParameters() {
@@ -62,7 +62,7 @@ extension GitHubSearchParameterTests {
         let searchQuery = GitHubSearchQuery(keyword: parameter)
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)There+is+whitespace+to+the+right+of+this+text\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testRepoUserInputWithTrailingWhiteSpace() {
@@ -71,7 +71,7 @@ extension GitHubSearchParameterTests {
         searchQuery.user = parameter
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)\(searchKeyword)+org:iMaddin\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testUserUserInputWithTrailingWhiteSpace() {
@@ -80,7 +80,7 @@ extension GitHubSearchParameterTests {
         searchQuery.user = parameter
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)\(searchKeyword)+user:iMaddin\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testTopicUserInputWithTrailingWhiteSpace() {
@@ -89,7 +89,7 @@ extension GitHubSearchParameterTests {
         searchQuery.topic = [parameter]
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)\(searchKeyword)+topic:Swift\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testKeywordWithPrependedWhitespace() {
@@ -97,7 +97,7 @@ extension GitHubSearchParameterTests {
         let searchQuery = GitHubSearchQuery(keyword: parameter)
         let searchParameter = GitHubSearchParameter(query: searchQuery)
         let expectation = "\(api)tetris\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
 }
@@ -122,7 +122,7 @@ extension GitHubSearchParameterTests {
         q.created = GitHubRangeValue(value: parameter)
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+created:2017-07-07\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testPushedParameter() {
@@ -131,7 +131,7 @@ extension GitHubSearchParameterTests {
         q.pushed = GitHubRangeValue(value: parameter)
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+pushed:2017-07-07\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testForkParameter() {
@@ -140,7 +140,7 @@ extension GitHubSearchParameterTests {
         q.fork = parameter
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+fork:\(parameter.rawValue)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testNumberOfForksParameter() {
@@ -149,7 +149,7 @@ extension GitHubSearchParameterTests {
         q.numberOfForks = GitHubRangeValue(value: parameter)
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+forks:\(parameter)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testSearchFieldsParameter() {
@@ -158,7 +158,7 @@ extension GitHubSearchParameterTests {
         q.searchFields = [parameter]
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+in:\(parameter.rawValue)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testLanguageParameter() {
@@ -167,7 +167,7 @@ extension GitHubSearchParameterTests {
         q.language = parameter
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+language:\(parameter.rawValue)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testRepoParameter() {
@@ -176,7 +176,7 @@ extension GitHubSearchParameterTests {
         q.repo = parameter
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+org:\(parameter)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testUserParameter() {
@@ -185,7 +185,7 @@ extension GitHubSearchParameterTests {
         q.user = parameter
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+user:\(parameter)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testSizeParameter() {
@@ -194,7 +194,7 @@ extension GitHubSearchParameterTests {
         q.size = GitHubRangeValue(value: parameter)
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+size:\(parameter)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testNumberOfStarsParameter() {
@@ -203,7 +203,7 @@ extension GitHubSearchParameterTests {
         q.numberOfStars = GitHubRangeValue(value: 23)
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+stars:\(parameter)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
     func testTopicParameter() {
@@ -212,7 +212,7 @@ extension GitHubSearchParameterTests {
         q.topic = [parameter]
         let searchParameter = GitHubSearchParameter(query: q)
         let expectation = "\(api)\(searchKeyword)+topic:\(parameter)\(sortOrder)"
-        XCTAssertEqual(searchParameter.url?.absoluteString, expectation)
+        XCTAssertEqual(searchParameter.url, expectation)
     }
 
 }
